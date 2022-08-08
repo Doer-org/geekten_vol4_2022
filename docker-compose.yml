@@ -1,0 +1,29 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    env_file:
+      - docker-compose.env
+    ports:
+      - 8000:8000
+    tty: true
+    volumes:
+      - ./server:/go/src/github.com/Doer-org/geekten_vol4_2022
+    depends_on:
+      - db
+    command: go run main.go
+
+  db:
+    build: 
+      context: .
+      dockerfile: ./db/Dockerfile
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+      - ./db/data:/var/lib/postgresql/data
+    env_file:
+      - docker-compose.env
+    restart: always
