@@ -1,5 +1,15 @@
 version: '3'
 services:
+  front:
+    build:
+      context: .
+      dockerfile: front/Dockerfile
+    volumes:
+      - ./front:/app/front
+    command: sh -c "cd /app/front && npm install && npm run dev"
+    ports:
+      - '3000:3000'
+
   server:
     build:
       context: .
@@ -16,7 +26,7 @@ services:
     command: go run main.go
 
   db:
-    build: 
+    build:
       context: .
       dockerfile: ./db/Dockerfile
     ports:
