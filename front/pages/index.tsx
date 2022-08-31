@@ -1,6 +1,9 @@
-import type { NextPage } from 'next';
-import { Layout } from '../components/layouts/Layout';
-import { useStore } from '../store/store';
+import type { NextPage } from "next";
+import { Layout } from "../components/layouts/Layout";
+import { useStore } from "../store/store";
+
+
+
 const Count = () => {
   const count = useStore((state) => state.count);
   return <h2>count: {count}</h2>;
