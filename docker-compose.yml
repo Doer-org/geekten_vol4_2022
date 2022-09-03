@@ -39,6 +39,7 @@ services:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf # default conf
       - ./proxy/conf:/etc/nginx/conf
       - ./proxy/html:/var/www/html
+      - ./proxy/logs:/var/log/nginx
     ports:
       - 80:80
     
