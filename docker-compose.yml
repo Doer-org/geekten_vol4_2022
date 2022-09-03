@@ -35,6 +35,8 @@ services:
     build:
       context: .
       dockerfile: ./proxy/Dockerfile
+    depends_on:
+      - server
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf # default conf
       - ./proxy/conf:/etc/nginx/conf
@@ -42,4 +44,3 @@ services:
       - ./proxy/logs:/var/log/nginx
     ports:
       - 80:80
-    

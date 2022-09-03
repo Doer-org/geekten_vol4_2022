@@ -20,5 +20,5 @@ http://localhost/health/
 
 api
 ```
-http://localhost/api/
+http://localhost/api/article/random
 ```

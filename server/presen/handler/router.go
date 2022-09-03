@@ -7,6 +7,10 @@ import (
 )
 
 func InitRouter(articleHandler ArticleHandler) {
+	// health
+	http.Handle("/api", middleware.Layres(http.HandlerFunc(health)))
+
+	// article
 	articleGetRandom := http.HandlerFunc(articleHandler.GetRandom)
-	http.Handle("/article/random", middleware.Layres(articleGetRandom))
+	http.Handle("/api/article/random", middleware.Layres(articleGetRandom))
 }
