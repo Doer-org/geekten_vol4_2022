@@ -1,4 +1,12 @@
+# env
 *.env
+
+# log
+proxy/logs
+
+# data
+db/data
+
+# other
 *.exe
 .idea/
-db/data

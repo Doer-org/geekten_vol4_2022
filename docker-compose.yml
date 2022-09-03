@@ -1,16 +1,7 @@
 version: '3'
 services:
-  front:
-    build:
-      context: .
-      dockerfile: front/Dockerfile
-    volumes:
-      - ./front:/app/front
-    command: sh -c "cd /app/front && npm install && npm run dev"
-    ports:
-      - '3000:3000'
-
   server:
+    container_name: server-geekten_vol4_2022
     build:
       context: .
       dockerfile: ./server/Dockerfile
@@ -26,6 +17,7 @@ services:
     command: go run main.go
 
   db:
+    container_name: db-geekten_vol4_2022
     build:
       context: .
       dockerfile: ./db/Dockerfile
@@ -37,3 +29,18 @@ services:
     env_file:
       - docker-compose.env
     restart: always
+
+  proxy:
+    container_name: proxy-geekten_vol4_2022
+    build:
+      context: .
+      dockerfile: ./proxy/Dockerfile
+    depends_on:
+      - server
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf # default conf
+      - ./proxy/conf:/etc/nginx/conf
+      - ./proxy/html:/var/www/html
+      - ./proxy/logs:/var/log/nginx
+    ports:
+      - 80:80
