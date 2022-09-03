@@ -1,0 +1,61 @@
+.burgers {
+  cursor: pointer;
+  display: inline-block;
+  height: 50px;
+  position: relative;
+  width: 50px;
+}
+
+.burgers span {
+  background: #333;
+  border-radius: 4px;
+  height: 7%;
+  left: 50%;
+  margin: -8% 0 0 -42%;
+  transition: all 0.3s ease-in-out;
+  width: 64%;
+}
+.child1 {
+  display: block;
+  position: absolute;
+  top: 30%;
+  width: 84%;
+}
+.child2 {
+  display: block;
+  position: absolute;
+  top: 50%;
+}
+.child1Open {
+  display: block;
+  position: absolute;
+  transform: rotate(-45deg);
+  top: 50%;
+  width: 44%;
+}
+.child2Open {
+  opacity: 0;
+}
+.child3 {
+  display: block;
+  position: absolute;
+  top: 70%;
+}
+.child3Open {
+  display: block;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 50%;
+  width: 44%;
+}
+.all {
+  position: absolute;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
