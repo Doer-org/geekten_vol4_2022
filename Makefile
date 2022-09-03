@@ -1,19 +1,28 @@
+# Makefile
+
+##
 # dir
+##
 SERVER_DIR:=./server
 FRONT_DIR:=./front
 DB_DIR:=./db/data
 
-# container
+##
+# container name
+##
 DB_CONTAINER_NAME:=hack-camp_vol5_2022-db
 
+##
 # command
+##
 RM := rm -rf
 
-
+.PHONY: all
 all:start
 
 
 # docker-compose up
+.PHONY: start
 start:
 	@echo ""
 	@echo "------------------------"
@@ -31,6 +40,7 @@ start:
 
 # docker-compose down
 # imageやvolumeも削除
+.PHONY: down
 down:
 	@echo ""
 	@echo "------------------------"
@@ -45,9 +55,24 @@ down:
 
 
 # dbやcacheは保持したまま再起動
+.PHONY: restart
 restart: down start
 
+.PHONY: clean
+clean:
 
+.PHONY: fclean
+fclean: clean delete-db
+
+# dbやcacheも削除してから再起動
+.PHONY: re
+re: fclean restart
+
+
+##
+# delete
+##
+.PHONY: delete-db
 delete-db:
 	@echo ""
 	@echo "------------------------"
@@ -60,31 +85,35 @@ delete-db:
 	@echo ""
 
 
-clean:
-
-fclean:clean delete-db
-
-# dbやcacheも削除してから再起動
-re:fclean restart
-
-
+##
 # lint
+##
+.PHONY: lint
 lint:
 	gofmt -l -w ./server
 
 
+##
+# logs
+##
+.PHONY: logs
+logs:
+	docker-compose logs -f
+
+##
 # docker container attach
+##
+.PHONY: attach-db
 attach-db:
 	docker exec -it $(DB_CONTAINER_NAME) /bin/bash
 
 
-# message from doer
+##
+# message
+##
+.PHONY: doer
 doer:
 	@echo ""
 	@echo "do'er saiko---!!!!"
 	@echo ""
 
-
-.PHONY: all start build restart down \
-attach-db delete-db \
-clean fclean re lint doer
