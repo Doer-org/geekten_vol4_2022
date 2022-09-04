@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <div className="grid md:grid-cols-2 grid-cols-1 place-items-center justify-items-center">
-        <div className="w-1/2 ">
+        <div className="w-1/2">
           <Lottie animationData={animationData} />
         </div>
         <div className="shadow-2xl rounded-md border w-full h-full text-center flex justify-center items-center p-10">

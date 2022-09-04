@@ -5,7 +5,7 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     <div className="font-mono text-gray-800">
       <Header />
       <div className="flex mx-5 min-h-screen">
-        <main className="flex w-screen flex-1 flex-col items-center justify-center">
+        <main className="flex w-screen  items-center justify-center">
           {children}
         </main>
       </div>
