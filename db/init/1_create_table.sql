@@ -1,7 +1,6 @@
 -- DB切り替え
 \c "hoge"
 
---テーブルを作成
 
 CREATE TABLE "tags" (
   "id"                INT NOT NULL PRIMARY KEY,
