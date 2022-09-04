@@ -1,7 +1,3 @@
--- --テーブルにデータを挿入
--- INSERT INTO snacks (name,price,img_url) 
--- VALUES ('test',100,'https://google.com',0);
-
 INSERT INTO tags ("id","name")
 VALUES (1,'Rust');
 
