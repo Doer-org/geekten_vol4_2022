@@ -1,0 +1,6 @@
+172.21.0.1 - - [03/Sep/2022:15:18:01 +0000] "GET / HTTP/1.1" 404 1297 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" "-"
+172.21.0.1 - - [03/Sep/2022:15:18:14 +0000] "GET /health HTTP/1.1" 301 169 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" "-"
+172.21.0.1 - - [03/Sep/2022:15:18:14 +0000] "GET /health/ HTTP/1.1" 200 222 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" "-"
+172.21.0.1 - - [03/Sep/2022:15:18:21 +0000] "GET /api HTTP/1.1" 301 169 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" "-"
+172.21.0.1 - - [03/Sep/2022:15:18:21 +0000] "GET /api/ HTTP/1.1" 404 19 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" "-"
+172.21.0.1 - - [03/Sep/2022:15:18:31 +0000] "GET /api/article/random HTTP/1.1" 200 35 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" "-"
