@@ -1,50 +1,39 @@
-import { FC } from "react";
-import { useState } from "react";
+import { FC } from 'react';
+import { useLogin } from '../hooks/useLogin';
+import { useFetchCurrentUser } from '../hooks/useFetchCurrentUser';
+import { useStore } from '../store/store';
+import { useNavStore } from '../store/store';
+import Image from 'next/image';
 
 const Form: FC<{ title: string }> = ({ title }) => {
-  const [mail, setMail] = useState<string>("");
-  const [pass, setPass] = useState<string>("");
-
+  const { id } = useStore();
+  const { show } = useNavStore();
+  const setId = useStore((state) => state.setId);
   return (
-    <div className="border justify-center text-center w-1/2 shadow-md rounded-xl">
-      <div className="my-6">
-        <p className="text-4xl my-5">{title}</p>
-      </div>
-      <div className="my-8">
-        <p className="text-2xl">MAIL</p>
-        <input
-          type="email"
-          className="border text-2xl w-4/5 rounded-md"
-          value={mail}
-          onChange={(e) => {
-            setMail(e.target.value);
-            console.log(mail);
-          }}
-        />
-      </div>
-      <div className="my-8">
-        <p className="text-2xl">PASSWORD</p>
-        <input
-          type="password"
-          className="border text-2xl w-4/5 rounded-md"
-          value={pass}
-          onChange={(e) => {
-            setPass(e.target.value);
-            console.log(pass);
-          }}
-        />
-      </div>
-      <div>
-        <button
-          type="submit"
-          className="border w-32 h-14 my-6 rounded-md"
-          onClick={() => {
-            console.log(mail, pass);
-          }}
-        >
-          {title}
-        </button>
-      </div>
+    <div className="shadow-md rounded-md p-5">
+      <div>{id}</div>
+      <button
+        className="flex bg-black hover:bg-slate-800 px-5 py-3  justify-center items-center rounded-md"
+        onClick={() => {
+          useLogin(id, setId);
+          useFetchCurrentUser(setId);
+        }}
+      >
+        {show ? (
+          ''
+        ) : (
+          <Image
+            src="/Github.png"
+            objectFit="contain"
+            alt="logo"
+            width={70}
+            height={70}
+            className="bg-black"
+          />
+        )}
+
+        <p className="px-5 text-white">Githubでログイン</p>
+      </button>
     </div>
   );
 };
