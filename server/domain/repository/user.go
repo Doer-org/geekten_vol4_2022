@@ -5,5 +5,5 @@ import (
 )
 
 type UserRepository interface {
-	CreateUser() (*entity.User, error)
+	CreateUser(string, string) (*entity.User, error)
 }

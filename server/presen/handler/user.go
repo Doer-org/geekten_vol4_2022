@@ -1,10 +1,12 @@
 package handler
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
-	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
+	"github.com/Doer-org/geekten_vol4_2022/presen/response"
 	"github.com/Doer-org/geekten_vol4_2022/usecase"
 	_ "github.com/lib/pq"
 )
@@ -24,19 +26,35 @@ func NewUserhandler(uu usecase.UserUsecase) UserHandler {
 }
 
 func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
-
 	if r.Method != "POST" {
 		w.WriteHeader(http.StatusBadRequest)
+		fmt.Print(w, "ERROR")
 		return
 	}
-	r.ParseForm()
 
-	new_name := r.FormValue("name")
-	new_id := r.FormValue("id")
+	newName := r.FormValue("name")
+	newId := r.FormValue("id")
 
-	user := &entity.User{}
-	user.Id = new_id
-	user.Name = new_name
+	if newName == "" {
+		fmt.Print(w, "ERROR")
+		return
+	}
+	//fmt.Print(w, "ERROR")
 
-	fmt.Print(w, new_name, new_id)
+	user, err := uh.userUsecase.CreateUser(newId, newName)
+
+	if err != nil {
+		log.Println(err)
+	}
+	resUser := response.NewUserResponse(user)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	//fmt.Print(w, "test")
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resUser); err != nil {
+		log.Println(err)
+	}
 }

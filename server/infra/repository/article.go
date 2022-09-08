@@ -37,6 +37,10 @@ func (ar articleRepository) GetRandom() (*entity.Article, error) {
 
 	for rows.Next() {
 		if err := rows.Scan(
+			&article.Id,
+			&article.Title,
+			&article.Likes,
+			&article.First,
 			&article.Title,
 			&article.Url,
 		); err != nil {

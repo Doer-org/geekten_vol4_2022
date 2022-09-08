@@ -1,14 +1,12 @@
 package usecase
 
 import (
-	"context"
-
 	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
 	"github.com/Doer-org/geekten_vol4_2022/domain/repository"
 )
 
 type UserUsecase interface {
-	CreateUser(context.Context) (*entity.User, error)
+	CreateUser(string, string) (*entity.User, error)
 }
 
 type userUsecase struct {
@@ -21,7 +19,7 @@ func NewUserUsecase(ur repository.UserRepository) UserUsecase {
 	}
 }
 
-func (ur userUsecase) CreateUser(ctx context.Context) (*entity.User, error) {
-	user, err := ur.userRepository.CreateUser()
+func (ur userUsecase) CreateUser(id string, name string) (*entity.User, error) {
+	user, err := ur.userRepository.CreateUser(id, name)
 	return user, err
 }
