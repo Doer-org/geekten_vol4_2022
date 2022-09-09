@@ -2,12 +2,14 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 
 	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
 	"github.com/Doer-org/geekten_vol4_2022/presen/response"
 	"github.com/Doer-org/geekten_vol4_2022/usecase"
+	"github.com/Doer-org/geekten_vol4_2022/utils"
 )
 
 type UserHandler interface {
@@ -36,8 +38,10 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	user, err := uh.userUsecase.CreateUser(newId, newName)
 
+	err = errors.New("hogego")
 	if err != nil {
-		log.Println(handler_error.CreateUserError)
+		utils.CreateErrorResponse(w, r, "faild to createuser")
+		return
 	}
 	resUser := response.NewUserResponse(user)
 
