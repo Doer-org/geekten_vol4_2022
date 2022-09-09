@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"errors"
 	"log"
 	"net/http"
 
@@ -38,7 +37,6 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	user, err := uh.userUsecase.CreateUser(newId, newName)
 
-	err = errors.New("hogego")
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to createuser")
 		return
