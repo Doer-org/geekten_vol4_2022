@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Doer-org/geekten_vol4_2022/error/handler"
+	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
 	"github.com/Doer-org/geekten_vol4_2022/presen/response"
 	"github.com/Doer-org/geekten_vol4_2022/usecase"
 )
