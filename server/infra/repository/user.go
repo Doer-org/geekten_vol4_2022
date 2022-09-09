@@ -7,7 +7,6 @@ import (
 	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
 	"github.com/Doer-org/geekten_vol4_2022/domain/repository"
 	db_error "github.com/Doer-org/geekten_vol4_2022/error/db"
-	_ "github.com/lib/pq"
 )
 
 type userRepository struct {
