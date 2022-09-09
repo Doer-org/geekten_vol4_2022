@@ -8,7 +8,6 @@ import (
 	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
 	"github.com/Doer-org/geekten_vol4_2022/presen/response"
 	"github.com/Doer-org/geekten_vol4_2022/usecase"
-	_ "github.com/lib/pq"
 )
 
 type UserHandler interface {
