@@ -2,10 +2,10 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
+	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
 	"github.com/Doer-org/geekten_vol4_2022/presen/response"
 	"github.com/Doer-org/geekten_vol4_2022/usecase"
 	_ "github.com/lib/pq"
@@ -27,19 +27,13 @@ func NewUserhandler(uu usecase.UserUsecase) UserHandler {
 
 func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Print(w, "ERROR")
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
 		return
 	}
 
 	newName := r.FormValue("name")
 	newId := r.FormValue("id")
-
-	if newName == "" {
-		fmt.Print(w, "ERROR")
-		return
-	}
-	//fmt.Print(w, "ERROR")
 
 	user, err := uh.userUsecase.CreateUser(newId, newName)
 

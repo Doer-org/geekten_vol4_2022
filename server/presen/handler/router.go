@@ -15,5 +15,5 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 	http.Handle("/api/article/random", middleware.Layres(articleGetRandom))
 
 	usercreate := http.HandlerFunc(userHandler.CreateUser)
-	http.Handle("/api/user", middleware.Layres(usercreate))
+	http.Handle("/api/user/create", middleware.Layres(usercreate))
 }
