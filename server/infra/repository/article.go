@@ -6,7 +6,7 @@ import (
 
 	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
 	"github.com/Doer-org/geekten_vol4_2022/domain/repository"
-	"github.com/Doer-org/geekten_vol4_2022/error/db"
+	db_error "github.com/Doer-org/geekten_vol4_2022/error/db"
 )
 
 type articleRepository struct {
@@ -41,7 +41,7 @@ func (ar articleRepository) GetRandom() (*entity.Article, error) {
 			&article.Title,
 			&article.Likes,
 			&article.First,
-			&article.Title,
+			&article.Tag,
 			&article.Url,
 		); err != nil {
 			log.Println(db_error.RowsScanError)
@@ -49,4 +49,35 @@ func (ar articleRepository) GetRandom() (*entity.Article, error) {
 		}
 	}
 	return article, nil
+}
+
+func (ar articleRepository) ArticleRanking() ([]*entity.Article, error) {
+	var articles []*entity.Article
+
+	statement := "SELECT * FROM articles ORDER BY likes DESC LIMIT 100"
+	rows, err := ar.db.Query(statement)
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		article := &entity.Article{}
+		if err := rows.Scan(
+			&article.Id,
+			&article.Title,
+			&article.Likes,
+			&article.First,
+			&article.Tag,
+			&article.Url,
+		); err != nil {
+			log.Println(db_error.RowsScanError)
+			return nil, err
+		}
+		articles = append(articles, article)
+	}
+
+	return articles, nil
 }

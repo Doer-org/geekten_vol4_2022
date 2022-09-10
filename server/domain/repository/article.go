@@ -6,4 +6,5 @@ import (
 
 type ArticleRepository interface {
 	GetRandom() (*entity.Article, error)
+	ArticleRanking() ([]*entity.Article, error)
 }

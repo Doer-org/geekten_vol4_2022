@@ -12,6 +12,7 @@ import (
 
 type ArticleHandler interface {
 	GetRandom(http.ResponseWriter, *http.Request)
+	ArticleRanking(w http.ResponseWriter, r *http.Request)
 }
 
 type articleHandler struct {
@@ -44,6 +45,24 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resArticle); err != nil {
+		log.Println(err)
+	}
+}
+
+func (ah articleHandler) ArticleRanking(w http.ResponseWriter, r *http.Request) {
+	articles, err := ah.articleUsecase.ArticleRanking()
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	resArticles := response.NewArticleListResponse(articles)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resArticles); err != nil {
 		log.Println(err)
 	}
 }
