@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import { Footer } from './Footer';
 import { Header } from './Header';
 export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -9,6 +10,7 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           {children}
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
