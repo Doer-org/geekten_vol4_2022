@@ -51,6 +51,7 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resUser); err != nil {
 		log.Println(err)
 	}
+	return
 }
 
 func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
@@ -77,4 +78,5 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resUser); err != nil {
 		log.Println(err)
 	}
+	return
 }
