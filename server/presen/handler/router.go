@@ -16,4 +16,7 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 
 	usercreate := http.HandlerFunc(userHandler.CreateUser)
 	http.Handle("/api/user/create", middleware.Layres(usercreate))
+
+	userupdate := http.HandlerFunc(userHandler.UpdateUser)
+	http.Handle("/api/user/update", middleware.Layres(userupdate))
 }

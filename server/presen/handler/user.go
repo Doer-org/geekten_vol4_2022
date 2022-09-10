@@ -13,6 +13,7 @@ import (
 
 type UserHandler interface {
 	CreateUser(http.ResponseWriter, *http.Request)
+	UpdateUser(http.ResponseWriter, *http.Request)
 }
 
 type userHandler struct {
@@ -39,6 +40,32 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to createuser")
+		return
+	}
+	resUser := response.NewUserResponse(user)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resUser); err != nil {
+		log.Println(err)
+	}
+}
+
+func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "PUT" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
+		return
+	}
+	newName := r.FormValue("name")
+	newId := r.FormValue("id")
+
+	user, err := uh.userUsecase.UpdateUser(newId, newName)
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to updateuser")
 		return
 	}
 	resUser := response.NewUserResponse(user)
