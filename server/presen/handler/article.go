@@ -12,7 +12,7 @@ import (
 
 type ArticleHandler interface {
 	GetRandom(http.ResponseWriter, *http.Request)
-	ArticleRanking(w http.ResponseWriter, r *http.Request)
+	GetRanking(w http.ResponseWriter, r *http.Request)
 }
 
 type articleHandler struct {
@@ -49,8 +49,8 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (ah articleHandler) ArticleRanking(w http.ResponseWriter, r *http.Request) {
-	articles, err := ah.articleUsecase.ArticleRanking()
+func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
+	articles, err := ah.articleUsecase.GetRanking()
 
 	if err != nil {
 		log.Println(err)

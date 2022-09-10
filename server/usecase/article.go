@@ -9,7 +9,7 @@ import (
 
 type ArticleUsecase interface {
 	GetRandom(context.Context) (*entity.Article, error)
-	ArticleRanking() ([]*entity.Article, error)
+	GetRanking() ([]*entity.Article, error)
 }
 
 type articleUsecase struct {
@@ -27,7 +27,7 @@ func (au articleUsecase) GetRandom(ctx context.Context) (*entity.Article, error)
 	return article, err
 }
 
-func (au articleUsecase) ArticleRanking() ([]*entity.Article, error) {
-	article, err := au.articleRepository.ArticleRanking()
+func (au articleUsecase) GetRanking() ([]*entity.Article, error) {
+	article, err := au.articleRepository.GetRanking()
 	return article, err
 }

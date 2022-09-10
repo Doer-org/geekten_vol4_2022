@@ -51,7 +51,7 @@ func (ar articleRepository) GetRandom() (*entity.Article, error) {
 	return article, nil
 }
 
-func (ar articleRepository) ArticleRanking() ([]*entity.Article, error) {
+func (ar articleRepository) GetRanking() ([]*entity.Article, error) {
 	var articles []*entity.Article
 
 	statement := "SELECT * FROM articles ORDER BY likes DESC LIMIT 100"
