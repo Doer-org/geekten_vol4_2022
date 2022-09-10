@@ -1,14 +1,15 @@
 import { FC, useState } from 'react';
 import Link from 'next/link';
 import style from '../../styles/navbar.module.css';
-import { useStore } from '../../store/store';
+import { useUserStore } from '../../store/store';
 import { useNavStore } from '../../store/store';
 import { useLogOut } from '../../hooks/useLogOut';
 export const Header: FC = () => {
-  const { id } = useStore();
+  const { user } = useUserStore();
   const { show } = useNavStore();
   const toggle = useNavStore((show) => show.toggle);
-  const resetId = useStore((state) => state.resetId);
+  const resetUser = useUserStore((state) => state.resetUser);
+
   return (
     <header className="fixed w-screen backdrop-blur-2xl">
       <div className="grid grid-cols-2 sm:px-10 px-3 py-3">
@@ -31,19 +32,30 @@ export const Header: FC = () => {
                   <li className="text-lg font-bold py-5">
                     <Link href="/favorite">Favorite</Link>
                   </li>
-                  {id == '' ? (
+                  {user.id == '' ? (
                     <li className="text-lg font-bold py-5">
                       <Link href="/account/login">Login/signup</Link>
                     </li>
                   ) : (
-                    <button
-                      className="text-lg font-bold py-5"
-                      onClick={() => {
-                        useLogOut(id, resetId);
-                      }}
-                    >
-                      LogOut
-                    </button>
+                    <div>
+                      <button
+                        className="text-lg font-bold py-5"
+                        onClick={() => {
+                          useLogOut()
+                            .then((res) => {
+                              resetUser();
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
+                        }}
+                      >
+                        LogOut
+                      </button>
+                      <li className="text-lg font-bold py-5">
+                        <Link href="/account/edit">edit</Link>
+                      </li>
+                    </div>
                   )}
                 </div>
               </ul>
@@ -55,19 +67,30 @@ export const Header: FC = () => {
                 <li className="text-lg font-bold">
                   <Link href="/favorite">Favorite</Link>
                 </li>
-                {id == '' ? (
+                {user.id == '' ? (
                   <li className="text-lg font-bold">
                     <Link href="/account/login">Login/signup</Link>
                   </li>
                 ) : (
-                  <button
-                    className="text-lg font-bold"
-                    onClick={() => {
-                      useLogOut(id, resetId);
-                    }}
-                  >
-                    LogOut
-                  </button>
+                  <div>
+                    <button
+                      className="text-lg font-bold py-5"
+                      onClick={() => {
+                        useLogOut()
+                          .then((res) => {
+                            resetUser();
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                      }}
+                    >
+                      LogOut
+                    </button>
+                    <li className="text-lg font-bold py-5">
+                      <Link href="/account/edit">edit</Link>
+                    </li>
+                  </div>
                 )}
               </ul>
             )}

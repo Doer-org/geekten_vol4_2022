@@ -1,22 +1,26 @@
 import { FC } from 'react';
 import { useLogin } from '../hooks/useLogin';
-import { useFetchCurrentUser } from '../hooks/useFetchCurrentUser';
-import { useStore } from '../store/store';
+import { useUserStore } from '../store/store';
 import { useNavStore } from '../store/store';
 import Image from 'next/image';
 
 const Form: FC<{ title: string }> = ({ title }) => {
-  const { id } = useStore();
+  const { user } = useUserStore();
   const { show } = useNavStore();
-  const setId = useStore((state) => state.setId);
+  const setUser = useUserStore((state) => state.setUser);
   return (
     <div className="shadow-md rounded-md p-5">
-      <div>{id}</div>
+      <div>{user.id}</div>
       <button
         className="flex bg-black hover:bg-slate-800 px-5 py-3  justify-center items-center rounded-md"
         onClick={() => {
-          useLogin(id, setId);
-          useFetchCurrentUser(setId);
+          useLogin()
+            .then((ret) => {
+              setUser(ret);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }}
       >
         {show ? (
