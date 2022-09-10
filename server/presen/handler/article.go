@@ -8,6 +8,7 @@ import (
 	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
 	"github.com/Doer-org/geekten_vol4_2022/presen/response"
 	"github.com/Doer-org/geekten_vol4_2022/usecase"
+	"github.com/Doer-org/geekten_vol4_2022/utils"
 )
 
 type ArticleHandler interface {
@@ -53,6 +54,7 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 	articles, err := ah.articleUsecase.GetRanking()
 
 	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to getranking")
 		log.Println(err)
 	}
 
