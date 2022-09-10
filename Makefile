@@ -10,7 +10,7 @@ DB_DIR:=./db/data
 ##
 # container name
 ##
-DB_CONTAINER_NAME:=hack-camp_vol5_2022-db
+DB_CONTAINER_NAME:=db-geekten_vol4_2022
 
 ##
 # command

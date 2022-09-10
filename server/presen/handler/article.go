@@ -36,7 +36,9 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	article, err := ah.articleUsecase.GetRandom(r.Context())
 
 	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to getrandom")
 		log.Println(err)
+		return
 	}
 
 	resArticle := response.NewArticleResponse(article)
@@ -48,6 +50,7 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resArticle); err != nil {
 		log.Println(err)
 	}
+	return
 }
 
 func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
@@ -56,6 +59,7 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getranking")
 		log.Println(err)
+		return
 	}
 
 	resArticles := response.NewArticleListResponse(articles)
@@ -67,4 +71,5 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resArticles); err != nil {
 		log.Println(err)
 	}
+	return
 }
