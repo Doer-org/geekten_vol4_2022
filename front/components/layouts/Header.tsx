@@ -10,8 +10,8 @@ export const Header: FC = () => {
   const toggle = useNavStore((show) => show.toggle);
   const resetId = useStore((state) => state.resetId);
   return (
-    <header className="fixed w-screen">
-      <div className="grid grid-cols-2 sm:px-10 px-3 py-3  ">
+    <header className="fixed w-screen backdrop-blur-2xl">
+      <div className="grid grid-cols-2 sm:px-10 px-3 py-3">
         <h1 className="text-5xl font-extrabold">DITA</h1>
         <nav className="flex items-center justify-end">
           <button className="md:hidden z-30" onClick={() => toggle(show)}>
