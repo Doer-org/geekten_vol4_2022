@@ -11,6 +11,7 @@ DB_DIR:=./db/data
 # container name
 ##
 DB_CONTAINER_NAME:=db-geekten_vol4_2022
+CRONJOB_CONTAINER_NAME:=cronjob-geekten_vol4_2022
 
 ##
 # command
@@ -106,6 +107,11 @@ logs:
 .PHONY: attach-db
 attach-db:
 	docker exec -it $(DB_CONTAINER_NAME) /bin/bash
+
+.PHONY: attach-cronjob
+attach-cronjob:
+	docker exec -it $(CRONJOB_CONTAINER_NAME) /bin/bash
+
 
 
 ##

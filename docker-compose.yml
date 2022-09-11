@@ -45,12 +45,14 @@ services:
     ports:
       - 80:80
 
-  # cronjob:
-  #   container_name: cronjob-geekten_vol4_2022
-  #   build:
-  #     context: ./cronjob
-  #     dockerfile: Dockerfile
-  #   tty: true
-  #   restart: always
-  #   volumes:
-  #     - ./cronjob:/root/src
+  cronjob:
+    container_name: cronjob-geekten_vol4_2022
+    build:
+      context: ./cronjob
+      dockerfile: Dockerfile
+    tty: true
+    restart: always
+    volumes:
+      - ./cronjob:/root/src
+    env_file:
+      - docker-compose.env
