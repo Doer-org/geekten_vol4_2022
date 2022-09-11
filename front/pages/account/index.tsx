@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
-import Form from '../../components/Form';
+import { EditForm } from '../../components/accounts/EditForm';
 import { Layout } from '@/components/layouts/Layout';
 
-const Login: NextPage = () => {
+const Edit: NextPage = () => {
   return (
     <Layout>
-      <Form title="Login" />
+      <EditForm />
     </Layout>
   );
 };
 
-export default Login;
+export default Edit;

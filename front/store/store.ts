@@ -8,17 +8,17 @@ type User = {
   resetUser: () => void;
 };
 
-type Nav = {
-  show: boolean;
-  toggle: (show: boolean) => void;
-};
-
 export const useUserStore = create<User>((set) => ({
   user: { id: '', name: '' },
   setUser: (user) => set({ user: user }),
   editUser: (id, name) => set({ user: { id: id, name: name } }),
   resetUser: () => set({ user: { id: '', name: '' } }),
 }));
+
+type Nav = {
+  show: boolean;
+  toggle: (show: boolean) => void;
+};
 
 export const useNavStore = create<Nav>((set) => ({
   show: false,

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import style from '../../styles/navbar.module.css';
 import { useUserStore } from '../../store/store';
@@ -9,6 +9,16 @@ export const Header: FC = () => {
   const { show } = useNavStore();
   const toggle = useNavStore((show) => show.toggle);
   const resetUser = useUserStore((state) => state.resetUser);
+
+  const logOut = () => {
+    useLogOut()
+      .then((res) => {
+        resetUser();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <header className="fixed w-screen backdrop-blur-2xl">
@@ -40,15 +50,7 @@ export const Header: FC = () => {
                     <div>
                       <button
                         className="text-lg font-bold py-5"
-                        onClick={() => {
-                          useLogOut()
-                            .then((res) => {
-                              resetUser();
-                            })
-                            .catch((error) => {
-                              console.log(error);
-                            });
-                        }}
+                        onClick={() => logOut()}
                       >
                         LogOut
                       </button>
@@ -72,24 +74,17 @@ export const Header: FC = () => {
                     <Link href="/account/login">Login/signup</Link>
                   </li>
                 ) : (
-                  <div>
+                  <div className="flex gap-10">
                     <button
-                      className="text-lg font-bold py-5"
-                      onClick={() => {
-                        useLogOut()
-                          .then((res) => {
-                            resetUser();
-                          })
-                          .catch((error) => {
-                            console.log(error);
-                          });
-                      }}
+                      className="text-lg font-bold "
+                      onClick={() => logOut()}
                     >
                       LogOut
                     </button>
-                    <li className="text-lg font-bold py-5">
-                      <Link href="/account/edit">edit</Link>
+                    <li className="text-lg font-bold ">
+                      <Link href="/account">account</Link>
                     </li>
+                    <li className="text-lg font-bold ">{user.name}</li>
                   </div>
                 )}
               </ul>
