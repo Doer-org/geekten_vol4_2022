@@ -1,4 +1,5 @@
 import { FC, ReactNode, useEffect } from 'react';
+import { Footer } from './Footer';
 import { Header } from './Header';
 import { useFetchCurrentUser } from '../../hooks/useFetchCurrentUser';
 import { useUserStore } from '../../store/store';
@@ -18,6 +19,7 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           {children}
         </main>
       </div>
+      <Footer />
     </div>
   );
 };

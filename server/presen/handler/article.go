@@ -8,10 +8,12 @@ import (
 	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
 	"github.com/Doer-org/geekten_vol4_2022/presen/response"
 	"github.com/Doer-org/geekten_vol4_2022/usecase"
+	"github.com/Doer-org/geekten_vol4_2022/utils"
 )
 
 type ArticleHandler interface {
 	GetRandom(http.ResponseWriter, *http.Request)
+	GetRanking(w http.ResponseWriter, r *http.Request)
 }
 
 type articleHandler struct {
@@ -34,7 +36,9 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	article, err := ah.articleUsecase.GetRandom(r.Context())
 
 	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to getrandom")
 		log.Println(err)
+		return
 	}
 
 	resArticle := response.NewArticleResponse(article)
@@ -46,4 +50,26 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resArticle); err != nil {
 		log.Println(err)
 	}
+	return
+}
+
+func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
+	articles, err := ah.articleUsecase.GetRanking()
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to getranking")
+		log.Println(err)
+		return
+	}
+
+	resArticles := response.NewArticleListResponse(articles)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resArticles); err != nil {
+		log.Println(err)
+	}
+	return
 }

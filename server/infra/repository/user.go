@@ -39,3 +39,23 @@ func (ur userRepository) CreateUser(id string, name string) (*entity.User, error
 
 	return user, nil
 }
+
+func (ur userRepository) UpdateUser(id string, name string) (*entity.User, error) {
+	statement := "update users set name = $2 where id = $1 returning id, name"
+
+	stmt, err := ur.db.Prepare(statement)
+	if err != nil {
+		log.Println(db_error.StatementError)
+		return nil, err
+	}
+	defer stmt.Close()
+	user := &entity.User{}
+
+	err = stmt.QueryRow(id, name).Scan(&user.Id, &user.Name)
+
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return nil, err
+	}
+	return user, nil
+}

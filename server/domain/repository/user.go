@@ -6,4 +6,5 @@ import (
 
 type UserRepository interface {
 	CreateUser(string, string) (*entity.User, error)
+	UpdateUser(string, string) (*entity.User, error)
 }
