@@ -40,9 +40,9 @@ func (ar articleRepository) GetRandom() (*entity.Article, error) {
 			&article.Id,
 			&article.Title,
 			&article.Likes,
-			&article.First,
-			&article.Tag,
 			&article.Url,
+			&article.Author,
+			&article.Kind,
 		); err != nil {
 			log.Println(db_error.RowsScanError)
 			return nil, err
@@ -69,9 +69,9 @@ func (ar articleRepository) GetRanking() ([]*entity.Article, error) {
 			&article.Id,
 			&article.Title,
 			&article.Likes,
-			&article.First,
-			&article.Tag,
 			&article.Url,
+			&article.Author,
+			&article.Kind,
 		); err != nil {
 			log.Println(db_error.RowsScanError)
 			return nil, err
