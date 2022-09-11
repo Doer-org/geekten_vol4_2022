@@ -1,16 +1,15 @@
 import psycopg2
-from setting.setting import POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD
+from setting.setting import POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD,DB_HOST
 
 #DBへの接続
 def connect_to_db():
     conn = psycopg2.connect(
-        host="psql-db",
-        port=5432,
-        dbname=POSTGRES_DB,
+        database=POSTGRES_DB,
         user=POSTGRES_USER,
-        password=POSTGRES_PASSWORD
+        password=POSTGRES_PASSWORD,
+        host=DB_HOST,
+        port=5432
     )
-
     return conn
 
 
