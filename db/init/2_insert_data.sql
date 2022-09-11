@@ -13,4 +13,8 @@ VALUES ('1','Mahiro Mahiro');
 INSERT INTO users ("id","name")
 VALUES ('2','Shotaro Yamasaki');
 
+INSERT INTO historys ("user_id","article_id","created_at")
+VALUES ('1',1,'1999-01-23 04:05:06');
 
+INSERT INTO historys ("user_id","article_id","created_at")
+VALUES ('2',2,'2002-02-18 04:05:06');
