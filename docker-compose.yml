@@ -44,3 +44,13 @@ services:
       - ./proxy/logs:/var/log/nginx
     ports:
       - 80:80
+
+  # cronjob:
+  #   container_name: cronjob-geekten_vol4_2022
+  #   build:
+  #     context: ./cronjob
+  #     dockerfile: Dockerfile
+  #   tty: true
+  #   restart: always
+  #   volumes:
+  #     - ./cronjob:/root/src
