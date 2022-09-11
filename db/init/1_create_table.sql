@@ -3,7 +3,7 @@
 
 
 CREATE TABLE "articles" (
-  "id"                 INT NOT NULL PRIMARY KEY,
+  "id"                 SERIAL NOT NULL PRIMARY KEY,
   "title"              VARCHAR(255) NOT NULL,
   "likes"              INT NOT NULL,
   "url"                VARCHAR(255) NOT NULL,
