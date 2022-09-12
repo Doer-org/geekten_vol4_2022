@@ -1,7 +1,7 @@
 package entity
 
 type Article struct {
-	Id 	   int
+	Id     int
 	Title  string
 	Likes  int
 	Url    string

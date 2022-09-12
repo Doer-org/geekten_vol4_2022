@@ -60,18 +60,18 @@ func (ur userRepository) UpdateUser(id string, name string) (*entity.User, error
 	return user, nil
 }
 
-func (ur userRepository) GetUser (id string) (*entity.User, error) {
+func (ur userRepository) GetUser(id string) (*entity.User, error) {
 
-	stml, err := ur.db.Query ("SELECT id, name FROM users where id = $1", id)
+	stml, err := ur.db.Query("SELECT id, name FROM users where id = $1", id)
 
 	if err != nil {
 		log.Println(db_error.StatementError)
 		return nil, err
 	}
 	user := &entity.User{}
-    defer stml.Close ()
+	defer stml.Close()
 
-	for stml.Next () {
+	for stml.Next() {
 		err := stml.Scan(&user.Id, &user.Name)
 		if err != nil {
 			log.Println(db_error.RowsScanError)
@@ -79,5 +79,5 @@ func (ur userRepository) GetUser (id string) (*entity.User, error) {
 		}
 	}
 
-    return user, nil
+	return user, nil
 }

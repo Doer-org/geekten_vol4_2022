@@ -80,7 +80,7 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (uh userHandler) GetUser (w http.ResponseWriter, r *http.Request) {
+func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		log.Println(handler_error.MethodNotAllowd)
@@ -89,12 +89,12 @@ func (uh userHandler) GetUser (w http.ResponseWriter, r *http.Request) {
 
 	newId := r.FormValue("id")
 
-    user, err := uh.userUsecase.GetUser(newId)
+	user, err := uh.userUsecase.GetUser(newId)
 
 	if user.Id == "" {
-        utils.CreateErrorResponse(w, r, "id not found")
-        return
-    }
+		utils.CreateErrorResponse(w, r, "id not found")
+		return
+	}
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getuser")
