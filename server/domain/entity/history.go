@@ -1,7 +1,9 @@
 package entity
 
+import "time"
+
 type History struct {
 	UserId    string
-	ArticleId string
-	CreatedAt string
+	ArticleId int
+	CreatedAt time.Time
 }

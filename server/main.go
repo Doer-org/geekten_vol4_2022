@@ -23,7 +23,11 @@ func main() {
 	userUsecase := usecase.NewUserUsecase(userRepository)
 	userHandler := handler.NewUserhandler(userUsecase)
 
-	handler.InitRouter(articleHandler, userHandler)
+	historyRepository := repository.NewHistoryRepository(db)
+	historyUsecase := usecase.NewHistoryUsecase(historyRepository)
+	historyHandler := handler.NewHistoryhandler(historyUsecase)
+
+	handler.InitRouter(articleHandler, userHandler, historyHandler)
 
 	port := utils.GetDefaultEnv("PORT", "8080")
 	srv := &http.Server{

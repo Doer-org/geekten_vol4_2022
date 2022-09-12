@@ -1,25 +1,27 @@
 package usecase
 
 import (
+	"time"
+
 	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
 	"github.com/Doer-org/geekten_vol4_2022/domain/repository"
 )
 
 type HistoryUsecase interface {
-	CreateHistory(string, string) (*entity.User, error)
+	CreateHistory(string, int, time.Time) (*entity.History, error)
 }
 
-type userUsecase struct {
-	userRepository repository.UserRepository
+type historyUsecase struct {
+	historyRepository repository.HistoryRepository
 }
 
-func NewUserUsecase(ur repository.UserRepository) UserUsecase {
-	return userUsecase{
-		userRepository: ur,
+func NewHistoryUsecase(hr repository.HistoryRepository) HistoryUsecase {
+	return historyUsecase{
+		historyRepository: hr,
 	}
 }
 
-func (ur userUsecase) CreateUser(id string, name string) (*entity.User, error) {
-	user, err := ur.userRepository.CreateUser(id, name)
-	return user, err
+func (ur historyUsecase) CreateHistory(user_id string, article_id int, time time.Time) (*entity.History, error) {
+	history, err := ur.historyRepository.CreateHistory(user_id, article_id, time)
+	return history, err
 }

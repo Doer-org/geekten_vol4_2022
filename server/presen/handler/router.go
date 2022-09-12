@@ -6,7 +6,7 @@ import (
 	"github.com/Doer-org/geekten_vol4_2022/presen/middleware"
 )
 
-func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
+func InitRouter(articleHandler ArticleHandler, userHandler UserHandler, historyHandler HistoryHandler) {
 	// health
 	http.Handle("/api", middleware.Layres(http.HandlerFunc(health)))
 
@@ -22,4 +22,7 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 
 	userupdate := http.HandlerFunc(userHandler.UpdateUser)
 	http.Handle("/api/user/update", middleware.Layres(userupdate))
+
+	historycreate := http.HandlerFunc(historyHandler.CreateHistory)
+	http.Handle("/api/history/create", middleware.Layres(historycreate))
 }
