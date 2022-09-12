@@ -15,19 +15,21 @@ export const EditForm: FC = () => {
           <input
             type="text"
             className="border-2 border-black px-1"
-            value={tmp}
+            value={user.name}
             onChange={(e) => {
-              setTmp(e.target.value);
+              EditUser(user.id, e.target.value);
             }}
           />
         </div>
 
         <button
           onClick={() => {
-            EditUser(user.id, tmp);
-            UpdateUser()
+            console.log(user);
+            UpdateUser(user)
               .then((res) => {
-                console.log(res);
+                EditUser(res.data.id, res.data.name);
+                console.log(res.data);
+                console.log(user);
               })
               .catch((err) => {
                 console.log(err);
