@@ -81,3 +81,60 @@ func (ar articleRepository) GetRanking() ([]*entity.Article, error) {
 
 	return articles, nil
 }
+
+func (ar articleRepository) CreateHistory(user_id string, article_id int) (*entity.History, error) {
+	statement := "INSERT INTO historys (user_id, article_id, created_at) VALUES($1,$2,current_timestamp) returning user_id, article_id, created_at"
+
+	stmt, err := ar.db.Prepare(statement)
+	if err != nil {
+		log.Println(db_error.StatementError)
+		return nil, err
+	}
+	defer stmt.Close()
+
+	history := &entity.History{}
+	err = stmt.QueryRow(user_id, article_id).Scan(&history.UserId, &history.ArticleId, &history.CreatedAt)
+
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return nil, err
+	}
+
+	return history, nil
+}
+
+func (ar articleRepository) GetHistory(user_id string) ([]*entity.History, []*entity.Article, error) {
+	var historys []*entity.History
+	var articles []*entity.Article
+
+	statement := "SELECT h.article_id AS id,a.title,a.likes,a.url,a.author,a.kind,h.created_at FROM historys h INNER JOIN articles a ON h.article_id = a.id where user_id = $1 ORDER BY h.created_at DESC "
+	rows, err := ar.db.Query(statement, user_id)
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return nil, nil, err
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		history := &entity.History{}
+		article := &entity.Article{}
+		if err := rows.Scan(
+			&history.ArticleId,
+			&article.Title,
+			&article.Likes,
+			&article.Url,
+			&article.Author,
+			&article.Kind,
+			&history.CreatedAt,
+		); err != nil {
+			log.Println(db_error.RowsScanError)
+			return nil, nil, err
+		}
+		history.UserId = user_id
+		articles = append(articles, article)
+		historys = append(historys, history)
+	}
+
+	return historys, articles, nil
+}
