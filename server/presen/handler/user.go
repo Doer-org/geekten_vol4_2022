@@ -14,6 +14,7 @@ import (
 type UserHandler interface {
 	CreateUser(http.ResponseWriter, *http.Request)
 	UpdateUser(http.ResponseWriter, *http.Request)
+	GetUser(http.ResponseWriter, *http.Request)
 }
 
 type userHandler struct {
@@ -51,7 +52,6 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resUser); err != nil {
 		log.Println(err)
 	}
-	return
 }
 
 func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
@@ -78,5 +78,39 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resUser); err != nil {
 		log.Println(err)
 	}
-	return
+}
+
+func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
+		return
+	}
+
+	newId := r.FormValue("id")
+	if newId == "" {
+		utils.CreateErrorResponse(w, r, "id empty")
+		return
+	}
+	user, err := uh.userUsecase.GetUser(newId)
+
+	if user.Id == "" {
+		utils.CreateErrorResponse(w, r, "id not found")
+		return
+	}
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to getuser")
+		return
+	}
+	resUser := response.NewUserResponse(user)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resUser); err != nil {
+		log.Println(err)
+	}
+
 }

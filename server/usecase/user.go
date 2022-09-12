@@ -8,6 +8,7 @@ import (
 type UserUsecase interface {
 	CreateUser(string, string) (*entity.User, error)
 	UpdateUser(string, string) (*entity.User, error)
+	GetUser(string) (*entity.User, error)
 }
 
 type userUsecase struct {
@@ -27,5 +28,10 @@ func (ur userUsecase) CreateUser(id string, name string) (*entity.User, error) {
 
 func (ur userUsecase) UpdateUser(id string, name string) (*entity.User, error) {
 	user, err := ur.userRepository.UpdateUser(id, name)
+	return user, err
+}
+
+func (ur userUsecase) GetUser(id string) (*entity.User, error) {
+	user, err := ur.userRepository.GetUser(id)
 	return user, err
 }
