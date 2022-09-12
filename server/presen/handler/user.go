@@ -88,7 +88,10 @@ func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newId := r.FormValue("id")
-
+    if newId == "" {
+        utils.CreateErrorResponse(w, r, "id empty")
+        return
+    }
 	user, err := uh.userUsecase.GetUser(newId)
 
 	if user.Id == "" {
