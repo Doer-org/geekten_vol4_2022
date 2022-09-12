@@ -14,10 +14,8 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <div className="font-mono text-gray-800">
       <Header />
-      <div className="flex min-h-screen">
-        <main className="flex w-screen  items-center justify-center">
-          {children}
-        </main>
+      <div className="flex min-h-screen w-screen  items-center justify-center">
+        <main>{children}</main>
       </div>
       <Footer />
     </div>
