@@ -86,12 +86,17 @@ func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newUserId := r.FormValue("user_id")
-	newArticleId, _ := strconv.Atoi(r.FormValue("article_id"))
+	newArticleId, err := strconv.Atoi(r.FormValue("article_id"))
+
+	if err != nil {
+		log.Println(err)
+		return
+	}
 
 	history, err := uh.articleUsecase.CreateHistory(newUserId, newArticleId)
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to createhistory")
+		log.Println(err)
 		return
 	}
 	resHistory := response.NewHistoryResponse(history)
