@@ -1,20 +1,24 @@
+import { userAgent } from 'next/server';
 import create from 'zustand';
-
-type Id = {
-  id: string;
-  setId: (id: string) => void;
-  resetId: () => void;
+import { UserInfo } from '../types/userInfo';
+type User = {
+  user: UserInfo;
+  setUser: (user: UserInfo) => void;
+  editUser: (id: string, name: string) => void;
+  resetUser: () => void;
 };
+
+export const useUserStore = create<User>((set) => ({
+  user: { id: '', name: '' },
+  setUser: (user) => set({ user: user }),
+  editUser: (id, name) => set({ user: { id: id, name: name } }),
+  resetUser: () => set({ user: { id: '', name: '' } }),
+}));
+
 type Nav = {
   show: boolean;
   toggle: (show: boolean) => void;
 };
-
-export const useStore = create<Id>((set) => ({
-  id: '',
-  setId: (id) => set({ id: id }),
-  resetId: () => set({ id: '' }),
-}));
 
 export const useNavStore = create<Nav>((set) => ({
   show: false,

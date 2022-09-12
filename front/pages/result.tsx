@@ -3,7 +3,6 @@ import { Layout } from '../components/layouts/Layout';
 import Lottie from 'lottie-react';
 import * as animationData from '../json/feature.json';
 import { useState } from 'react';
-import Link from 'next/link';
 
 const Result: NextPage = () => {
   const [loading, setLoading] = useState(true);

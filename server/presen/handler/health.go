@@ -1,13 +1,12 @@
 package handler
 
 import (
+	"io"
 	"log"
 	"net/http"
-	"io"
 
 	"github.com/Doer-org/geekten_vol4_2022/error/handler"
 )
-
 
 func health(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
