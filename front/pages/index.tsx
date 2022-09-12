@@ -11,7 +11,7 @@ const Home: NextPage = () => {
         <div className="w-1/2">
           <Lottie animationData={animationData} />
         </div>
-        <div className="shadow-2xl rounded-md border text-center flex justify-center items-center p-10">
+        <div className="shadow-2xl rounded-md border text-center flex justify-center items-center p-20">
           <div>
             <h2 className="my-5">
               DITAはあなたの技術の発見をサポートするサービスです
