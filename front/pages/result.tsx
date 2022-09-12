@@ -21,7 +21,7 @@ const Result: NextPage = () => {
           </div>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 grid-cols-1 w-screen mt-40">
+        <div className="grid md:grid-cols-2 grid-cols-1 w-screen">
           <div className=" text-center md:border-r-2 md:border-black">
             <h2 className=" text-center text-2xl font-bold">結果</h2>
             <Article />

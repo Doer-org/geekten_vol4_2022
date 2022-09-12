@@ -5,11 +5,12 @@ import Link from 'next/link';
 
 export const Footer: FC = () => {
   return (
-    <footer>
-      <div className="bg-slate-50 h-28 flex justify-center">
+    <footer className="relative">
+      <div className="h-20 absolute w-screen bottom-0 flex justify-center items-center ">
         <Link href="https://doer.vercel.app/">
-          {/* <Image src={Logo} width={80} height={160}></Image> */}
-          aa
+          <div className="relative w-24 h-20 ml-3">
+            <Image src={Logo} alt="logo" layout="fill" />
+          </div>
         </Link>
       </div>
     </footer>
