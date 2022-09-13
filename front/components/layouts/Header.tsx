@@ -2,7 +2,7 @@ import { FC } from 'react';
 import style from '../../styles/navbar.module.css';
 import { useUserStore } from '../../store/store';
 import { useNavStore } from '../../store/store';
-
+import { Navbar } from '../layouts/Nav/Navbar';
 import { HomeEl, FavEl, LoginEl, AccountEl, LogoutEl } from './Navbar';
 export const Header: FC = () => {
   const { user } = useUserStore();
@@ -11,9 +11,9 @@ export const Header: FC = () => {
 
   return (
     <header className="fixed w-screen backdrop-blur-2xl">
-      <div className="grid grid-cols-2 sm:px-10 px-3 py-3">
+      <div className="grid grid-cols-3 sm:px-10 px-3 py-3">
         <h1 className="text-5xl font-extrabold">DITA</h1>
-        <nav className="flex items-center justify-end">
+        <nav className="flex items-center justify-end col-span-2">
           <button className="md:hidden z-30" onClick={() => toggle(show)}>
             <div className={style.burgers}>
               <span className={show ? style.child1Open : style.child1}></span>
@@ -23,33 +23,16 @@ export const Header: FC = () => {
           </button>
           <div>
             {show ? (
-              <ul className={show ? style.all : undefined}>
-                <div className=" text-white flex flex-col h-screen items-center justify-center">
-                  <HomeEl />
-                  <FavEl />
-                  {user.id == '' ? (
-                    <LoginEl />
-                  ) : (
-                    <div>
-                      <LogoutEl />
-                      <AccountEl />
-                    </div>
-                  )}
-                </div>
-              </ul>
+              <div className={show ? style.all : undefined}>
+                <Navbar
+                  user={user}
+                  className={
+                    'text-white flex flex-col h-screen items-center justify-center'
+                  }
+                />
+              </div>
             ) : (
-              <ul className="md:flex hidden gap-10 justify-end">
-                <HomeEl />
-                <FavEl />
-                {user.id == '' ? (
-                  <LoginEl />
-                ) : (
-                  <div className="flex gap-10">
-                    <LogoutEl />
-                    <AccountEl />
-                  </div>
-                )}
-              </ul>
+              <Navbar user={user} className={'md:flex hidden justify-end'} />
             )}
           </div>
         </nav>
