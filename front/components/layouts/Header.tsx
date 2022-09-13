@@ -1,30 +1,19 @@
 import { FC } from 'react';
-import Link from 'next/link';
 import style from '../../styles/navbar.module.css';
 import { useUserStore } from '../../store/store';
 import { useNavStore } from '../../store/store';
-import { useLogOut } from '../../hooks/useLogOut';
+import { Navbar } from '../layouts/Nav/Navbar';
+import { LoggedInNavbar } from '../layouts/Nav/LoggedInNavbar';
 export const Header: FC = () => {
   const { user } = useUserStore();
   const { show } = useNavStore();
   const toggle = useNavStore((show) => show.toggle);
-  const resetUser = useUserStore((state) => state.resetUser);
-
-  const logOut = () => {
-    useLogOut()
-      .then((res) => {
-        resetUser();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <header className="fixed w-screen backdrop-blur-2xl">
-      <div className="grid grid-cols-2 sm:px-10 px-3 py-3">
+      <div className="grid grid-cols-3 sm:px-10 px-3 py-3">
         <h1 className="text-5xl font-extrabold">DITA</h1>
-        <nav className="flex items-center justify-end">
+        <nav className="flex items-center justify-end col-span-2">
           <button className="md:hidden z-30" onClick={() => toggle(show)}>
             <div className={style.burgers}>
               <span className={show ? style.child1Open : style.child1}></span>
@@ -33,61 +22,14 @@ export const Header: FC = () => {
             </div>
           </button>
           <div>
-            {show ? (
-              <ul className={show ? style.all : undefined}>
-                <div className=" text-white flex flex-col h-screen items-center justify-center">
-                  <li className="text-lg font-bold py-5">
-                    <Link href="/">Home</Link>
-                  </li>
-                  <li className="text-lg font-bold py-5">
-                    <Link href="/favorite">Favorite</Link>
-                  </li>
-                  {user.id == '' ? (
-                    <li className="text-lg font-bold py-5">
-                      <Link href="/account/login">Login/signup</Link>
-                    </li>
-                  ) : (
-                    <div>
-                      <button
-                        className="text-lg font-bold py-5"
-                        onClick={() => logOut()}
-                      >
-                        LogOut
-                      </button>
-                      <li className="text-lg font-bold py-5">
-                        <Link href="/account/edit">edit</Link>
-                      </li>
-                    </div>
-                  )}
-                </div>
-              </ul>
+            {user.id == '' ? (
+              <div className={show ? style.all : undefined}>
+                <Navbar isShow={show} />
+              </div>
             ) : (
-              <ul className="md:flex hidden gap-10 justify-end">
-                <li className="text-lg font-bold">
-                  <Link href="/">Home</Link>
-                </li>
-                <li className="text-lg font-bold">
-                  <Link href="/favorite">Favorite</Link>
-                </li>
-                {user.id == '' ? (
-                  <li className="text-lg font-bold">
-                    <Link href="/account/login">Login/signup</Link>
-                  </li>
-                ) : (
-                  <div className="flex gap-10">
-                    <button
-                      className="text-lg font-bold "
-                      onClick={() => logOut()}
-                    >
-                      LogOut
-                    </button>
-                    <li className="text-lg font-bold ">
-                      <Link href="/account">account</Link>
-                    </li>
-                    <li className="text-lg font-bold ">{user.name}</li>
-                  </div>
-                )}
-              </ul>
+              <div className={show ? style.all : undefined}>
+                <LoggedInNavbar isShow={show} />
+              </div>
             )}
           </div>
         </nav>
