@@ -18,6 +18,9 @@ const Result: NextPage = () => {
         <div className="text-center">
           <div className=" w-44 h-44">
             <Lottie animationData={animationData} />
+            <p className="text-center text-gray-400">
+              Animation by: MD ABDUR RAHIM
+            </p>
           </div>
         </div>
       ) : (
