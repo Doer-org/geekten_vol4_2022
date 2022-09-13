@@ -83,7 +83,7 @@ func (ar articleRepository) GetRanking() ([]*entity.Article, error) {
 }
 
 func (ar articleRepository) CreateHistory(user_id string, article_id int) (*entity.History, error) {
-	statement := "INSERT INTO historys (user_id, article_id, created_at) VALUES($1,$2,current_timestamp) returning user_id, article_id, created_at"
+	statement := "INSERT INTO historys (user_id, article_id) VALUES($1,$2) returning user_id, article_id, created_at"
 
 	stmt, err := ar.db.Prepare(statement)
 	if err != nil {
