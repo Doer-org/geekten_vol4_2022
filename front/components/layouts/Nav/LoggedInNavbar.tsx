@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { UserInfo } from '../../../types/userInfo';
 import { useLogOut } from '../../../hooks/useLogOut';
 import { useUserStore } from '../../../store/store';
-export const LoggedInNavbar: FC<{ user: UserInfo }> = ({ user }) => {
+export const LoggedInNavbar: FC<{ show: boolean }> = ({ show }) => {
   const resetUser = useUserStore((state) => state.resetUser);
   const logOut = () => {
     useLogOut()
@@ -15,27 +15,28 @@ export const LoggedInNavbar: FC<{ user: UserInfo }> = ({ user }) => {
       });
   };
   return (
-    <div>
-      <li className="text-lg font-bold py-5">
+    <ul
+      className={
+        show
+          ? 'text-white flex flex-col h-screen items-center justify-center'
+          : 'md:flex hidden justify-end'
+      }
+    >
+      <li className="text-lg font-bold py-5 md:py-2 px-3">
         <Link href="/">ホーム</Link>
       </li>
-      <li className="text-lg font-bold py-5">
+      <li className="text-lg font-bold py-5 md:py-2 px-3">
         <Link href="/favorite">お気に入り</Link>
       </li>
-      {user.id == '' ? (
-        <li className="text-lg font-bold py-5">
-          <Link href="/account/login">ログイン・新規登録</Link>
-        </li>
-      ) : (
-        <div>
-          <button className="text-lg font-bold py-5" onClick={() => logOut()}>
-            ログアウト
-          </button>
-          <li className="text-lg font-bold py-5">
-            <Link href="/account">アカウント</Link>
-          </li>
-        </div>
-      )}
-    </div>
+      <button
+        className="text-lg font-bold py-5 md:py-2 px-3"
+        onClick={() => logOut()}
+      >
+        ログアウト
+      </button>
+      <li className="text-lg font-bold py-5 md:py-2 px-3">
+        <Link href="/account">アカウント</Link>
+      </li>
+    </ul>
   );
 };

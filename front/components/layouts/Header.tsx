@@ -3,7 +3,7 @@ import style from '../../styles/navbar.module.css';
 import { useUserStore } from '../../store/store';
 import { useNavStore } from '../../store/store';
 import { Navbar } from '../layouts/Nav/Navbar';
-import { HomeEl, FavEl, LoginEl, AccountEl, LogoutEl } from './Navbar';
+import { LoggedInNavbar } from '../layouts/Nav/LoggedInNavbar';
 export const Header: FC = () => {
   const { user } = useUserStore();
   const { show } = useNavStore();
@@ -22,17 +22,14 @@ export const Header: FC = () => {
             </div>
           </button>
           <div>
-            {show ? (
+            {user.id == '' ? (
               <div className={show ? style.all : undefined}>
-                <Navbar
-                  user={user}
-                  className={
-                    'text-white flex flex-col h-screen items-center justify-center'
-                  }
-                />
+                <Navbar show={show} />
               </div>
             ) : (
-              <Navbar user={user} className={'md:flex hidden justify-end'} />
+              <div className={show ? style.all : undefined}>
+                <LoggedInNavbar show={show} />
+              </div>
             )}
           </div>
         </nav>
