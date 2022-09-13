@@ -5,7 +5,19 @@ import { UpdateUser } from '../../services/User/UpdateUser';
 export const EditForm: FC = () => {
   const { user } = useUserStore();
   const EditUser = useUserStore((state) => state.editUser);
-  const [tmp, setTmp] = useState(user.name);
+  const [tmp, setTmp] = useState<string>(user.name);
+  const updateUser = () => {
+    console.log(user);
+    UpdateUser(user)
+      .then((res) => {
+        EditUser(res.data.id, res.data.name);
+        console.log(res.data);
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   console.log(user.name);
   return (
     <div className="text-center">
@@ -21,22 +33,7 @@ export const EditForm: FC = () => {
         />
       </div>
 
-      <button
-        onClick={() => {
-          console.log(user);
-          UpdateUser(user)
-            .then((res) => {
-              EditUser(res.data.id, res.data.name);
-              console.log(res.data);
-              console.log(user);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        変更
-      </button>
+      <button onClick={() => updateUser()}>変更</button>
     </div>
   );
 };
