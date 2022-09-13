@@ -22,8 +22,8 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 
 	userupdate := http.HandlerFunc(userHandler.UpdateUser)
 	http.Handle("/api/user/update", middleware.Layres(userupdate))
-  	
-  userget := http.HandlerFunc(userHandler.GetUser)
+
+	userget := http.HandlerFunc(userHandler.GetUser)
 	http.Handle("/api/user/get", middleware.Layres(userget))
 
 	historycreate := http.HandlerFunc(articleHandler.CreateHistory)
