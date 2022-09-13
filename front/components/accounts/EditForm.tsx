@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { Layout } from '@/components/layouts/Layout';
 import { useUserStore } from '../../store/store';
 import { UpdateUser } from '../../services/User/UpdateUser';
 export const EditForm: FC = () => {
@@ -33,7 +32,7 @@ export const EditForm: FC = () => {
         />
       </div>
 
-      <button onClick={() => updateUser()}>変更</button>
+      <button onClick={updateUser}>変更</button>
     </div>
   );
 };

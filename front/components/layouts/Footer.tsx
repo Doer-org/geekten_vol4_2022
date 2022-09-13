@@ -7,7 +7,11 @@ export const Footer: FC = () => {
   return (
     <footer className="relative">
       <div className="h-20 absolute w-screen bottom-0 flex justify-center items-center ">
-        <Link href="https://doer.vercel.app/">
+        <Link
+          target="_blank"
+          href="https://doer.vercel.app/"
+          rel="noopener noreferrer"
+        >
           <div className="relative w-24 h-20 ml-3">
             <Image src={Logo} alt="logo" layout="fill" />
           </div>

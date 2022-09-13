@@ -24,11 +24,11 @@ export const Header: FC = () => {
           <div>
             {user.id == '' ? (
               <div className={show ? style.all : undefined}>
-                <Navbar show={show} />
+                <Navbar isShow={show} />
               </div>
             ) : (
               <div className={show ? style.all : undefined}>
-                <LoggedInNavbar show={show} />
+                <LoggedInNavbar isShow={show} />
               </div>
             )}
           </div>

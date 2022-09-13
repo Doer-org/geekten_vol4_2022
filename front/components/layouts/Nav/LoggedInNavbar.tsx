@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { UserInfo } from '../../../types/userInfo';
 import { useLogOut } from '../../../hooks/useLogOut';
 import { useUserStore } from '../../../store/store';
-export const LoggedInNavbar: FC<{ show: boolean }> = ({ show }) => {
+interface IProps {
+  isShow: boolean;
+}
+export const LoggedInNavbar: FC<IProps> = (show) => {
   const resetUser = useUserStore((state) => state.resetUser);
   const logOut = () => {
     useLogOut()
@@ -28,10 +30,7 @@ export const LoggedInNavbar: FC<{ show: boolean }> = ({ show }) => {
       <li className="text-lg font-bold py-5 md:py-2 px-3">
         <Link href="/favorite">お気に入り</Link>
       </li>
-      <button
-        className="text-lg font-bold py-5 md:py-2 px-3"
-        onClick={() => logOut()}
-      >
+      <button className="text-lg font-bold py-5 md:py-2 px-3" onClick={logOut}>
         ログアウト
       </button>
       <li className="text-lg font-bold py-5 md:py-2 px-3">

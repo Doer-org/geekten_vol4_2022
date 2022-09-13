@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { FC } from 'react';
-export const Navbar: FC<{ show: boolean }> = ({ show }) => {
+interface IProps {
+  isShow: boolean;
+}
+export const Navbar: FC<IProps> = (show) => {
   return (
     <ul
       className={

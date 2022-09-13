@@ -1,4 +1,5 @@
-export const Article = () => {
+import { FC } from 'react';
+export const Article: FC = () => {
   return (
     <article className="grid grid-cols-1 shadow-2xl border border-black rounded-md mt-5 mb-10 mx-5">
       <div className=" bg-lime-300 rounded-md py-10 px-5 break-all">
