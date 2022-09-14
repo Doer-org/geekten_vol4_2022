@@ -35,8 +35,9 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 		log.Println(handler_error.MethodNotAllowd)
 		return
 	}
+	types := r.URL.Query().Get("type")
 
-	article, err := ah.articleUsecase.GetRandom(r.Context())
+	article, err := ah.articleUsecase.GetRandom(types)
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getrandom", err)

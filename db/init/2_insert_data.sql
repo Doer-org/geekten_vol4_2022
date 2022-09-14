@@ -7,6 +7,30 @@ VALUES ('Cから学ぶRustの良さ',16,'https://qiita.com/Cowsisland/items/7124
 INSERT INTO articles ("title","likes","url","author","kind")
 VALUES ('GoはGomiのGo',36,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
 
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',56,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',26,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',136,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',236,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',306,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',386,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',316,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
+INSERT INTO articles ("title","likes","url","author","kind")
+VALUES ('GoはGomiのGo',736,'https://qiita.com/Cowsisland/items/71248bdd081089b7ba09','@yadon','zenn');
+
 INSERT INTO users ("id","name")
 VALUES ('1','Mahiro Mahiro');
 
