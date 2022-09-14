@@ -36,7 +36,13 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	article, err := ah.articleUsecase.GetRandom(r.Context())
+	limit, err := strconv.Atoi(r.FormValue("limit"))
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "id not number", err)
+		return
+	}
+
+	article, err := ah.articleUsecase.GetRandom(limit)
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getrandom", err)

@@ -3,6 +3,8 @@ package repository
 import (
 	"database/sql"
 	"log"
+	"math/rand"
+	"time"
 
 	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
 	"github.com/Doer-org/geekten_vol4_2022/domain/repository"
@@ -23,10 +25,21 @@ func NewArticleRepository(db *sql.DB) repository.ArticleRepository {
 // https://pkg.go.dev/database/sql@go1.17#pkg-index
 // https://docs.google.com/presentation/d/1KE-81XbWdsiS6UASiwp3GWlmdHVFA81kewbw18r-DRA/edit#slide=id.g4fa6e8ab24_0_82
 
-func (ar articleRepository) GetRandom() (*entity.Article, error) {
+func (ar articleRepository) GetRandom(limit int) (*entity.Article, error) {
 
-	const getRandomQuery = "SELECT * FROM articles LIMIT 1"
-	rows, err := ar.db.Query(getRandomQuery)
+	rand.Seed(time.Now().UnixNano())
+	result := rand.Intn(10)
+	result++
+
+	var getRandomQuery string
+
+	if limit == 1 {
+		getRandomQuery = "SELECT * FROM articles ORDER BY likes DESC LIMIT 1 OFFSET $1"
+	}
+	if limit == 2 {
+		getRandomQuery = "SELECT * FROM articles ORDER BY likes LIMIT 1 OFFSET $1"
+	}
+	rows, err := ar.db.Query(getRandomQuery, result)
 	if err != nil {
 		log.Println(db_error.QueryError)
 		return nil, err

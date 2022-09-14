@@ -1,14 +1,12 @@
 package usecase
 
 import (
-	"context"
-
 	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
 	"github.com/Doer-org/geekten_vol4_2022/domain/repository"
 )
 
 type ArticleUsecase interface {
-	GetRandom(context.Context) (*entity.Article, error)
+	GetRandom(int) (*entity.Article, error)
 	GetRanking() ([]*entity.Article, error)
 	CreateHistory(string, int) (*entity.History, error)
 	GetHistory(string) ([]*entity.History, []*entity.Article, error)
@@ -24,8 +22,8 @@ func NewArticleUsecase(ar repository.ArticleRepository) ArticleUsecase {
 	}
 }
 
-func (au articleUsecase) GetRandom(ctx context.Context) (*entity.Article, error) {
-	article, err := au.articleRepository.GetRandom()
+func (au articleUsecase) GetRandom(limit int) (*entity.Article, error) {
+	article, err := au.articleRepository.GetRandom(limit)
 	return article, err
 }
 
