@@ -6,11 +6,19 @@ import { useUserStore } from '../../store/store';
 export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const setUser = useUserStore((state) => state.setUser);
   const { user } = useUserStore();
+
   useEffect(() => {
-    if (user !== null) {
-      useFetchCurrentUser(setUser);
+    if (JSON.parse(localStorage.getItem('user') as string) === null) {
+      if (user.id !== '') {
+        useFetchCurrentUser(setUser);
+        console.log('api tataita');
+      }
+    } else {
+      setUser(JSON.parse(localStorage.getItem('user') as string));
+      console.log('cache tataita');
     }
   }, []);
+
   return (
     <div className="font-mono text-gray-800">
       <Header />

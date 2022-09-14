@@ -3,11 +3,11 @@ import { FC } from 'react';
 interface IProps {
   isShow: boolean;
 }
-export const Navbar: FC<IProps> = (show) => {
+export const Navbar: FC<IProps> = ({ isShow }) => {
   return (
     <ul
       className={
-        show
+        isShow
           ? 'text-white flex flex-col h-screen items-center justify-center'
           : 'md:flex hidden justify-end'
       }

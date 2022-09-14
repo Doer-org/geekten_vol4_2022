@@ -15,8 +15,9 @@ const Form: FC<{ title: string }> = ({ title }) => {
         className="flex bg-black hover:bg-slate-800 px-5 py-3  justify-center items-center rounded-md"
         onClick={() => {
           useLogin()
-            .then((ret) => {
-              setUser(ret);
+            .then((res) => {
+              setUser(res);
+              console.log(res);
             })
             .catch((err) => {
               console.log(err);

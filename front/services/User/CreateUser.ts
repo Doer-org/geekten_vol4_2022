@@ -1,5 +1,3 @@
-// usercreate := http.HandlerFunc(userHandler.CreateUser)
-// 	http.Handle("/api/user/create", middleware.Layres(usercreate))
 import { Axios } from '../../libs/api';
 import { UserInfo } from '../../types/userInfo';
 type CreateUser = (user: UserInfo) => void;
