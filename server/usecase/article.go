@@ -22,8 +22,8 @@ func NewArticleUsecase(ar repository.ArticleRepository) ArticleUsecase {
 	}
 }
 
-func (au articleUsecase) GetRandom(limit string) (*entity.Article, error) {
-	article, err := au.articleRepository.GetRandom(limit)
+func (au articleUsecase) GetRandom(types string) (*entity.Article, error) {
+	article, err := au.articleRepository.GetRandom(types)
 	return article, err
 }
 

@@ -37,7 +37,7 @@ func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 		getRandomQuery = "SELECT * FROM articles ORDER BY likes DESC LIMIT 1 OFFSET $1"
 	}
 	if types == "nich" {
-		getRandomQuery = "SELECT * FROM articles ORDER BY likes LIMIT 1 OFFSET $1"
+		getRandomQuery = "SELECT * FROM articles ORDER BY likes ASC LIMIT 1 OFFSET $1"
 	}
 	rows, err := ar.db.Query(getRandomQuery, result)
 	if err != nil {
