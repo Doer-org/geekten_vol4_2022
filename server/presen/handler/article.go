@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -40,7 +39,7 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	article, err := ah.articleUsecase.GetRandom(r.Context())
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to getrandom")
+		utils.CreateErrorResponse(w, r, "faild to getrandom", err)
 		log.Println(err)
 		return
 	}
@@ -61,7 +60,7 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 	articles, err := ah.articleUsecase.GetRanking()
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to getranking")
+		utils.CreateErrorResponse(w, r, "faild to getranking", err)
 		log.Println(err)
 		return
 	}
@@ -89,14 +88,14 @@ func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
 	newArticleId, err := strconv.Atoi(r.FormValue("article_id"))
 
 	if err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "id not number", err)
 		return
 	}
 
 	history, err := uh.articleUsecase.CreateHistory(newUserId, newArticleId)
 
 	if err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "faild to createhistory", err)
 		return
 	}
 	resHistory := response.NewHistoryResponse(history)
@@ -108,7 +107,6 @@ func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resHistory); err != nil {
 		log.Println(err)
 	}
-	return
 }
 
 func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
@@ -123,15 +121,15 @@ func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
 	historys, article, err := uh.articleUsecase.GetHistory(newUserId)
 
 	if historys == nil {
-		utils.CreateErrorResponse(w, r, "id not found")
+		utils.CreateErrorResponse(w, r, "id not found", err)
 		return
 	}
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to gethistory")
+		utils.CreateErrorResponse(w, r, "faild to gethistory", err)
 		return
 	}
-	fmt.Print(w, historys, article)
+
 	resHistory := response.NewHistoryListResponse(article, historys)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -141,6 +139,5 @@ func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	return
 
 }

@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 )
 
@@ -10,7 +11,8 @@ type Error struct {
 	Result string
 }
 
-func CreateErrorResponse(w http.ResponseWriter, r *http.Request, errormessage string) {
+func CreateErrorResponse(w http.ResponseWriter, r *http.Request, errormessage string, err error) {
+	log.Println(err)
 	ping := Error{http.StatusOK, errormessage}
 
 	res, err := json.Marshal(ping)
