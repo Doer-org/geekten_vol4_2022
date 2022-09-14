@@ -5,7 +5,7 @@ import { useUserStore } from '../../../store/store';
 interface IProps {
   isShow: boolean;
 }
-export const LoggedInNavbar: FC<IProps> = (show) => {
+export const LoggedInNavbar: FC<IProps> = ({ isShow }) => {
   const resetUser = useUserStore((state) => state.resetUser);
   const logOut = () => {
     useLogOut()
@@ -19,7 +19,7 @@ export const LoggedInNavbar: FC<IProps> = (show) => {
   return (
     <ul
       className={
-        show
+        isShow
           ? 'text-white flex flex-col h-screen items-center justify-center'
           : 'md:flex hidden justify-end'
       }
