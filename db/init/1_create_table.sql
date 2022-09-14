@@ -16,6 +16,16 @@ CREATE TABLE "users" (
   "name"              VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE "historys" (
+  "user_id"             VARCHAR(255) NOT NULL,
+  "article_id"          INT NOT NULL,
+  "created_at"          TIMESTAMP default CURRENT_TIMESTAMP,
+  foreign key ("user_id") references "users"("id")
+    ON DELETE CASCADE,
+  foreign key ("article_id") references "articles"("id")
+    ON DELETE CASCADE
+);
+
 
 
 

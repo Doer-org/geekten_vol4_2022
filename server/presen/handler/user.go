@@ -40,7 +40,7 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	user, err := uh.userUsecase.CreateUser(newId, newName)
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to createuser")
+		utils.CreateErrorResponse(w, r, "faild to createuser", err)
 		return
 	}
 	resUser := response.NewUserResponse(user)
@@ -66,7 +66,7 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	user, err := uh.userUsecase.UpdateUser(newId, newName)
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to updateuser")
+		utils.CreateErrorResponse(w, r, "faild to updateuser", err)
 		return
 	}
 	resUser := response.NewUserResponse(user)
@@ -89,18 +89,18 @@ func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	newId := r.FormValue("id")
 	if newId == "" {
-		utils.CreateErrorResponse(w, r, "id empty")
+		utils.CreateErrorResponse(w, r, "id empty", nil)
 		return
 	}
 	user, err := uh.userUsecase.GetUser(newId)
 
 	if user.Id == "" {
-		utils.CreateErrorResponse(w, r, "id not found")
+		utils.CreateErrorResponse(w, r, "id not found", nil)
 		return
 	}
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to getuser")
+		utils.CreateErrorResponse(w, r, "faild to getuser", err)
 		return
 	}
 	resUser := response.NewUserResponse(user)

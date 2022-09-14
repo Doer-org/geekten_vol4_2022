@@ -1,5 +1,7 @@
 package entity
 
+import "time"
+
 type Article struct {
 	Id     int
 	Title  string
@@ -7,4 +9,10 @@ type Article struct {
 	Url    string
 	Author string
 	Kind   string
+}
+
+type History struct {
+	UserId    string
+	ArticleId int
+	CreatedAt time.Time
 }

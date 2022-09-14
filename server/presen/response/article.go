@@ -1,6 +1,10 @@
 package response
 
-import "github.com/Doer-org/geekten_vol4_2022/domain/entity"
+import (
+	"time"
+
+	"github.com/Doer-org/geekten_vol4_2022/domain/entity"
+)
 
 func NewArticleResponse(article *entity.Article) ArticleResponse {
 	return ArticleResponse{
@@ -16,14 +20,14 @@ func NewArticleResponse(article *entity.Article) ArticleResponse {
 func NewArticleListResponse(articles []*entity.Article) []ArticleResponse {
 	var resArticles []ArticleResponse
 
-	for _, v := range articles {
+	for _, article := range articles {
 		res := ArticleResponse{
-			Id:     v.Id,
-			Title:  v.Title,
-			Likes:  v.Likes,
-			Url:    v.Url,
-			Author: v.Author,
-			Kind:   v.Kind,
+			Id:     article.Id,
+			Title:  article.Title,
+			Likes:  article.Likes,
+			Url:    article.Url,
+			Author: article.Author,
+			Kind:   article.Kind,
 		}
 		resArticles = append(resArticles, res)
 	}
@@ -38,4 +42,49 @@ type ArticleResponse struct {
 	Url    string `json:"url"`
 	Author string `json:"author"`
 	Kind   string `json:"kind"`
+}
+
+func NewHistoryListResponse(articles []*entity.Article, historys []*entity.History) []HistoryAriticleResponse {
+	var resHistorys []HistoryAriticleResponse
+
+	for i, history := range historys {
+		art := ArticleResponse{
+			Id:     articles[i].Id,
+			Title:  articles[i].Title,
+			Likes:  articles[i].Likes,
+			Url:    articles[i].Url,
+			Author: articles[i].Author,
+			Kind:   articles[i].Kind,
+		}
+		res := HistoryAriticleResponse{
+			UserId:    history.UserId,
+			ArticleId: history.ArticleId,
+			CreatedAt: history.CreatedAt,
+			Article:   art,
+		}
+		resHistorys = append(resHistorys, res)
+	}
+
+	return resHistorys
+}
+
+func NewHistoryResponse(history *entity.History) HistoryResponse {
+	return HistoryResponse{
+		UserId:    history.UserId,
+		ArticleId: history.ArticleId,
+		CreatedAt: history.CreatedAt,
+	}
+}
+
+type HistoryAriticleResponse struct {
+	UserId    string    `json:"user_id"`
+	ArticleId int       `json:"article_id"`
+	CreatedAt time.Time `json:"created_at"`
+	Article   ArticleResponse
+}
+
+type HistoryResponse struct {
+	UserId    string    `json:"user_id"`
+	ArticleId int       `json:"article_id"`
+	CreatedAt time.Time `json:"created_at"`
 }

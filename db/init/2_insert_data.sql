@@ -13,4 +13,8 @@ VALUES ('1','Mahiro Mahiro');
 INSERT INTO users ("id","name")
 VALUES ('2','Shotaro Yamasaki');
 
+INSERT INTO historys ("user_id","article_id")
+VALUES ('1',1);
 
+INSERT INTO historys ("user_id","article_id")
+VALUES ('2',2);

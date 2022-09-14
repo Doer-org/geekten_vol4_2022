@@ -17,12 +17,19 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 	articleRanking := http.HandlerFunc(articleHandler.GetRanking)
 	http.Handle("/api/article/ranking", middleware.Layres(articleRanking))
 
-	usercreate := http.HandlerFunc(userHandler.CreateUser)
-	http.Handle("/api/user/create", middleware.Layres(usercreate))
+	userCreate := http.HandlerFunc(userHandler.CreateUser)
+	http.Handle("/api/user/create", middleware.Layres(userCreate))
 
-	userupdate := http.HandlerFunc(userHandler.UpdateUser)
-	http.Handle("/api/user/update", middleware.Layres(userupdate))
+	userUpdate := http.HandlerFunc(userHandler.UpdateUser)
+	http.Handle("/api/user/update", middleware.Layres(userUpdate))
 
-	userget := http.HandlerFunc(userHandler.GetUser)
-	http.Handle("/api/user/get", middleware.Layres(userget))
+	userGet := http.HandlerFunc(userHandler.GetUser)
+	http.Handle("/api/user/get", middleware.Layres(userGet))
+
+	historyCreate := http.HandlerFunc(articleHandler.CreateHistory)
+	http.Handle("/api/history/create", middleware.Layres(historyCreate))
+
+	historyGet := http.HandlerFunc(articleHandler.GetHistory)
+	http.Handle("/api/history/get", middleware.Layres(historyGet))
+
 }
