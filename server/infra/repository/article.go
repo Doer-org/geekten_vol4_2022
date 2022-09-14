@@ -25,7 +25,7 @@ func NewArticleRepository(db *sql.DB) repository.ArticleRepository {
 // https://pkg.go.dev/database/sql@go1.17#pkg-index
 // https://docs.google.com/presentation/d/1KE-81XbWdsiS6UASiwp3GWlmdHVFA81kewbw18r-DRA/edit#slide=id.g4fa6e8ab24_0_82
 
-func (ar articleRepository) GetRandom(limit int) (*entity.Article, error) {
+func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 
 	rand.Seed(time.Now().UnixNano())
 	result := rand.Intn(10)
@@ -33,10 +33,10 @@ func (ar articleRepository) GetRandom(limit int) (*entity.Article, error) {
 
 	var getRandomQuery string
 
-	if limit == 1 {
+	if types == "popularity" {
 		getRandomQuery = "SELECT * FROM articles ORDER BY likes DESC LIMIT 1 OFFSET $1"
 	}
-	if limit == 2 {
+	if types == "nich" {
 		getRandomQuery = "SELECT * FROM articles ORDER BY likes LIMIT 1 OFFSET $1"
 	}
 	rows, err := ar.db.Query(getRandomQuery, result)

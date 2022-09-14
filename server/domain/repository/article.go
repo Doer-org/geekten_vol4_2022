@@ -5,7 +5,7 @@ import (
 )
 
 type ArticleRepository interface {
-	GetRandom(int) (*entity.Article, error)
+	GetRandom(string) (*entity.Article, error)
 	GetRanking() ([]*entity.Article, error)
 	CreateHistory(string, int) (*entity.History, error)
 	GetHistory(string) ([]*entity.History, []*entity.Article, error)

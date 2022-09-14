@@ -6,7 +6,7 @@ import (
 )
 
 type ArticleUsecase interface {
-	GetRandom(int) (*entity.Article, error)
+	GetRandom(string) (*entity.Article, error)
 	GetRanking() ([]*entity.Article, error)
 	CreateHistory(string, int) (*entity.History, error)
 	GetHistory(string) ([]*entity.History, []*entity.Article, error)
@@ -22,7 +22,7 @@ func NewArticleUsecase(ar repository.ArticleRepository) ArticleUsecase {
 	}
 }
 
-func (au articleUsecase) GetRandom(limit int) (*entity.Article, error) {
+func (au articleUsecase) GetRandom(limit string) (*entity.Article, error) {
 	article, err := au.articleRepository.GetRandom(limit)
 	return article, err
 }
