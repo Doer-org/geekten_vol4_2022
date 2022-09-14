@@ -1,6 +1,5 @@
 import { Axios } from '../../libs/api';
 import { UserInfo } from '../../types/userInfo';
-import { AxiosResponse } from 'axios';
 type Error = {
   Status: number;
   Result: string;

@@ -7,8 +7,5 @@ import { UserInfo } from '../types/userInfo';
 type EditUser = (user: UserInfo) => Promise<AxiosResponse<UserInfo>>;
 export const useEditUser: EditUser = async (user) => {
   const updatedUser = await UpdateUser(user);
-  console.log(updatedUser);
-  console.log('EditUser/process');
-
   return updatedUser;
 };

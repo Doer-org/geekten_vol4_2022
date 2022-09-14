@@ -10,8 +10,11 @@ export const EditForm: FC = () => {
     UpdateUser(user)
       .then((res) => {
         EditUser(res.data.id, res.data.name);
-        console.log(res.data);
-        console.log(user);
+        localStorage.removeItem('user');
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ id: res.data.id, name: res.data.name })
+        );
       })
       .catch((err) => {
         console.log(err);

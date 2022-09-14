@@ -15,7 +15,7 @@ export const useLogin = async (): Promise<UserInfo> => {
   // 本当はFetchUserの返ってきた値が正常系じゃないときのみcreateUserをするようにしたい
   CreateUser(userData);
   const user = FetchUser(userData.id);
-  console.log(user);
+  // ここでローカルストレージに入れる
   localStorage.setItem('user', JSON.stringify(userData));
   return user;
 };

@@ -8,8 +8,14 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const { user } = useUserStore();
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('user') as string).id === null) {
-      useFetchCurrentUser(setUser);
+    if (JSON.parse(localStorage.getItem('user') as string) === null) {
+      if (user.id !== '') {
+        useFetchCurrentUser(setUser);
+        console.log('api tataita');
+      }
+    } else {
+      setUser(JSON.parse(localStorage.getItem('user') as string));
+      console.log('cache tataita');
     }
   }, []);
 
