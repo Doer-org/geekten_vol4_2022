@@ -20,14 +20,14 @@ func NewArticleResponse(article *entity.Article) ArticleResponse {
 func NewArticleListResponse(articles []*entity.Article) []ArticleResponse {
 	var resArticles []ArticleResponse
 
-	for _, v := range articles {
+	for _, article := range articles {
 		res := ArticleResponse{
-			Id:     v.Id,
-			Title:  v.Title,
-			Likes:  v.Likes,
-			Url:    v.Url,
-			Author: v.Author,
-			Kind:   v.Kind,
+			Id:     article.Id,
+			Title:  article.Title,
+			Likes:  article.Likes,
+			Url:    article.Url,
+			Author: article.Author,
+			Kind:   article.Kind,
 		}
 		resArticles = append(resArticles, res)
 	}
@@ -44,10 +44,10 @@ type ArticleResponse struct {
 	Kind   string `json:"kind"`
 }
 
-func NewHistoryListResponse(articles []*entity.Article, history []*entity.History) []HistoryResponse2 {
-	var resHistorys []HistoryResponse2
+func NewHistoryListResponse(articles []*entity.Article, historys []*entity.History) []HistoryAriticleResponse {
+	var resHistorys []HistoryAriticleResponse
 
-	for i, v := range history {
+	for i, history := range historys {
 		art := ArticleResponse{
 			Id:     articles[i].Id,
 			Title:  articles[i].Title,
@@ -56,10 +56,10 @@ func NewHistoryListResponse(articles []*entity.Article, history []*entity.Histor
 			Author: articles[i].Author,
 			Kind:   articles[i].Kind,
 		}
-		res := HistoryResponse2{
-			UserId:    v.UserId,
-			ArticleId: v.ArticleId,
-			CreatedAt: v.CreatedAt,
+		res := HistoryAriticleResponse{
+			UserId:    history.UserId,
+			ArticleId: history.ArticleId,
+			CreatedAt: history.CreatedAt,
 			Article:   art,
 		}
 		resHistorys = append(resHistorys, res)
@@ -76,7 +76,7 @@ func NewHistoryResponse(history *entity.History) HistoryResponse {
 	}
 }
 
-type HistoryResponse2 struct {
+type HistoryAriticleResponse struct {
 	UserId    string    `json:"user_id"`
 	ArticleId int       `json:"article_id"`
 	CreatedAt time.Time `json:"created_at"`
