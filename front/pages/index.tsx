@@ -3,8 +3,11 @@ import { Layout } from '../components/layouts/Layout';
 import Lottie from 'lottie-react';
 import * as animationData from '../json/robot.json';
 import Link from 'next/link';
+import { useArticleOptionStore } from '../store/store';
 
 const Home: NextPage = () => {
+  const { option } = useArticleOptionStore();
+  const setOption = useArticleOptionStore((state) => state.setOption);
   return (
     <Layout>
       <div className="grid md:grid-cols-2 grid-cols-1 place-items-center justify-items-center">
@@ -18,9 +21,25 @@ const Home: NextPage = () => {
               DITAはあなたの技術の発見をサポートするサービスです
             </h2>
             <Link href="/result">
-              <a className="shadow-md rounded-md border p-3 hover:bg-orange-500">
-                はじめる
+              <button
+                className="shadow-md rounded-md border p-3 hover:bg-orange-500"
+                onClick={() => setOption('nich')}
+              >
+                nich
+              </button>
+            </Link>
+            <Link href="/result">
+              <a className="shadow-md rounded-md border p-3 hover:bg-orange-500 mx-3">
+                Random
               </a>
+            </Link>
+            <Link href="/result">
+              <button
+                className="shadow-md rounded-md border p-3 hover:bg-orange-500"
+                onClick={() => setOption('popularity')}
+              >
+                popular
+              </button>
             </Link>
           </div>
         </div>
