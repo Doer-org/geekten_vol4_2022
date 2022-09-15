@@ -32,4 +32,7 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 	historyGet := http.HandlerFunc(articleHandler.GetHistory)
 	http.Handle("/api/history/get", middleware.Layres(historyGet))
 
+	favoriteCreate := http.HandlerFunc(userHandler.CreateFavorite)
+	http.Handle("/api/favorite/create", middleware.Layres(favoriteCreate))
+
 }

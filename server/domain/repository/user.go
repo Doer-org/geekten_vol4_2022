@@ -8,4 +8,6 @@ type UserRepository interface {
 	CreateUser(string, string) (*entity.User, error)
 	UpdateUser(string, string) (*entity.User, error)
 	GetUser(string) (*entity.User, error)
+	CreateFavorite(string, int) (*entity.Favorite, error)
+	ArticleLikesPlus(int) (*entity.Article, error)
 }
