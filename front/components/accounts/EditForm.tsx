@@ -35,10 +35,10 @@ export const EditForm: FC = () => {
           }}
         />
 
-        <p className='text-red-500' hidden = {user.name.length < 40}>名前は40文字以内で入力してください</p>
+        <p className='text-red-500' hidden = {user.name.length > 0 && user.name.length <= 40}>名前は1文字以上40文字以内で入力してください</p>
       </div>
 
-      <button onClick={updateUser} disabled={user.name.length >= 40}>変更</button>
+      <button onClick={updateUser} disabled={user.name.length <= 0 && user.name.length > 40}>変更</button>
     </div>
   );
 };
