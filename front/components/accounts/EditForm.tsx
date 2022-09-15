@@ -15,12 +15,13 @@ export const EditForm: FC = () => {
           'user',
           JSON.stringify({ id: res.data.id, name: res.data.name })
         );
+        console.log(user.name)
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(user.name);
+  // console.log(user.name);
   return (
     <div className="text-center">
       <div>Name</div>
@@ -33,9 +34,11 @@ export const EditForm: FC = () => {
             EditUser(user.id, e.target.value);
           }}
         />
+
+        <p className='text-red-500' hidden = {user.name.length < 40}>名前は40文字以内で入力してください</p>
       </div>
 
-      <button onClick={updateUser}>変更</button>
+      <button onClick={updateUser} disabled={user.name.length >= 40}>変更</button>
     </div>
   );
 };
