@@ -18,6 +18,7 @@ type UserHandler interface {
 	GetUser(http.ResponseWriter, *http.Request)
 	CreateFavorite(w http.ResponseWriter, r *http.Request)
 	DeleteFavorite(w http.ResponseWriter, r *http.Request)
+	GetFavorite(w http.ResponseWriter, r *http.Request)
 }
 
 type userHandler struct {
@@ -186,4 +187,37 @@ func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 	if err := je.Encode(resArticle); err != nil {
 		log.Println(err)
 	}
+}
+
+func (uh userHandler) GetFavorite(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
+		return
+	}
+
+	newUserId := r.FormValue("user_id")
+
+	favorites, article, err := uh.userUsecase.GetFavorite(newUserId)
+
+	if favorites == nil {
+		utils.CreateErrorResponse(w, r, "id not found", err)
+		return
+	}
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to gethistory", err)
+		return
+	}
+
+	resFavorite := response.NewFavoriteListResponse(article, favorites)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resFavorite); err != nil {
+		log.Println(err)
+		return
+	}
+
 }
