@@ -13,6 +13,15 @@ def connect_to_db():
     return conn
 
 
+#DBへの接続
+def connect_to_dburl(url):
+    conn = psycopg2.connect(
+        url
+    )
+    return conn
+
+
+
 
 # DBとの接続を切断
 def disconnect_to_db(conn):
