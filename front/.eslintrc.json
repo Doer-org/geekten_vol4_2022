@@ -1,33 +1,33 @@
-{
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "plugin:react/recommended",
-        "google",
-        "next/core-web-vitals",
-        "plugin:tailwindcss/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "import",
-        "unused-imports",
-        "tailwindcss"
-    ],
-    "rules": {
-        "@typescript-eslint/no-unused-vars": "off",
-        "unused-imports/no-unused-imports": "warn",
-        "semi": ["error", "never", {"beforeStatementContinuationChars": "never"}],
-        "max-len": ["error", { "code": 120 }]
-    }
-}
+// {
+//     "env": {
+//         "browser": true,
+//         "es2021": true
+//     },
+//     "extends": [
+//         "plugin:react/recommended",
+//         "google",
+//         "next/core-web-vitals",
+//         "plugin:tailwindcss/recommended"
+//     ],
+//     "parser": "@typescript-eslint/parser",
+//     "parserOptions": {
+//         "ecmaFeatures": {
+//             "jsx": true
+//         },
+//         "ecmaVersion": "latest",
+//         "sourceType": "module"
+//     },
+//     "plugins": [
+//         "react",
+//         "@typescript-eslint",
+//         "import",
+//         "unused-imports",
+//         "tailwindcss"
+//     ],
+//     "rules": {
+//         "@typescript-eslint/no-unused-vars": "off",
+//         "unused-imports/no-unused-imports": "warn",
+//         "semi": ["error", "never", {"beforeStatementContinuationChars": "never"}],
+//         "max-len": ["error", { "code": 120 }]
+//     }
+// }
