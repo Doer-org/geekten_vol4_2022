@@ -32,8 +32,7 @@ CREATE TABLE "favorite" (
   foreign key ("user_id") references "users"("id")
     ON DELETE CASCADE,
   foreign key ("article_id") references "articles"("id")
-    ON DELETE CASCADE,
-  CONSTRAINT upsert_pk PRIMARY KEY("user_id", "article_id")
+    ON DELETE CASCADE
 );
 
 

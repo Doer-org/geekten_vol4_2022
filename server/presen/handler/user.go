@@ -154,7 +154,7 @@ func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+	if r.Method != "DELETE" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		log.Println(handler_error.MethodNotAllowd)
 		return
@@ -175,7 +175,7 @@ func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	article, err := uh.userUsecase.ArticleLikesPlus(newArticleId)
+	article, err := uh.userUsecase.ArticleLikesMinus(newArticleId)
 
 	resArticle := response.NewArticleResponse(article)
 

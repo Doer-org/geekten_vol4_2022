@@ -11,4 +11,5 @@ type UserRepository interface {
 	CreateFavorite(string, int) (*entity.Favorite, error)
 	ArticleLikesPlus(int) (*entity.Article, error)
 	DeleteFavorite(string, int) error
+	ArticleLikesMinus(int) (*entity.Article, error)
 }

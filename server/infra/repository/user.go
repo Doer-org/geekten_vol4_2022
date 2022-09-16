@@ -83,9 +83,7 @@ func (ur userRepository) GetUser(id string) (*entity.User, error) {
 }
 
 func (ur userRepository) CreateFavorite(user_id string, article_id int) (*entity.Favorite, error) {
-	statement := "INSERT INTO favorite VALUES($1,$2) returning user_id,article_id"
-
-	// returning user_id,article_id
+	statement := "INSERT INTO favorite VALUES($1,$2) returning user_id, article_id"
 
 	stmt, err := ur.db.Prepare(statement)
 	if err != nil {
@@ -134,23 +132,38 @@ func (ur userRepository) ArticleLikesPlus(article_id int) (*entity.Article, erro
 func (ur userRepository) DeleteFavorite(user_id string, article_id int) error {
 	statement := "DELETE FROM favorite WHERE user_id = $1 AND article_id = $2"
 
-	// returning user_id,article_id
-
-	stmt, err := ur.db.Prepare(statement)
-	if err != nil {
-		log.Println(db_error.StatementError)
-		return err
-	}
-	defer stmt.Close()
-
-	favorite := &entity.Favorite{}
-	err = stmt.QueryRow(user_id, article_id).Scan(&favorite.UserId, &favorite.ArticleId)
+	_, err := ur.db.Exec(statement, user_id, article_id)
 
 	if err != nil {
 		log.Println(db_error.QueryError)
 		return err
 	}
-
 	return nil
 
+}
+
+func (ur userRepository) ArticleLikesMinus(article_id int) (*entity.Article, error) {
+	statement := "UPDATE articles SET likes = likes - 1 where id = $1 returning id, title, likes, url, author, kind"
+
+	stmt, err := ur.db.Prepare(statement)
+	if err != nil {
+		log.Println(db_error.StatementError)
+		return nil, err
+	}
+	defer stmt.Close()
+
+	article := &entity.Article{}
+	err = stmt.QueryRow(article_id).Scan(&article.Id,
+		&article.Title,
+		&article.Likes,
+		&article.Url,
+		&article.Author,
+		&article.Kind)
+
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return nil, err
+	}
+
+	return article, nil
 }
