@@ -14,11 +14,6 @@ type useArticleOptionStore = {
   setOption: (option: Option) => void;
 };
 
-type Nav = {
-  show: boolean;
-  toggle: (show: boolean) => void;
-};
-
 type ArticleHistory = {
   history: HistoryInfo[] | null;
   setHistory: (history: HistoryInfo[]) => void;
@@ -39,9 +34,4 @@ export const useArticleOptionStore = create<useArticleOptionStore>((set) => ({
 export const useHistoryStore = create<ArticleHistory>((set) => ({
   history: null,
   setHistory: (histories) => set({ history: histories }),
-}));
-
-export const useNavStore = create<Nav>((set) => ({
-  show: false,
-  toggle: (show) => set({ show: !show }),
 }));
