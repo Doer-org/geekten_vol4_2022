@@ -1,43 +1,34 @@
 import { FC } from 'react';
 import { useLogin } from '../hooks/User/useLogin';
 import { useUserStore } from '../store/store';
-import { useNavStore } from '../store/store';
 import Image from 'next/image';
 
 const Form: FC<{ title: string }> = ({ title }) => {
-  const { user } = useUserStore();
-  const { show } = useNavStore();
   const setUser = useUserStore((state) => state.setUser);
+  const Login = () => {
+    useLogin()
+      .then((res) => {
+        setUser(res);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
-    <div className="shadow-md rounded-md p-5">
-      <div>{user.id}</div>
-      <button
-        className="flex bg-black hover:bg-slate-800 px-5 py-3  justify-center items-center rounded-md"
-        onClick={() => {
-          useLogin()
-            .then((res) => {
-              setUser(res);
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        {show ? (
-          ''
-        ) : (
+    <div className="shadow-2xl rounded-md p-5">
+      <button className="px-5 py-3 rounded-md" onClick={Login}>
+        <div className="-z-10 relative ">
           <Image
             src="/Github.png"
-            objectFit="contain"
             alt="logo"
             width={70}
             height={70}
-            className="bg-black"
+            className="relative rounded-full bg-black"
           />
-        )}
+        </div>
 
-        <p className="px-5 text-white">Githubでログイン</p>
+        <p className="py-5">Githubでログイン</p>
       </button>
     </div>
   );
