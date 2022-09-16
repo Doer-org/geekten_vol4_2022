@@ -1,8 +1,7 @@
 from db.conn import connect_to_db,disconnect_to_db
 
-def insert_db(title, likes, url, author, kind):
+def insert_db(conn, title, likes, url, author, kind):
     # db接続とデータの挿入
-    conn = connect_to_db()
     cur = conn.cursor()
 
     insert_sql = f"\
@@ -14,5 +13,3 @@ def insert_db(title, likes, url, author, kind):
     conn.commit()
 
     cur.close()
-
-    disconnect_to_db(conn)
