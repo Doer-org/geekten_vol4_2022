@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import { useLogin } from '../hooks/User/useLogin';
 import { useUserStore } from '../store/store';
-import { useNavStore } from '../store/store';
 import Image from 'next/image';
 
 const Form: FC<{ title: string }> = ({ title }) => {
   const { user } = useUserStore();
-  const { show } = useNavStore();
   const setUser = useUserStore((state) => state.setUser);
   return (
     <div className="shadow-md rounded-md p-5">
@@ -24,7 +22,7 @@ const Form: FC<{ title: string }> = ({ title }) => {
             });
         }}
       >
-        {show ? (
+        {true ? (
           ''
         ) : (
           <Image

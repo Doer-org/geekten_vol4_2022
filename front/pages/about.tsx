@@ -1,21 +1,43 @@
-import type { NextPage } from "next";
-import { Layout } from "../components/layouts/Layout";
-// import Image from "next/image";
-// import mao from 'https://github.com/meow520.png'
+import type { NextPage } from 'next';
+import { Layout } from '../components/layouts/Layout';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const About: NextPage = () => {
-  const users = ["mahiro72", "seipan", "nisi0929", "kai-0307", "meow520"];
+  const users = [
+    { name: 'kai-0307', image: 'jpg' },
+    { name: 'mahiro72', image: 'png' },
+    { name: 'meow520', image: 'jpg' },
+    { name: 'nisi0929', image: 'png' },
+    { name: 'seipan', image: 'jpg' },
+  ];
 
   return (
     <Layout>
-      <div>
-        <h2 className="mb-20 text-center text-2xl font-bold">About</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          {users.map((name) => {
+      <div className="text-center">
+        <h2 className="text-2xl font-bold">Contoributers</h2>
+        <p className="mt-5 mb-20">
+          2022年9月に行われた技育展で作成したプロジェクトです
+        </p>
+        <div className="flex flex-wrap justify-center gap-10 mx-10">
+          {users.map((user) => {
             return (
-              <div className="w-96 h-32 flex justify-center items-center">
-            <p>{name}</p>
-            </div>
+              <Link href={`https://github.com/${user.name}`}>
+                <a
+                  target="_blank"
+                  className="shadow-xl p-5 hover:bg-amber-300 hover:-mt-2 transition-all rounded-md"
+                >
+                  <div className="text-center">
+                    <p>{user.name}</p>
+                    <Image
+                      className="rounded-full -z-10 relative"
+                      src={`/profiles/${user.name}.${user.image}`}
+                      height={100}
+                      width={100}
+                    />
+                  </div>
+                </a>
+              </Link>
             );
           })}
         </div>
