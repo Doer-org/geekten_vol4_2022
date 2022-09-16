@@ -121,7 +121,7 @@ func (ar articleRepository) GetHistory(user_id string) ([]*entity.History, []*en
 	var historys []*entity.History
 	var articles []*entity.Article
 
-	statement := "SELECT h.article_id AS id,a.title,a.likes,a.url,a.author,a.kind,h.created_at FROM historys h INNER JOIN articles a ON h.article_id = a.id where user_id = $1 ORDER BY h.created_at DESC "
+	statement := "SELECT h.article_id AS id,a.title,a.likes,a.url,a.author,a.kind,h.created_at FROM historys h INNER JOIN articles a ON h.article_id = a.id where user_id = $1 ORDER BY h.created_at DESC LIMIT 7"
 	rows, err := ar.db.Query(statement, user_id)
 	if err != nil {
 		log.Println(db_error.QueryError)
@@ -152,4 +152,3 @@ func (ar articleRepository) GetHistory(user_id string) ([]*entity.History, []*en
 
 	return historys, articles, nil
 }
-
