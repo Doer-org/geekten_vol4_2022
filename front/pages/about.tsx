@@ -22,15 +22,15 @@ const About: NextPage = () => {
         <div className="flex flex-wrap justify-center gap-10 mx-10">
           {users.map((user) => {
             return (
-              <Link href={`https://github.com/${user.name}`}>
+              <Link href={`https://github.com/${user.name}`} key={user.name}>
                 <a
                   target="_blank"
-                  className="shadow-xl p-5 hover:bg-amber-300 hover:-mt-2 transition-all rounded-md"
+                  className="shadow-xl p-5 hover:-mt-2 transition-all rounded-md -z-10"
                 >
                   <div className="text-center">
                     <p>{user.name}</p>
                     <Image
-                      className="rounded-full -z-10 relative"
+                      className="rounded-full relative"
                       src={`/profiles/${user.name}.${user.image}`}
                       height={100}
                       width={100}
