@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { useLogOut } from '../../../hooks/useLogOut';
+import { useLogOut } from '../../../hooks/User/useLogOut';
 import { useUserStore } from '../../../store/store';
 interface IProps {
   isShow: boolean;

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { ArticleInfo } from '../../types/articleInfo';
-import { useFetchArticle } from '../../hooks/useFetchArticle';
+import { useFetchArticle } from '../../hooks/Article/useFetchArticle';
 import { useArticleOptionStore } from '../../store/store';
 import Link from 'next/link';
 export const Article: FC = () => {
