@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
 	"github.com/Doer-org/geekten_vol4_2022/presen/response"
@@ -15,6 +16,8 @@ type UserHandler interface {
 	CreateUser(http.ResponseWriter, *http.Request)
 	UpdateUser(http.ResponseWriter, *http.Request)
 	GetUser(http.ResponseWriter, *http.Request)
+	CreateFavorite(w http.ResponseWriter, r *http.Request)
+	DeleteFavorite(w http.ResponseWriter, r *http.Request)
 }
 
 type userHandler struct {
@@ -113,4 +116,74 @@ func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
+}
+
+func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
+		return
+	}
+
+	newUserId := r.FormValue("user_id")
+	newArticleId, err := strconv.Atoi(r.FormValue("article_id"))
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "id not number", err)
+		return
+	}
+
+	favorite, err := uh.userUsecase.CreateFavorite(newUserId, newArticleId)
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to createfavorite", err)
+		return
+	}
+
+	article, err := uh.userUsecase.ArticleLikesPlus(newArticleId)
+
+	resFavorite := response.NewFavoriteResponse(favorite, article)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resFavorite); err != nil {
+		log.Println(err)
+	}
+}
+
+func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "DELETE" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
+		return
+	}
+
+	newUserId := r.FormValue("user_id")
+	newArticleId, err := strconv.Atoi(r.FormValue("article_id"))
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "id not number", err)
+		return
+	}
+
+	err_deletefav := uh.userUsecase.DeleteFavorite(newUserId, newArticleId)
+
+	if err_deletefav != nil {
+		utils.CreateErrorResponse(w, r, "faild to deletefavorite", err)
+		return
+	}
+
+	article, err := uh.userUsecase.ArticleLikesMinus(newArticleId)
+
+	resArticle := response.NewArticleResponse(article)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resArticle); err != nil {
+		log.Println(err)
+	}
 }
