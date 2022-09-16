@@ -95,7 +95,7 @@ func (ur userRepository) CreateFavorite(user_id string, article_id int) (*entity
 	defer stmt.Close()
 
 	favorite := &entity.Favorite{}
-	err = stmt.QueryRow(user_id, article_id, user_id, article_id).Scan(&favorite.UserId, &favorite.ArticleId)
+	err = stmt.QueryRow(user_id, article_id).Scan(&favorite.UserId, &favorite.ArticleId)
 
 	if err != nil {
 		log.Println(db_error.QueryError)
@@ -129,4 +129,28 @@ func (ur userRepository) ArticleLikesPlus(article_id int) (*entity.Article, erro
 	}
 
 	return article, nil
+}
+
+func (ur userRepository) DeleteFavorite(user_id string, article_id int) error {
+	statement := "DELETE FROM favorite WHERE user_id = $1 AND article_id = $2"
+
+	// returning user_id,article_id
+
+	stmt, err := ur.db.Prepare(statement)
+	if err != nil {
+		log.Println(db_error.StatementError)
+		return err
+	}
+	defer stmt.Close()
+
+	favorite := &entity.Favorite{}
+	err = stmt.QueryRow(user_id, article_id).Scan(&favorite.UserId, &favorite.ArticleId)
+
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return err
+	}
+
+	return nil
+
 }

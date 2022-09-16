@@ -152,3 +152,4 @@ func (ar articleRepository) GetHistory(user_id string) ([]*entity.History, []*en
 
 	return historys, articles, nil
 }
+
