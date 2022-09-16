@@ -21,7 +21,6 @@ export const EditForm: FC = () => {
         console.log(err);
       });
   };
-  // console.log(user.name);
   return (
     <div className="text-center">
       <h2 className="text-center text-2xl font-bold">アカウント編集</h2>
@@ -36,13 +35,6 @@ export const EditForm: FC = () => {
               EditUser(user.id, e.target.value);
             }}
           />
-
-          <p
-            className="text-red-500"
-            hidden={user.name.length > 0 && user.name.length <= 40}
-          >
-            名前は1文字以上40文字以内で入力してください
-          </p>
         </div>
 
         <button
@@ -53,6 +45,12 @@ export const EditForm: FC = () => {
           変更
         </button>
       </div>
+      <p
+        className="text-red-500"
+        hidden={user.name.length > 0 && user.name.length <= 40}
+      >
+        名前は1文字以上40文字以内で入力してください
+      </p>
     </div>
   );
 };
