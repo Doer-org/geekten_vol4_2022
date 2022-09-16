@@ -1,6 +1,6 @@
-import { userAgent } from 'next/server';
 import create from 'zustand';
 import { UserInfo } from '../types/userInfo';
+import { HistoryInfo } from '../types/historyInfo';
 import { Option } from '../types/articleInfo';
 type User = {
   user: UserInfo;
@@ -19,6 +19,11 @@ type Nav = {
   toggle: (show: boolean) => void;
 };
 
+type History = {
+  history: HistoryInfo[] | null;
+  setHistory: (history: HistoryInfo[]) => void;
+};
+
 export const useUserStore = create<User>((set) => ({
   user: { id: '', name: '' },
   setUser: (user) => set({ user: user }),
@@ -29,6 +34,11 @@ export const useUserStore = create<User>((set) => ({
 export const useArticleOptionStore = create<useArticleOptionStore>((set) => ({
   option: 'popularity',
   setOption: (option) => set({ option: option }),
+}));
+
+export const useHistoryStore = create<History>((set) => ({
+  history: null,
+  setHistory: (history) => set({ history: history }),
 }));
 
 export const useNavStore = create<Nav>((set) => ({
