@@ -22,7 +22,7 @@ from setting import api
 
 # https://qiita-api.vercel.app/
 # こちらのAPIを利用
-def cronjob_get_data():
+def cronjob_get_data(conn):
 
     res = requests.get(api.QIITA_TREND_API_URL)
     resJson = res.json()
@@ -35,6 +35,6 @@ def cronjob_get_data():
             likes = 0
             kind = "qiita"
 
-            insert_db(title, likes, url, author, kind)
+            insert_db(conn, title, likes, url, author, kind)
         except:
             logger(error.ZENN_GET_DATA_ERR)

@@ -6,7 +6,7 @@ from db.insert import insert_db
 from setting import api
 from const.error import error
 
-def cronjob_get_data():
+def cronjob_get_data(conn):
 
     res = requests.get(api.ZENN_URL)
     soup = BeautifulSoup(res.text, "html.parser")
@@ -23,6 +23,6 @@ def cronjob_get_data():
             likes = 0
             kind = "zenn"
 
-            insert_db(title, likes, url, author, kind)
+            insert_db(conn, title, likes, url, author, kind)
         except:
             logger(error.ZENN_GET_DATA_ERR)
