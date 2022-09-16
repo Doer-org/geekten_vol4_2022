@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const Axios = axios.create({
-  baseURL: 'http://localhost:',
+  baseURL: 'https://dita-server.onrender.com',
   responseType: 'json',
   headers: {
     'Content-Type': 'application/json',
