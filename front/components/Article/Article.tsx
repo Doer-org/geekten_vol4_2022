@@ -1,14 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import { ArticleInfo } from '../../types/articleInfo';
-import { useFetchArticle } from '../../hooks/useFetchArticle';
+import { useFetchArticle } from '../../hooks/Article/useFetchArticle';
+import { useCreateHistory } from '../../hooks/History/useCreateHistory';
 import { useArticleOptionStore } from '../../store/store';
+import { useUserStore } from '../../store/store';
 import Link from 'next/link';
 export const Article: FC = () => {
   const initial = { id: 0, title: '', likes: 0, url: '', author: '', kind: '' };
   const [article, setArticle] = useState<ArticleInfo>(initial);
   const { option } = useArticleOptionStore();
+  const { user } = useUserStore();
   useEffect(() => {
-    // 一旦popularityにしてるけどここはどうするか
     useFetchArticle(option)
       .then((res) => {
         setArticle(res.data);
@@ -20,7 +22,15 @@ export const Article: FC = () => {
   }, []);
   return (
     <Link href={article.url}>
-      <a target="_blank">
+      <a
+        target="_blank"
+        onClick={() => {
+          if (user.id !== '') {
+            console.log('aaaa');
+            useCreateHistory(user.id, article.id);
+          }
+        }}
+      >
         <article className="grid grid-cols-1 shadow-2xl border border-black rounded-md mt-5 mb-10 mx-5 ">
           <div
             className=" bg-lime-300 rounded-md py-10 px-5 break-all"
