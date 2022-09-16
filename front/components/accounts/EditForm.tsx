@@ -15,7 +15,7 @@ export const EditForm: FC = () => {
           'user',
           JSON.stringify({ id: res.data.id, name: res.data.name })
         );
-        console.log(user.name)
+        console.log(user.name);
       })
       .catch((err) => {
         console.log(err);
@@ -24,21 +24,35 @@ export const EditForm: FC = () => {
   // console.log(user.name);
   return (
     <div className="text-center">
-      <div>Name</div>
-      <div className="py-3">
-        <input
-          type="text"
-          className="border-2 border-black px-1"
-          value={user.name}
-          onChange={(e) => {
-            EditUser(user.id, e.target.value);
-          }}
-        />
+      <h2 className="text-center text-2xl font-bold">アカウント編集</h2>
+      <div className="flex justify-center items-center">
+        <p>名前</p>
+        <div className="p-3">
+          <input
+            type="text"
+            className="border-2 border-black px-1"
+            value={user.name}
+            onChange={(e) => {
+              EditUser(user.id, e.target.value);
+            }}
+          />
 
-        <p className='text-red-500' hidden = {user.name.length > 0 && user.name.length <= 40}>名前は1文字以上40文字以内で入力してください</p>
+          <p
+            className="text-red-500"
+            hidden={user.name.length > 0 && user.name.length <= 40}
+          >
+            名前は1文字以上40文字以内で入力してください
+          </p>
+        </div>
+
+        <button
+          onClick={updateUser}
+          disabled={user.name.length <= 0 && user.name.length > 40}
+          className="border-2 border-black px-1 hover:bg-amber-500"
+        >
+          変更
+        </button>
       </div>
-
-      <button onClick={updateUser} disabled={user.name.length <= 0 && user.name.length > 40}>変更</button>
     </div>
   );
 };
