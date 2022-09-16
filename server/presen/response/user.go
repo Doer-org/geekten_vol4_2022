@@ -26,6 +26,29 @@ func NewFavoriteResponse(favorite *entity.Favorite, article *entity.Article) Fav
 	return favart
 }
 
+func NewFavoriteListResponse(articles []*entity.Article, favorites []*entity.Favorite) []FavArtResponse {
+	var resFavorites []FavArtResponse
+
+	for i, favorite := range favorites {
+		art := ArticleResponse{
+			Id:     articles[i].Id,
+			Title:  articles[i].Title,
+			Likes:  articles[i].Likes,
+			Url:    articles[i].Url,
+			Author: articles[i].Author,
+			Kind:   articles[i].Kind,
+		}
+		res := FavArtResponse{
+			UserId:    favorite.UserId,
+			ArticleId: favorite.ArticleId,
+			Article:   art,
+		}
+		resFavorites = append(resFavorites, res)
+	}
+
+	return resFavorites
+}
+
 type UserResponse struct {
 	Name string `json:"name"`
 	Id   string `json:"id"`
