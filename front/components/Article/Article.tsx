@@ -8,7 +8,6 @@ export const Article: FC = () => {
   const [article, setArticle] = useState<ArticleInfo>(initial);
   const { option } = useArticleOptionStore();
   useEffect(() => {
-    // 一旦popularityにしてるけどここはどうするか
     useFetchArticle(option)
       .then((res) => {
         setArticle(res.data);
@@ -20,7 +19,12 @@ export const Article: FC = () => {
   }, []);
   return (
     <Link href={article.url}>
-      <a target="_blank">
+      <a
+        target="_blank"
+        onClick={() => {
+          console.log('fhdskhflasj');
+        }}
+      >
         <article className="grid grid-cols-1 shadow-2xl border border-black rounded-md mt-5 mb-10 mx-5 ">
           <div
             className=" bg-lime-300 rounded-md py-10 px-5 break-all"
