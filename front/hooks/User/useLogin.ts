@@ -1,8 +1,8 @@
 import { getAuth, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
-import { initializeFirebase } from '../utils/firebase';
-import { CreateUser } from '../services/User/CreateUser';
-import { FetchUser } from '../services/User/FetchUser';
-import { UserInfo } from '../types/userInfo';
+import { initializeFirebase } from '../../utils/firebase';
+import { CreateUser } from '../../services/User/CreateUser';
+import { FetchUser } from '../../services/User/FetchUser';
+import { UserInfo } from '../../types/userInfo';
 export const useLogin = async (): Promise<UserInfo> => {
   initializeFirebase();
   const auth = getAuth();
