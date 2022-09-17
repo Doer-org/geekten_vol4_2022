@@ -24,7 +24,7 @@ const Form: FC = () => {
       <button className="px-5 py-3 rounded-md" onClick={Login}>
         <div className="-z-10 relative ">
           <Image
-            src="/Github.png"
+            src="/GitHub.png"
             alt="logo"
             width={70}
             height={70}
