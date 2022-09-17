@@ -10,3 +10,5 @@ db/data
 # other
 *.exe
 .idea/
+
+*.prd

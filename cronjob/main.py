@@ -1,10 +1,9 @@
 import schedule
 import sys
-from db.conn import connect_to_dburl
 import os
 from scraping.qiita import qiita
 from scraping.zenn import zenn
-from db.conn import connect_to_db,disconnect_to_db
+from db.conn import connect_to_db,disconnect_to_db,connect_to_dburl
 
 # 1度だけ実行
 def init_task(conn):
@@ -23,7 +22,8 @@ def init_task(conn):
 
 def cronjob_task_prd():
     print("cronjob task start")
-    conn = connect_to_dburl(sys.argv[2])
+    dbUrl = os.environ.get("DB_URL")
+    conn = connect_to_dburl(dbUrl)
     qiita.cronjob_get_data(conn)
     zenn.cronjob_get_data(conn)
     disconnect_to_db(conn)
@@ -35,13 +35,14 @@ if __name__ == "__main__":
 
     # defaultではinsertするだけ
     if len(args) == 1:
+        print("init task called : Local")
         init_task(connect_to_db())
 
     ## prd
     # python main.py --inittask dburl
-    if len(args) == 3 and args[1]=="--inittask":
+    if len(args) == 2 and args[1]=="--inittask":
         print("=====init task prd start=======")
-        dbUrl = args[2]
+        dbUrl = os.environ.get("DB_URL")
         if not dbUrl:
           exit("error dbURL none")
 
@@ -53,11 +54,14 @@ if __name__ == "__main__":
 
     # python main.py --cronjob dburl
     # 定期実行
-    elif len(args) == 3 and args[1]=="--cronjob":
-        dbUrl = args[2]
+    elif len(args) == 2 and args[1]=="--cronjob":
+        print("cronjob start")
+        dbUrl = os.environ.get("DB_URL")
         if not dbUrl:
           exit("error dbURL none")
-        
+        conn = connect_to_dburl(dbUrl)
+        init_task(conn)
+
         # 1日ごとにmain関数の実行
         print("schedule set")
         schedule.every(1).days.do(cronjob_task_prd)
