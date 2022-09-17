@@ -14,16 +14,13 @@ export const LoggedInNavbar: FC<IProps> = ({ isShow }) => {
     useLogOut()
       .then((res) => {
         resetUser();
-        setNotice("Logged out!")
-        setTimeout(()=>{
-          setNotice("")
-        }, 2 * 1000)
+        setNotice('Logged out!');
+        setTimeout(() => {
+          setNotice('');
+        }, 2 * 1000);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
-
 
   return (
     <ul

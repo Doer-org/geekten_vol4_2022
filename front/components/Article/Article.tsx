@@ -17,11 +17,8 @@ export const Article: FC = () => {
     useFetchArticle(option)
       .then((res) => {
         setArticle(res.data);
-        console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   return (
     <div>
@@ -30,7 +27,6 @@ export const Article: FC = () => {
           target="_blank"
           onClick={() => {
             if (user.id !== '') {
-              console.log('aaaa');
               useCreateHistory(user.id, article.id);
             }
           }}

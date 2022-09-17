@@ -11,7 +11,6 @@ export const FavButton: FC<{ user_id: string; article_id: number }> = ({
   // favorite一覧のidを取ってきてそれの一覧にあれば表示を変える
   useEffect(() => {
     useFetchFavorite(user_id).then((res) => {
-      console.log('kokoha button da!!!!!!!!');
       const ids = res.map((b) => {
         return b.article_id;
       });

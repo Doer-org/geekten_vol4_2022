@@ -6,12 +6,6 @@ export const CreateUser: CreateUser = (user) => {
   formData.append('id', user.id);
   formData.append('name', user.name);
   Axios.post('/api/user/create', formData)
-    .then((res) => {
-      console.log('seikou!!!');
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log('sippai!!');
-      console.log(err);
-    });
+    .then((res) => {})
+    .catch((err) => {});
 };

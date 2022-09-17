@@ -5,12 +5,6 @@ export const CreateHistory: CreateHistory = (user_id, article_id) => {
   formData.append('user_id', user_id);
   formData.append('article_id', `${article_id}`);
   Axios.post('/api/history/create', formData)
-    .then((res) => {
-      console.log('history create api seikou!!!');
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log('history create api sippai!!');
-      console.log(err);
-    });
+    .then((res) => {})
+    .catch((err) => {});
 };

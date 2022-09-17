@@ -13,11 +13,8 @@ const Favorite: NextPage = () => {
     useFetchFavorite(user_id)
       .then((res) => {
         setFavorites(res);
-        console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   return (
     <Layout>

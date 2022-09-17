@@ -11,9 +11,7 @@ export const Histories: FC = () => {
       .then(async (res) => {
         setHistory([...res]);
       })
-      .catch(() => {
-        console.log('err');
-      });
+      .catch(() => {});
   }, []);
 
   return (

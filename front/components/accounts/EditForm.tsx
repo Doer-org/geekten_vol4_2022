@@ -6,7 +6,6 @@ export const EditForm: FC = () => {
   const EditUser = useUserStore((state) => state.editUser);
   const [tmp, setTmp] = useState<string>(user.name);
   const updateUser = () => {
-    console.log(user);
     UpdateUser(user)
       .then((res) => {
         EditUser(res.data.id, res.data.name);
@@ -15,11 +14,8 @@ export const EditForm: FC = () => {
           'user',
           JSON.stringify({ id: res.data.id, name: res.data.name })
         );
-        console.log(user.name);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
   return (
     <div className="text-center">
