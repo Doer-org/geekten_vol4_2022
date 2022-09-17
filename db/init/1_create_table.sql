@@ -33,6 +33,7 @@ CREATE TABLE "favorite" (
     ON DELETE CASCADE,
   foreign key ("article_id") references "articles"("id")
     ON DELETE CASCADE
+  
 );
 
 
