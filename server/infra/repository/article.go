@@ -28,7 +28,7 @@ func NewArticleRepository(db *sql.DB) repository.ArticleRepository {
 func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 	var articles []*entity.Article
 	rand.Seed(time.Now().UnixNano())
-	result := rand.Intn(49)
+	randomNumber := rand.Intn(49)
 
 	var getRandomQuery string
 
@@ -64,7 +64,7 @@ func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 		articles = append(articles, article)
 	}
 	resarticle := &entity.Article{}
-	resarticle = articles[result]
+	resarticle = articles[randomNumber]
 	return resarticle, nil
 }
 
@@ -107,10 +107,10 @@ func (ar articleRepository) GetRandomTen() ([]*entity.Article, error) {
 	for i := 0; i < 10; i++ {
 		for {
 			rand.Seed(time.Now().UnixNano())
-			result := rand.Intn(sizeart)
-			if used[result] == -1 {
-				used[result] = 1
-				resarticles = append(resarticles, articles[result])
+			randomNumber := rand.Intn(sizeart)
+			if used[randomNumber] == -1 {
+				used[randomNumber] = 1
+				resarticles = append(resarticles, articles[randomNumber])
 				break
 			}
 		}
