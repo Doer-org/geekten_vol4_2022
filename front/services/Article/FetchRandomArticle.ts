@@ -1,7 +1,7 @@
 import { Axios } from '../../libs/api';
 import { AxiosResponse } from 'axios';
 import { ArticleInfo } from '../../types/articleInfo';
-type Option = 'popularity' | 'nich';
+type Option = 'popularity' | 'nich' | 'normal';
 interface FetchRandomArticle {
   (option: Option): Promise<AxiosResponse<ArticleInfo, any>>;
 }
