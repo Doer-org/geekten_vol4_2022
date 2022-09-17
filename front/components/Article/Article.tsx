@@ -1,13 +1,15 @@
-import { FC, useEffect, useState } from "react";
-import { ArticleInfo } from "../../types/articleInfo";
-import { useFetchArticle } from "../../hooks/Article/useFetchArticle";
-import { useCreateHistory } from "../../hooks/History/useCreateHistory";
-import { useArticleOptionStore } from "../../store/store";
-import { useUserStore } from "../../store/store";
-import Link from "next/link";
-import { Twitter } from "@/components/Article/Twitter";
+import { FC, useEffect, useState } from 'react';
+import { ArticleInfo } from '../../types/articleInfo';
+import { useFetchArticle } from '../../hooks/Article/useFetchArticle';
+import { useCreateHistory } from '../../hooks/History/useCreateHistory';
+import { useArticleOptionStore } from '../../store/store';
+import { useUserStore } from '../../store/store';
+import Link from 'next/link';
+import { FavButton } from '../Favorite/FavButton';
+import { Twitter } from '../Article/Twitter';
+
 export const Article: FC = () => {
-  const initial = { id: 0, title: "", likes: 0, url: "", author: "", kind: "" };
+  const initial = { id: 0, title: '', likes: 0, url: '', author: '', kind: '' };
   const [article, setArticle] = useState<ArticleInfo>(initial);
   const { option } = useArticleOptionStore();
   const { user } = useUserStore();
@@ -52,7 +54,10 @@ export const Article: FC = () => {
       </Link>
       <div className=" text-left mx-5">
         <FavButton user_id={user.id} article_id={article.id} />
-        <Twitter url={article.url} title={`技術記事を読みました！ from DITA🤖 \n\n ${article.title}`} />
+        <Twitter
+          url={article.url}
+          title={`技術記事を読みました！ from DITA🤖 \n\n ${article.title}`}
+        />
       </div>
     </div>
   );
