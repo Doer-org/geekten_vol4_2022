@@ -4,13 +4,13 @@ export const CreateFavorite: CreateFavorite = (user_id, article_id) => {
   const formData = new FormData();
   formData.append('user_id', user_id);
   formData.append('article_id', `${article_id}`);
-  Axios.post('/api/history/create', formData)
+  Axios.post('/api/favorite/create', formData)
     .then((res) => {
-      console.log('history create api seikou!!!');
+      console.log('favorite create api seikou!!!');
       console.log(res);
     })
     .catch((err) => {
-      console.log('history create api sippai!!');
+      console.log('favorite create api sippai!!');
       console.log(err);
     });
 };
