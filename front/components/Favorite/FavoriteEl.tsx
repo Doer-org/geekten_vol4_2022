@@ -6,7 +6,7 @@ import { FC } from 'react';
 import styles from '../../styles/article.module.css';
 export const FavoriteEl: FC<{ favorite: FavoriteInfo }> = ({ favorite }) => {
   return (
-    <div>
+    <div className="w-full">
       <Link href={favorite.Article.url}>
         <a target="_blank">
           <article
@@ -16,7 +16,7 @@ export const FavoriteEl: FC<{ favorite: FavoriteInfo }> = ({ favorite }) => {
                 : styles['qiitaGrad']
             }
           >
-            <div className="grid grid-cols-1 place-items-center justify-items-center shadow-2xl p-5 -z-10 ">
+            <div className="grid grid-cols-1 place-items-center justify-items-center shadow-2xl p-5 -z-10">
               <div>
                 <div className=" p-2 rounded-md w-full -z-10">
                   {favorite.Article.kind == 'zenn' ? (

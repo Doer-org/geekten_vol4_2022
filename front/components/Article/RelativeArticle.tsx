@@ -60,7 +60,7 @@ export const RelativeArticle: FC<{ article: ArticleInfo }> = ({ article }) => {
           </a>
         </Link>
         <div className="text-end my-4">
-          <FavButton user_id={user.id} article_id={article.id} />
+          {user.id && <FavButton user_id={user.id} article_id={article.id} />}
         </div>
       </div>
     </div>

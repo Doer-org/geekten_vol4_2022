@@ -1,0 +1,62 @@
+.unclick {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  transition: 0.3s;
+}
+.unclick::before,
+.unclick::after {
+  content: '';
+  width: 50%;
+  height: 80%;
+  background: #585858;
+  border-radius: 25px 25px 0 0;
+  display: block;
+  position: absolute;
+  z-index: -10;
+}
+.unclick::before {
+  transform: rotate(-45deg);
+  left: 14%;
+}
+.unclick::after {
+  transform: rotate(45deg);
+  right: 14%;
+}
+
+.unclicked:hover {
+  transform: scale(103%);
+  box-shadow: black;
+  opacity: 50%;
+}
+
+.clicked {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  transition: 0.3s;
+}
+.clicked::before,
+.clicked::after {
+  content: '';
+  width: 50%;
+  height: 80%;
+  background: #ff87b9;
+  border-radius: 25px 25px 0 0;
+  display: block;
+  position: absolute;
+  z-index: -10;
+}
+.clicked::before {
+  transform: rotate(-45deg);
+  left: 14%;
+}
+.clicked::after {
+  transform: rotate(45deg);
+  right: 14%;
+}
+.clicked:hover {
+  transform: scale(103%);
+  box-shadow: black;
+  opacity: 50%;
+}

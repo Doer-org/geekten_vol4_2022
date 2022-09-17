@@ -43,7 +43,7 @@ const Result: NextPage = () => {
             <h2 className=" text-center text-2xl my-5 font-bold">結果</h2>
             <Article />
             <button
-              className="my-5 shadow-md rounded-md border p-3 hover:bg-orange-500"
+              className="my-5 shadow-md rounded-md border p-3 hover:bg-amber-500 "
               onClick={() => tryAgain()}
             >
               もう一度する
@@ -55,7 +55,7 @@ const Result: NextPage = () => {
               その他の記事
             </h2>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 max-h-screen overflow-y-scroll overflow-hidden">
-              {articles.map((article: ArticleInfo) => {
+              {articles?.map((article: ArticleInfo) => {
                 return <RelativeArticle article={article} key={article.id} />;
               })}
             </div>

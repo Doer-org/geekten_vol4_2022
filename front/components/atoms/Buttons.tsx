@@ -8,26 +8,26 @@ export const Buttons = () => {
     <div className="flex flex-col md:flex-row gap-3">
       <Link href="/result">
         <button
-          className="shadow-md rounded-md border p-3 hover:bg-orange-500"
+          className="shadow-md rounded-md border p-3 hover:bg-amber-500 "
           onClick={() => setOption('nich')}
         >
-          nich
+          NICH
         </button>
       </Link>
       <Link href="/result">
         <button
-          className="shadow-md rounded-md border p-3 hover:bg-orange-500"
+          className="shadow-md rounded-md border p-3 hover:bg-amber-500 "
           onClick={() => setOption('normal')}
         >
-          normal
+          NORMAL
         </button>
       </Link>
       <Link href="/result">
         <button
-          className="shadow-md rounded-md border p-3 hover:bg-orange-500"
+          className="shadow-md rounded-md border p-3 hover:bg-amber-500 "
           onClick={() => setOption('popularity')}
         >
-          popular
+          POPULAR
         </button>
       </Link>
     </div>

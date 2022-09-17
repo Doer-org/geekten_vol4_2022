@@ -7,7 +7,6 @@ import { useUserStore } from '../../store/store';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FavButton } from '../Favorite/FavButton';
-import { Buttons } from '../atoms/Buttons';
 import { Twitter } from '../Article/Twitter';
 import styles from '../../styles/article.module.css';
 export const Article: FC = () => {
@@ -74,8 +73,8 @@ export const Article: FC = () => {
             </article>
           </a>
         </Link>
-        <div className="my-4 flex justify-end items-center">
-          <FavButton user_id={user.id} article_id={article.id} />
+        <div className="my-4 flex justify-center items-center">
+          {user.id && <FavButton user_id={user.id} article_id={article.id} />}
           <Twitter
             url={article.url}
             title={`技術記事を読みました！ from DITA🤖 \n\n ${article.title}`}

@@ -5,6 +5,7 @@
 }
 .qiitaGrad:hover {
   transform: scale(103%);
+  z-index: -10;
 }
 
 .zennGrad {
@@ -16,4 +17,5 @@
 
 .zennGrad:hover {
   transform: scale(103%);
+  z-index: -10;
 }

@@ -26,10 +26,10 @@ const Home: NextPage = () => {
         </div>
         <div className="shadow-2xl rounded-md border text-center flex justify-center items-center p-5 w-full md:w-4/6 my-5">
           <div className="mx-10">
-            <h2 className="my-5">
+            <h2 className="my-5 text-xl">
               DITAはあなたの技術の発見をサポートするサービスです
             </h2>
-            <p className="my-3 font-semibold">mode</p>
+            <p className="my-5 text-lg font-semibold">MODE</p>
             <div className=" flex justify-center">
               <Buttons />
             </div>
