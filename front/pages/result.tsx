@@ -39,8 +39,8 @@ const Result: NextPage = () => {
         </div>
       ) : (
         <div className="grid md:grid-cols-2 grid-cols-1 w-screen">
-          <div className=" text-center md:border-r-2 md:border-black">
-            <h2 className=" text-center text-2xl font-bold">結果</h2>
+          <div className=" text-center md:border-r-1 md:border-black">
+            <h2 className=" text-center text-2xl my-5 font-bold">結果</h2>
             <Article />
             <button
               className="my-5 shadow-md rounded-md border p-3 hover:bg-orange-500"
@@ -50,9 +50,11 @@ const Result: NextPage = () => {
             </button>
           </div>
 
-          <div className=" md:border-l-2 md:border-black px-5">
-            <h2 className="text-center text-2xl font-bold">関連記事</h2>
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 max-h-screen overflow-y-scroll overflow-hidden">
+          <div className=" md:border-l md:border-black px-2">
+            <h2 className="text-center text-2xl my-5 font-bold">
+              その他の記事
+            </h2>
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 max-h-screen overflow-y-scroll overflow-hidden">
               {articles.map((article: ArticleInfo) => {
                 return <RelativeArticle article={article} key={article.id} />;
               })}

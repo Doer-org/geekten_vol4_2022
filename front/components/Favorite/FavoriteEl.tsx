@@ -12,17 +12,29 @@ export const FavoriteEl: FC<{ favorite: FavoriteInfo }> = ({ favorite }) => {
           <article
             className={
               favorite.Article.kind == 'zenn'
-                ? styles['zennGradient']
-                : styles['qiitaGradient']
+                ? styles['zennGrad']
+                : styles['qiitaGrad']
             }
           >
-            <div className="grid grid-cols-1 place-items-center justify-items-center shadow-2xl p-5 ">
+            <div className="grid grid-cols-1 place-items-center justify-items-center shadow-2xl p-5 -z-10 ">
               <div>
-                <div className={(styles.zennGradient, 'relative w-20 h-20')}>
+                <div className=" p-2 rounded-md w-full -z-10">
                   {favorite.Article.kind == 'zenn' ? (
-                    <Image src="/Zenn.png" layout="fill" objectFit="contain" />
+                    <Image
+                      src="/Zenn.png"
+                      height={100}
+                      width={100}
+                      objectFit="contain"
+                      className=" relative -z-10"
+                    />
                   ) : (
-                    <Image src="/Qiita.png" layout="fill" objectFit="contain" />
+                    <Image
+                      src="/Qiita.png"
+                      height={100}
+                      width={100}
+                      objectFit="contain"
+                      className="relative -z-10"
+                    />
                   )}
                 </div>
                 <div className="grid grid-cols-1 place-items-center justify-items-center">

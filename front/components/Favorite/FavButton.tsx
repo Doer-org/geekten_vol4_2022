@@ -7,10 +7,9 @@ export const FavButton: FC<{ user_id: string; article_id: number }> = ({
   article_id,
 }) => {
   const [favoritedNum, setFavoritedNum] = useState<number[]>([]);
-
   useEffect(() => {
     useFetchFavorite(user_id).then((res) => {
-      const ids = res.map((b) => {
+      const ids = res?.map((b) => {
         return b.article_id;
       });
       setFavoritedNum(ids);

@@ -20,8 +20,8 @@ export const Histories: FC = () => {
         <h2 className="text-center text-2xl font-bold">履歴</h2>
         <div className="">
           {history !== null ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 justify-center items-center">
-              {history.map((his, id) => {
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-center items-center gap-5">
+              {history?.map((his, id) => {
                 return <History history={his} key={id} />;
               })}
             </div>
