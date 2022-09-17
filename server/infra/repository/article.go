@@ -107,7 +107,7 @@ func (ar articleRepository) GetRandomTen() ([]*entity.Article, error) {
 	for i := 0; i < 10; i++ {
 		for {
 			rand.Seed(time.Now().UnixNano())
-			result := rand.Intn(sizeart - 1)
+			result := rand.Intn(sizeart)
 			if used[result] == -1 {
 				used[result] = 1
 				resarticles = append(resarticles, articles[result])
