@@ -37,6 +37,8 @@ func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 		getRandomQuery = "SELECT * FROM articles ORDER BY likes DESC LIMIT 50"
 	case "nich":
 		getRandomQuery = "SELECT * FROM articles ORDER BY likes ASC LIMIT 50"
+	case "normal":
+		getRandomQuery = "SELECT * FROM articles LIMIT 50"
 	}
 
 	rows, err := ar.db.Query(getRandomQuery)
