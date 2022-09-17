@@ -17,6 +17,7 @@ type ArticleHandler interface {
 	GetRanking(w http.ResponseWriter, r *http.Request)
 	CreateHistory(http.ResponseWriter, *http.Request)
 	GetHistory(http.ResponseWriter, *http.Request)
+	GetRandomTen(w http.ResponseWriter, r *http.Request)
 }
 
 type articleHandler struct {
@@ -52,6 +53,27 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resArticle); err != nil {
+		log.Println(err)
+	}
+	return
+}
+
+func (ah articleHandler) GetRandomTen(w http.ResponseWriter, r *http.Request) {
+	articles, err := ah.articleUsecase.GetRandomTen()
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to getrandomten", err)
+		log.Println(err)
+		return
+	}
+
+	resArticles := response.NewArticleListResponse(articles)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	je := json.NewEncoder(w)
+	if err := je.Encode(resArticles); err != nil {
 		log.Println(err)
 	}
 	return
@@ -142,4 +164,3 @@ func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-
