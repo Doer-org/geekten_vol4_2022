@@ -1,10 +1,11 @@
-import type { NextPage } from 'next';
-import { Layout } from '../components/layouts/Layout';
-import Lottie from 'lottie-react';
-import * as animationData from '../json/feature.json';
-import { useState } from 'react';
-import { Article } from '../components/Article/Article';
-import { RelativeArticle } from '../components/Article/RelativeArticle';
+import type { NextPage } from "next";
+import { Layout } from "../components/layouts/Layout";
+import Lottie from "lottie-react";
+import * as animationData from "../json/feature.json";
+import { useState } from "react";
+import { Article } from "../components/Article/Article";
+import { RelativeArticle } from "../components/Article/RelativeArticle";
+
 const Result: NextPage = () => {
   const [loading, setLoading] = useState(true);
   const tryAgain = () => {
@@ -36,6 +37,7 @@ const Result: NextPage = () => {
               もう一度する
             </button>
           </div>
+          
           <div className=" md:border-l-2 md:border-black">
             <h2 className="text-center text-2xl font-bold">関連記事</h2>
             <div className="grid grid-cols-1 xl:grid-cols-2 max-h-screen overflow-y-scroll overflow-hidden">

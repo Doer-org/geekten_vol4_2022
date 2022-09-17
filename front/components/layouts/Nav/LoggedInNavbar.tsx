@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import { FC } from 'react';
+import { useNoticeStore } from '../../../store/store';
 import { useLogOut } from '../../../hooks/User/useLogOut';
 import { useUserStore } from '../../../store/store';
 interface IProps {
@@ -7,15 +9,22 @@ interface IProps {
 }
 export const LoggedInNavbar: FC<IProps> = ({ isShow }) => {
   const resetUser = useUserStore((state) => state.resetUser);
+  const setNotice = useNoticeStore((state) => state.setNotice);
   const logOut = () => {
     useLogOut()
       .then((res) => {
         resetUser();
+        setNotice("Logged out!")
+        setTimeout(()=>{
+          setNotice("")
+        }, 2 * 1000)
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+
   return (
     <ul
       className={

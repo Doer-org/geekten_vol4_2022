@@ -26,30 +26,30 @@ func NewArticleRepository(db *sql.DB) repository.ArticleRepository {
 // https://docs.google.com/presentation/d/1KE-81XbWdsiS6UASiwp3GWlmdHVFA81kewbw18r-DRA/edit#slide=id.g4fa6e8ab24_0_82
 
 func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
-
+	var articles []*entity.Article
 	rand.Seed(time.Now().UnixNano())
-	result := rand.Intn(10)
-	result++
+	result := rand.Intn(49)
 
 	var getRandomQuery string
 
 	switch types {
 	case "popularity":
-		getRandomQuery = "SELECT * FROM articles ORDER BY likes DESC LIMIT 1 OFFSET $1"
+		getRandomQuery = "SELECT * FROM articles ORDER BY likes DESC LIMIT 50"
 	case "nich":
-		getRandomQuery = "SELECT * FROM articles ORDER BY likes ASC LIMIT 1 OFFSET $1"
+		getRandomQuery = "SELECT * FROM articles ORDER BY likes ASC LIMIT 50"
+	case "normal":
+		getRandomQuery = "SELECT * FROM articles LIMIT 50"
 	}
 
-	rows, err := ar.db.Query(getRandomQuery, result)
+	rows, err := ar.db.Query(getRandomQuery)
 	if err != nil {
 		log.Println(db_error.QueryError)
 		return nil, err
 	}
 	defer rows.Close()
 
-	article := &entity.Article{}
-
 	for rows.Next() {
+		article := &entity.Article{}
 		if err := rows.Scan(
 			&article.Id,
 			&article.Title,
@@ -61,8 +61,63 @@ func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 			log.Println(db_error.RowsScanError)
 			return nil, err
 		}
+		articles = append(articles, article)
 	}
-	return article, nil
+	resarticle := &entity.Article{}
+	resarticle = articles[result]
+	return resarticle, nil
+}
+
+func (ar articleRepository) GetRandomTen() ([]*entity.Article, error) {
+	var articles []*entity.Article
+
+	getRandomQuery := "SELECT * FROM articles"
+
+	rows, err := ar.db.Query(getRandomQuery)
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		article := &entity.Article{}
+		if err := rows.Scan(
+			&article.Id,
+			&article.Title,
+			&article.Likes,
+			&article.Url,
+			&article.Author,
+			&article.Kind,
+		); err != nil {
+			log.Println(db_error.RowsScanError)
+			return nil, err
+		}
+		articles = append(articles, article)
+	}
+
+	var resarticles []*entity.Article
+	sizeart := len(articles)
+	used := make([]int, sizeart+1, sizeart+1)
+
+	for i := 0; i <= sizeart; i++ {
+		used[i] = -1
+	}
+
+	for i := 0; i < 10; i++ {
+		for {
+			rand.Seed(time.Now().UnixNano())
+			result := rand.Intn(sizeart)
+			if used[result] == -1 {
+				used[result] = 1
+				resarticles = append(resarticles, articles[result])
+				break
+			}
+		}
+
+	}
+
+	return resarticles, nil
 }
 
 func (ar articleRepository) GetRanking() ([]*entity.Article, error) {
