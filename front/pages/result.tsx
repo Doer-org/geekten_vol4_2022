@@ -2,18 +2,32 @@ import type { NextPage } from "next";
 import { Layout } from "../components/layouts/Layout";
 import Lottie from "lottie-react";
 import * as animationData from "../json/feature.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Article } from "../components/Article/Article";
 import { RelativeArticle } from "../components/Article/RelativeArticle";
+import { useFetchArticles } from "@/hooks/Article/useFetchArticles";
+import { ArticleInfo } from "@/types/articleInfo";
 
 const Result: NextPage = () => {
   const [loading, setLoading] = useState(true);
+  const [articles, setArticles] = useState<ArticleInfo[]>([]);
+
   const tryAgain = () => {
     setLoading(true);
   };
   setTimeout(() => {
     setLoading(false);
   }, 3 * 1000);
+
+  useEffect(() => {
+    useFetchArticles()
+      .then((res) => {   
+        setArticles(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <Layout>
       {loading ? (
@@ -41,8 +55,8 @@ const Result: NextPage = () => {
           <div className=" md:border-l-2 md:border-black">
             <h2 className="text-center text-2xl font-bold">関連記事</h2>
             <div className="grid grid-cols-1 xl:grid-cols-2 max-h-screen overflow-y-scroll overflow-hidden">
-              {[0, 1, 2, 3, 4, 5, 6, 7].map((id) => {
-                return <RelativeArticle key={id} />;
+              {articles.map((article:ArticleInfo) => {
+                return <RelativeArticle article={article} />;
               })}
             </div>
           </div>

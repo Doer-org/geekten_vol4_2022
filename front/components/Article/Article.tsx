@@ -7,6 +7,7 @@ import { useUserStore } from '../../store/store';
 import Link from 'next/link';
 import { FavButton } from '../Favorite/FavButton';
 import { Twitter } from '../Article/Twitter';
+
 export const Article: FC = () => {
   const initial = { id: 0, title: '', likes: 0, url: '', author: '', kind: '' };
   const [article, setArticle] = useState<ArticleInfo>(initial);
