@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Router from 'next/router';
 import { FC } from 'react';
 import { useNoticeStore } from '../../../store/store';
 import { useLogOut } from '../../../hooks/User/useLogOut';

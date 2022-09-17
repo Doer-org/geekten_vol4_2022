@@ -4,7 +4,7 @@ import { useUserStore } from '../store/store';
 import Image from 'next/image';
 import { useNoticeStore } from '../store/store';
 
-const Form: FC<{ title: string }> = ({ title }) => {
+const Form: FC = () => {
   const setUser = useUserStore((state) => state.setUser);
   const setNotice = useNoticeStore((state) => state.setNotice);
 

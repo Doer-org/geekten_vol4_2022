@@ -6,9 +6,8 @@ export const FavButton: FC<{ user_id: string; article_id: number }> = ({
   user_id,
   article_id,
 }) => {
-  // favorite一覧を一旦stateに格納
   const [favoritedNum, setFavoritedNum] = useState<number[]>([]);
-  // favorite一覧のidを取ってきてそれの一覧にあれば表示を変える
+
   useEffect(() => {
     useFetchFavorite(user_id).then((res) => {
       const ids = res.map((b) => {

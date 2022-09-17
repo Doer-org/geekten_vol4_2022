@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { ArticleInfo } from '@/types/articleInfo';
-import { useUserStore } from '@/store/store';
-import { useCreateHistory } from '@/hooks/History/useCreateHistory';
+import { ArticleInfo } from '../../types/articleInfo';
+import { useUserStore } from '../../store/store';
+import { useCreateHistory } from '../../hooks/History/useCreateHistory';
 import Link from 'next/link';
 export const RelativeArticle: FC<{ article: ArticleInfo }> = ({ article }) => {
   const { user } = useUserStore();

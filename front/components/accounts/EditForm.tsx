@@ -1,10 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useUserStore } from '../../store/store';
 import { UpdateUser } from '../../services/User/UpdateUser';
 export const EditForm: FC = () => {
   const { user } = useUserStore();
   const EditUser = useUserStore((state) => state.editUser);
-  const [tmp, setTmp] = useState<string>(user.name);
   const updateUser = () => {
     UpdateUser(user)
       .then((res) => {
