@@ -5,7 +5,7 @@ import { useCreateHistory } from "../../hooks/History/useCreateHistory";
 import { useArticleOptionStore } from "../../store/store";
 import { useUserStore } from "../../store/store";
 import Link from "next/link";
-import { Twitter } from "@/components/Article/twitter";
+import { Twitter } from "@/components/Article/Twitter";
 export const Article: FC = () => {
   const initial = { id: 0, title: "", likes: 0, url: "", author: "", kind: "" };
   const [article, setArticle] = useState<ArticleInfo>(initial);
