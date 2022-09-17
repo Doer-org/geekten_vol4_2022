@@ -17,7 +17,7 @@ const About: NextPage = () => {
       <div className="text-center">
         <h2 className="text-2xl font-bold">Contoributers</h2>
         <p className="mt-5 mb-20">
-          2022年9月に行われた技育展で作成したプロジェクトです
+          DITAは2022年9月に行われた技育展で作成したプロジェクトです
         </p>
         <div className="mx-10 flex flex-wrap justify-center gap-5">
           {users.map((user) => {
