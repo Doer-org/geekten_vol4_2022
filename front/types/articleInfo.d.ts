@@ -6,4 +6,4 @@ export type ArticleInfo = {
   author: string;
   kind: string;
 };
-export type Option = 'popularity' | 'nich';
+export type Option = 'popularity' | 'nich' | 'normal';

@@ -20,8 +20,8 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <div className="font-mono text-gray-800">
       <Header />
-      <div className="flex flex-col min-h-screen w-screen  items-center justify-center">
-        <main className="my-40">{children}</main>
+      <div className="flex min-h-screen w-screen  items-center justify-center">
+        <main className="md:my-40 my-28">{children}</main>
       </div>
       <Footer />
     </div>

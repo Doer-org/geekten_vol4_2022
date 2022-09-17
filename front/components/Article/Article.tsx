@@ -7,6 +7,7 @@ import { useUserStore } from '../../store/store';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FavButton } from '../Favorite/FavButton';
+import { Buttons } from '../atoms/Buttons';
 import { Twitter } from '../Article/Twitter';
 import styles from '../../styles/article.module.css';
 export const Article: FC = () => {

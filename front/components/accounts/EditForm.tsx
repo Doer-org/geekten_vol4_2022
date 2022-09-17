@@ -19,7 +19,7 @@ export const EditForm: FC = () => {
   return (
     <div className="text-center">
       <h2 className="text-center text-2xl font-bold">アカウント編集</h2>
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col md:flex-row justify-center items-center my-5">
         <p>名前</p>
         <div className="p-3">
           <input
