@@ -22,7 +22,7 @@ const About: NextPage = () => {
         <div className="mx-10 flex flex-wrap justify-center gap-5">
           {users.map((user) => {
             return (
-              <div>
+              <div key={user.name}>
                 <div className="text-center grid grid-cols-1 shadow-2xl">
                   <Link
                     href={`https://github.com/${user.name}`}
@@ -35,7 +35,7 @@ const About: NextPage = () => {
                       {user.name}
                     </a>
                   </Link>
-                  <div className="my-3">
+                  <div className="my-3 ">
                     <Image
                       className="rounded-full relative -z-10"
                       src={`/profiles/${user.name}.${user.image}`}

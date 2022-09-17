@@ -1,7 +1,7 @@
-import create from "zustand";
-import { UserInfo } from "../types/userInfo";
-import { HistoryInfo } from "../types/historyInfo";
-import { Option } from "../types/articleInfo";
+import create from 'zustand';
+import { UserInfo } from '../types/userInfo';
+import { HistoryInfo } from '../types/historyInfo';
+import { Option } from '../types/articleInfo';
 type User = {
   user: UserInfo;
   setUser: (user: UserInfo) => void;
@@ -27,14 +27,14 @@ type useNoticeStore = {
 };
 
 export const useUserStore = create<User>((set) => ({
-  user: { id: "", name: "" },
+  user: { id: '', name: '' },
   setUser: (user) => set({ user: user }),
   editUser: (id, name) => set({ user: { id: id, name: name } }),
-  resetUser: () => set({ user: { id: "", name: "" } }),
+  resetUser: () => set({ user: { id: '', name: '' } }),
 }));
 
 export const useArticleOptionStore = create<useArticleOptionStore>((set) => ({
-  option: "popularity",
+  option: 'popularity',
   setOption: (option) => set({ option: option }),
 }));
 
@@ -44,8 +44,8 @@ export const useHistoryStore = create<ArticleHistory>((set) => ({
 }));
 
 export const useNoticeStore = create<useNoticeStore>((set) => ({
-  notice: "",
+  notice: '',
   loggedIn: false,
   setNotice: (notice) => set({ notice: notice }),
-  setLoggedIn: (loggedIn) => set({loggedIn: loggedIn})
+  setLoggedIn: (loggedIn) => set({ loggedIn: loggedIn }),
 }));

@@ -1,0 +1,21 @@
+.qiitaGrad {
+  border: 5px solid;
+  border-image: linear-gradient(to right, yellow, green) 1;
+  transition: 0.2s;
+}
+.qiitaGrad:hover {
+  transform: scale(103%);
+  z-index: -10;
+}
+
+.zennGrad {
+  border: 5px solid;
+  border-image: linear-gradient(to right, rgb(104, 183, 193), rgb(51, 105, 230))
+    1;
+  transition: 0.2s;
+}
+
+.zennGrad:hover {
+  transform: scale(103%);
+  z-index: -10;
+}

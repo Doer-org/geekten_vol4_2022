@@ -7,7 +7,5 @@ export const UpdateUser: UpdateUser = async (user) => {
   formData.append('id', user.id);
   formData.append('name', user.name);
   const updatedUser = await Axios.put('/api/user/update', formData);
-  console.log('updatedUser/api');
-  console.log(updatedUser);
   return updatedUser;
 };

@@ -1,12 +1,10 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useUserStore } from '../../store/store';
 import { UpdateUser } from '../../services/User/UpdateUser';
 export const EditForm: FC = () => {
   const { user } = useUserStore();
   const EditUser = useUserStore((state) => state.editUser);
-  const [tmp, setTmp] = useState<string>(user.name);
   const updateUser = () => {
-    console.log(user);
     UpdateUser(user)
       .then((res) => {
         EditUser(res.data.id, res.data.name);
@@ -15,16 +13,13 @@ export const EditForm: FC = () => {
           'user',
           JSON.stringify({ id: res.data.id, name: res.data.name })
         );
-        console.log(user.name);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
   return (
     <div className="text-center">
       <h2 className="text-center text-2xl font-bold">アカウント編集</h2>
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col md:flex-row justify-center items-center my-5">
         <p>名前</p>
         <div className="p-3">
           <input

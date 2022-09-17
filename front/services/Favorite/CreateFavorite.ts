@@ -5,12 +5,6 @@ export const CreateFavorite: CreateFavorite = (user_id, article_id) => {
   formData.append('user_id', `${user_id}`);
   formData.append('article_id', `${article_id}`);
   Axios.post('/api/favorite/create', formData)
-    .then((res) => {
-      console.log('favorite create api seikou!!!');
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log('favorite create api sippai!!');
-      console.log(err);
-    });
+    .then((res) => {})
+    .catch((err) => {});
 };

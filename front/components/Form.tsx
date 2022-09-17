@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
-import { useLogin } from "../hooks/User/useLogin";
-import { useUserStore } from "../store/store";
-import Image from "next/image";
-import { useNoticeStore } from "../store/store";
+import { FC, useState } from 'react';
+import { useLogin } from '../hooks/User/useLogin';
+import { useUserStore } from '../store/store';
+import Image from 'next/image';
+import { useNoticeStore } from '../store/store';
 
-const Form: FC<{ title: string }> = ({ title }) => {
+const Form: FC = () => {
   const setUser = useUserStore((state) => state.setUser);
   const setNotice = useNoticeStore((state) => state.setNotice);
 
@@ -12,15 +12,12 @@ const Form: FC<{ title: string }> = ({ title }) => {
     useLogin()
       .then((res) => {
         setUser(res);
-        setNotice("Logged in!");
-        setTimeout(()=>{
-          setNotice("")
-        }, 2 * 1000)
-        console.log(res);
+        setNotice('Logged in!');
+        setTimeout(() => {
+          setNotice('');
+        }, 2 * 1000);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
   return (
     <div className="shadow-2xl rounded-md p-5">

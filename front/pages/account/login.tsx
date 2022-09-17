@@ -5,7 +5,7 @@ import { Layout } from '@/components/layouts/Layout';
 const Login: NextPage = () => {
   return (
     <Layout>
-      <Form title="Login" />
+      <Form />
     </Layout>
   );
 };

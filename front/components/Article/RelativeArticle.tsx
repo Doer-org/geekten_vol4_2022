@@ -1,41 +1,67 @@
-import { FC } from "react";
-import { ArticleInfo } from "@/types/articleInfo";
-import { useUserStore } from "@/store/store";
-import { useCreateHistory } from "@/hooks/History/useCreateHistory";
-import Link from "next/link";
-export const RelativeArticle: FC<{article:ArticleInfo}> = ({article}) => {
+import { FC } from 'react';
+import { ArticleInfo } from '../../types/articleInfo';
+import { FavButton } from '../../components/Favorite/FavButton';
+import { useUserStore } from '../../store/store';
+import { useCreateHistory } from '../../hooks/History/useCreateHistory';
+import Image from 'next/image';
+import styles from '../../styles/article.module.css';
+import Link from 'next/link';
+export const RelativeArticle: FC<{ article: ArticleInfo }> = ({ article }) => {
   const { user } = useUserStore();
-  
   return (
-    <div>
+    <div className="m-5">
       <div>
-        <Link href={article?.url}>
+        <Link href={article.url}>
           <a
             target="_blank"
             onClick={() => {
-              if (user.id !== "") {
-                console.log("aaaa");
+              if (user.id !== '') {
                 useCreateHistory(user.id, article.id);
               }
             }}
           >
-            <article className="grid grid-cols-1 shadow-2xl border border-black rounded-md mt-5 mb-10 mx-5 ">
-              <div
-                className=" bg-lime-300 rounded-md py-10 px-5 break-all"
-                style={
-                  article?.kind == "zenn"
-                    ? { backgroundColor: "rgb(34 211 238)" }
-                    : { backgroundColor: "rgb(190 242 100)" }
-                }
-              >
-                <h3 className="text-lg lg:text-xl font-medium">
-                  {article.title}
-                </h3>
+            <article
+              className={
+                article.kind == 'zenn'
+                  ? styles['zennGrad']
+                  : styles['qiitaGrad']
+              }
+            >
+              <div className="grid grid-cols-1 place-items-center justify-items-center shadow-2xl p-2 -z-10">
+                <div className="p-2 rounded-md w-full -z-10">
+                  <div className="relative">
+                    {article.kind == 'zenn' ? (
+                      <Image
+                        src="/Zenn.png"
+                        height={100}
+                        width={100}
+                        objectFit="contain"
+                        className=" relative -z-10"
+                      />
+                    ) : (
+                      <Image
+                        src="/Qiita.png"
+                        height={100}
+                        width={100}
+                        objectFit="contain"
+                        className="relative -z-10"
+                      />
+                    )}
+                  </div>
+                  <div className="grid grid-cols-1 place-items-center justify-items-center">
+                    <h3 className="text-lg lg:text-xl font-medium">
+                      {article.title}
+                    </h3>
+                    <p className=" my-5 justify-self-end">{article.author}</p>
+                  </div>
+                </div>
               </div>
-              <p className="m-3 text-center">{article.author}</p>
             </article>
           </a>
         </Link>
+        <div className="text-end my-4">
+          {user.id && <FavButton user_id={user.id} article_id={article.id} />}
+        </div>
       </div>
     </div>
   );
