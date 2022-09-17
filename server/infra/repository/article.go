@@ -68,6 +68,58 @@ func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 	return resarticle, nil
 }
 
+func (ar articleRepository) GetRandomTen() ([]*entity.Article, error) {
+	var articles []*entity.Article
+
+	getRandomQuery := "SELECT * FROM articles"
+
+	rows, err := ar.db.Query(getRandomQuery)
+	if err != nil {
+		log.Println(db_error.QueryError)
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		article := &entity.Article{}
+		if err := rows.Scan(
+			&article.Id,
+			&article.Title,
+			&article.Likes,
+			&article.Url,
+			&article.Author,
+			&article.Kind,
+		); err != nil {
+			log.Println(db_error.RowsScanError)
+			return nil, err
+		}
+		articles = append(articles, article)
+	}
+
+	var resarticles []*entity.Article
+	sizeart := len(articles)
+	used := make([]int, sizeart+1, sizeart+1)
+
+	for i := 0; i <= sizeart; i++ {
+		used[i] = -1
+	}
+
+	for i := 0; i < 10; i++ {
+		for {
+			rand.Seed(time.Now().UnixNano())
+			result := rand.Intn(sizeart - 1)
+			if used[result] == -1 {
+				used[result] = 1
+				resarticles = append(resarticles, articles[result])
+				break
+			}
+		}
+
+	}
+
+	return resarticles, nil
+}
+
 func (ar articleRepository) GetRanking() ([]*entity.Article, error) {
 	var articles []*entity.Article
 
