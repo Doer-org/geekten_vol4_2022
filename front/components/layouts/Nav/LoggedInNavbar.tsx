@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import { FC } from 'react';
 import { useLogOut } from '../../../hooks/useLogOut';
 import { useUserStore } from '../../../store/store';
@@ -11,6 +12,7 @@ export const LoggedInNavbar: FC<IProps> = ({ isShow }) => {
     useLogOut()
       .then((res) => {
         resetUser();
+        Router.push('/')
       })
       .catch((error) => {
         console.log(error);

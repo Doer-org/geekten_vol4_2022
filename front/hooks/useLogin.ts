@@ -3,6 +3,8 @@ import { initializeFirebase } from '../utils/firebase';
 import { CreateUser } from '../services/User/CreateUser';
 import { FetchUser } from '../services/User/FetchUser';
 import { UserInfo } from '../types/userInfo';
+import Router from 'next/router';
+
 export const useLogin = async (): Promise<UserInfo> => {
   initializeFirebase();
   const auth = getAuth();
@@ -17,5 +19,6 @@ export const useLogin = async (): Promise<UserInfo> => {
   const user = FetchUser(userData.id);
   // ここでローカルストレージに入れる
   localStorage.setItem('user', JSON.stringify(userData));
+  Router.push('/')
   return user;
 };
