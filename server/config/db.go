@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -23,6 +24,7 @@ func GetDbUri() string {
 			dbName,
 		)
 	} else {
+		log.Println("env prd: ",dbUrl)
 		return dbUrl
 	}
 }

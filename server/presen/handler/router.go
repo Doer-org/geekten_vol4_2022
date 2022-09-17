@@ -38,4 +38,7 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 	favoriteDelete := http.HandlerFunc(userHandler.DeleteFavorite)
 	http.Handle("/api/favorite/delete", middleware.Layres(favoriteDelete))
 
+	getFavorite := http.HandlerFunc(userHandler.GetFavorite)
+	http.Handle("/api/favorite/get", middleware.Layres(getFavorite))
+
 }

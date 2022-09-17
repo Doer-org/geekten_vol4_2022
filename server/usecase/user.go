@@ -13,6 +13,7 @@ type UserUsecase interface {
 	ArticleLikesPlus(int) (*entity.Article, error)
 	DeleteFavorite(string, int) error
 	ArticleLikesMinus(int) (*entity.Article, error)
+	GetFavorite(string) ([]*entity.Favorite, []*entity.Article, error)
 }
 
 type userUsecase struct {
@@ -58,4 +59,9 @@ func (ur userUsecase) DeleteFavorite(user_id string, article_id int) error {
 func (ur userUsecase) ArticleLikesMinus(article_id int) (*entity.Article, error) {
 	article, err := ur.userRepository.ArticleLikesMinus(article_id)
 	return article, err
+}
+
+func (ur userUsecase) GetFavorite(user_id string) ([]*entity.Favorite, []*entity.Article, error) {
+	favorite, article, err := ur.userRepository.GetFavorite(user_id)
+	return favorite, article, err
 }
