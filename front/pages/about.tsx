@@ -19,25 +19,32 @@ const About: NextPage = () => {
         <p className="mt-5 mb-20">
           2022年9月に行われた技育展で作成したプロジェクトです
         </p>
-        <div className="flex flex-wrap justify-center gap-10 mx-10">
+        <div className="mx-10 flex flex-wrap justify-center gap-5">
           {users.map((user) => {
             return (
-              <Link href={`https://github.com/${user.name}`} key={user.name}>
-                <a
-                  target="_blank"
-                  className="shadow-xl p-5 hover:-mt-2 transition-all rounded-md -z-10"
-                >
-                  <div className="text-center">
-                    <p>{user.name}</p>
+              <div>
+                <div className="text-center grid grid-cols-1 shadow-2xl">
+                  <Link
+                    href={`https://github.com/${user.name}`}
+                    key={user.name}
+                  >
+                    <a
+                      target="_blank"
+                      className="py-3 px-10 hover:-mt-2 transition-all rounded-md hover:bg-amber-400"
+                    >
+                      {user.name}
+                    </a>
+                  </Link>
+                  <div className="my-3">
                     <Image
-                      className="rounded-full relative"
+                      className="rounded-full relative -z-10"
                       src={`/profiles/${user.name}.${user.image}`}
                       height={100}
                       width={100}
                     />
                   </div>
-                </a>
-              </Link>
+                </div>
+              </div>
             );
           })}
         </div>
