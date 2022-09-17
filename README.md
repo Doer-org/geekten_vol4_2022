@@ -1,52 +1,40 @@
 # Geekten vol_4team, 2022
 
-# hack-camp_vol5_2022
 ### Date
 
-2022/7/9 ~ 7/10
+2022/8/23 ~ 9/23
 
 <br>
 
 ## About
 ***
-[技育CAMP vol.5](https://talent.supporterz.jp/events/17333219-d4ad-4623-b735-ce0e7656f52f/) 用のリポジトリです
+[技育展](https://talent.supporterz.jp/geekten/2022/) 用のリポジトリです
 
-テーマは「**世の中を楽しくする**」を選びました
+テーマは「**スキル・開発支援**」を選びました
 
 <br>
 
-<img width="600px" src="https://img.esa.io/uploads/production/attachments/19248/2022/07/09/130878/d1b0066a-7e2c-4da1-afcc-5b6bf8e7d878.png" />
+<img width="600px" src="https://img.esa.io/uploads/production/attachments/19248/2022/08/06/130878/0fefe25b-814e-491c-bae9-62a9cf1b789c.png" />
 
 <br>
 
 <br>
 
 ## 結果！！
-***
-### 🎉**最優秀賞**🎉を受賞しました👏👏
-
-
-https://twitter.com/du_doer/status/1546073030446575618
-
-<a href="https://twitter.com/du_doer/status/1546073030446575618">
-  <img width="360px" src="https://img.esa.io/uploads/production/attachments/19248/2022/07/11/130878/46b74648-8ebd-42bc-8a11-633b2922d04f.png" />
-</a>
-
 
 <br>
 
 ## アプリ
 ***
 
-このアプリは「自己紹介」×「技術🛠」をテーマにした
-#### 「[Meet Hack](https://meet-hack.vercel.app/)」というアプリです！
+このアプリは「おみくじ」×「技術記事🛠」をテーマにした
+#### 「[DITA](https://dita-doer.vercel.app/)」というアプリです！
 
 <br>
 
 デプロイ先はこちら
-https://meet-hack.vercel.app/
+https://dita-doer.vercel.app/
 
-(注意 : backendがherokuの無料枠のため、データが返ってくるまで**時間がかかる**場合があります)
 
 <br>
 
