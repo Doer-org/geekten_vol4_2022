@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Router from 'next/router';
 import { FC } from 'react';
-import { useLogOut } from '../../../hooks/useLogOut';
+import { useLogOut } from '../../../hooks/User/useLogOut';
 import { useUserStore } from '../../../store/store';
 interface IProps {
   isShow: boolean;
@@ -27,17 +27,20 @@ export const LoggedInNavbar: FC<IProps> = ({ isShow }) => {
       }
     >
       <li className="text-lg font-bold py-5 md:py-2 px-3">
-        <Link href="/">ホーム</Link>
+        <Link href="/">HOME</Link>
+      </li>
+      <li className="text-lg font-bold py-5 md:py-2 px-3 z-50">
+        <Link href="/about">ABOUT</Link>
       </li>
       <li className="text-lg font-bold py-5 md:py-2 px-3">
-        <Link href="/favorite">お気に入り</Link>
+        <Link href="/favorite">FAVORITE</Link>
+      </li>
+      <li className="text-lg font-bold py-5 md:py-2 px-3">
+        <Link href="/account">ACCOUNT</Link>
       </li>
       <button className="text-lg font-bold py-5 md:py-2 px-3" onClick={logOut}>
-        ログアウト
+        LOGOUT
       </button>
-      <li className="text-lg font-bold py-5 md:py-2 px-3">
-        <Link href="/account">アカウント</Link>
-      </li>
     </ul>
   );
 };

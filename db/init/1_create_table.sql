@@ -26,6 +26,13 @@ CREATE TABLE "historys" (
     ON DELETE CASCADE
 );
 
-
+CREATE TABLE "favorite" (
+  "user_id"             VARCHAR(255) NOT NULL,
+  "article_id"          INT NOT NULL,
+  foreign key ("user_id") references "users"("id")
+    ON DELETE CASCADE,
+  foreign key ("article_id") references "articles"("id")
+    ON DELETE CASCADE
+);
 
 

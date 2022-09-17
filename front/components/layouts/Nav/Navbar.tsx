@@ -12,11 +12,14 @@ export const Navbar: FC<IProps> = ({ isShow }) => {
           : 'md:flex hidden justify-end'
       }
     >
-      <li className="text-lg font-bold py-5 md:py-2 px-3">
-        <Link href="/">ホーム</Link>
+      <li className="text-lg font-bold py-5 md:py-2 px-3 z-50">
+        <Link href="/">HOME</Link>
       </li>
-      <li className="text-lg font-bold py-5 md:py-2 px-3">
-        <Link href="/account/login">ログイン・新規登録</Link>
+      <li className="text-lg font-bold py-5 md:py-2 px-3 z-50">
+        <Link href="/about">ABOUT</Link>
+      </li>
+      <li className="text-lg font-bold py-5 md:py-2 px-3 z-50">
+        <Link href="/account/login">LOGIN・SIGNUP</Link>
       </li>
     </ul>
   );
