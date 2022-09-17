@@ -3,7 +3,7 @@ import { initializeFirebase } from '../../utils/firebase';
 import { CreateUser } from '../../services/User/CreateUser';
 import { FetchUser } from '../../services/User/FetchUser';
 import { UserInfo } from '../../types/userInfo';
-import Router from 'next/router'
+import Router from 'next/router';
 
 export const useLogin = async (): Promise<UserInfo> => {
   initializeFirebase();

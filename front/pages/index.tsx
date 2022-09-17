@@ -1,15 +1,25 @@
-import type { NextPage } from 'next';
-import { Layout } from '../components/layouts/Layout';
-import Lottie from 'lottie-react';
-import * as animationData from '../json/robot.json';
-import Link from 'next/link';
-import { useArticleOptionStore } from '../store/store';
+import type { NextPage } from "next";
+import { Layout } from "../components/layouts/Layout";
+import Lottie from "lottie-react";
+import * as animationData from "../json/robot.json";
+import Link from "next/link";
+import { useArticleOptionStore } from "../store/store";
+import { useNoticeStore } from "../store/store";
 
 const Home: NextPage = () => {
   const { option } = useArticleOptionStore();
+  const { notice } = useNoticeStore();
   const setOption = useArticleOptionStore((state) => state.setOption);
+
   return (
     <Layout>
+      <div className="h-10 w-full">
+        <div className="h-full mr-5 flex justify-center" hidden={notice === ""}>
+          <p className="text-center text-lg my-auto bg-amber-500 font-bold px-10 py-3 rounded-md" hidden={notice === ""}>
+            {notice}
+          </p>
+        </div>
+      </div>
       <div className="grid md:grid-cols-2 grid-cols-1 place-items-center justify-items-center">
         <div className="w-1/2">
           <Lottie animationData={animationData} />
@@ -23,7 +33,7 @@ const Home: NextPage = () => {
             <Link href="/result">
               <button
                 className="shadow-md rounded-md border p-3 hover:bg-orange-500"
-                onClick={() => setOption('nich')}
+                onClick={() => setOption("nich")}
               >
                 nich
               </button>
@@ -36,7 +46,7 @@ const Home: NextPage = () => {
             <Link href="/result">
               <button
                 className="shadow-md rounded-md border p-3 hover:bg-orange-500"
-                onClick={() => setOption('popularity')}
+                onClick={() => setOption("popularity")}
               >
                 popular
               </button>
