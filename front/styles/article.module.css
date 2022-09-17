@@ -1,0 +1,17 @@
+.zennGradient {
+  background-image: linear-gradient(to right, #2af598 0%, #009efd 100%);
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.zennGradient:hover {
+  transform: scale(105%);
+}
+
+.qiitaGradient {
+  background-image: linear-gradient(to right, #d1f25a 0%, #0ad114 100%);
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.qiitaGradient:hover {
+  transform: scale(105%);
+}

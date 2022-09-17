@@ -5,9 +5,10 @@ import { useCreateHistory } from '../../hooks/History/useCreateHistory';
 import { useArticleOptionStore } from '../../store/store';
 import { useUserStore } from '../../store/store';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FavButton } from '../Favorite/FavButton';
 import { Twitter } from '../Article/Twitter';
-
+import styles from '../../styles/article.module.css';
 export const Article: FC = () => {
   const initial = { id: 0, title: '', likes: 0, url: '', author: '', kind: '' };
   const [article, setArticle] = useState<ArticleInfo>(initial);
@@ -21,39 +22,59 @@ export const Article: FC = () => {
       .catch((err) => {});
   }, []);
   return (
-    <div>
-      <Link href={article.url}>
-        <a
-          target="_blank"
-          onClick={() => {
-            if (user.id !== '') {
-              useCreateHistory(user.id, article.id);
-            }
-          }}
-        >
-          <article className="grid grid-cols-1 shadow-2xl border border-black rounded-md mt-5 mb-10 mx-5 ">
-            <div
-              className=" bg-lime-300 rounded-md py-10 px-5 break-all"
-              style={
+    <div className="mx-5">
+      <div>
+        <Link href={article.url}>
+          <a
+            target="_blank"
+            onClick={() => {
+              if (user.id !== '') {
+                useCreateHistory(user.id, article.id);
+              }
+            }}
+          >
+            <article
+              className={
                 article.kind == 'zenn'
-                  ? { backgroundColor: 'rgb(34 211 238)' }
-                  : { backgroundColor: 'rgb(190 242 100)' }
+                  ? styles['zennGradient']
+                  : styles['qiitaGradient']
               }
             >
-              <h3 className="text-lg lg:text-xl font-medium">
-                {article.title}
-              </h3>
-            </div>
-            <p className="m-3">{article.author}</p>
-          </article>
-        </a>
-      </Link>
-      <div className=" text-left mx-5">
-        <FavButton user_id={user.id} article_id={article.id} />
-        <Twitter
-          url={article.url}
-          title={`技術記事を読みました！ from DITA🤖 \n\n ${article.title}`}
-        />
+              <div className="grid grid-cols-1 place-items-center justify-items-center shadow-2xl p-5 ">
+                <div>
+                  <div className={(styles.zennGradient, 'relative w-20 h-20')}>
+                    {article.kind == 'zenn' ? (
+                      <Image
+                        src="/Zenn.png"
+                        layout="fill"
+                        objectFit="contain"
+                      />
+                    ) : (
+                      <Image
+                        src="/Qiita.png"
+                        layout="fill"
+                        objectFit="contain"
+                      />
+                    )}
+                  </div>
+                  <div className="grid grid-cols-1 place-items-center justify-items-center">
+                    <h3 className="text-lg lg:text-xl font-medium">
+                      {article.title}
+                    </h3>
+                    <p className=" my-5 justify-self-end">{article.author}</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </a>
+        </Link>
+        <div className="my-4 flex justify-end items-center">
+          <FavButton user_id={user.id} article_id={article.id} />
+          <Twitter
+            url={article.url}
+            title={`技術記事を読みました！ from DITA🤖 \n\n ${article.title}`}
+          />
+        </div>
       </div>
     </div>
   );

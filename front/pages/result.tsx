@@ -5,8 +5,8 @@ import * as animationData from '../json/feature.json';
 import { useState, useEffect } from 'react';
 import { Article } from '../components/Article/Article';
 import { RelativeArticle } from '../components/Article/RelativeArticle';
-import { useFetchArticles } from '@/hooks/Article/useFetchArticles';
-import { ArticleInfo } from '@/types/articleInfo';
+import { useFetchArticles } from '../hooks/Article/useFetchArticles';
+import { ArticleInfo } from '../types/articleInfo';
 
 const Result: NextPage = () => {
   const [loading, setLoading] = useState(true);
@@ -50,11 +50,11 @@ const Result: NextPage = () => {
             </button>
           </div>
 
-          <div className=" md:border-l-2 md:border-black">
+          <div className=" md:border-l-2 md:border-black px-5">
             <h2 className="text-center text-2xl font-bold">関連記事</h2>
-            <div className="grid grid-cols-1 xl:grid-cols-2 max-h-screen overflow-y-scroll overflow-hidden">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 max-h-screen overflow-y-scroll overflow-hidden">
               {articles.map((article: ArticleInfo) => {
-                return <RelativeArticle article={article} />;
+                return <RelativeArticle article={article} key={article.id} />;
               })}
             </div>
           </div>
