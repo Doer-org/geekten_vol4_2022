@@ -13,6 +13,7 @@ const Result: NextPage = () => {
   const [articles, setArticles] = useState<ArticleInfo[]>([]);
 
   const tryAgain = () => {
+    location.reload();
     setLoading(true);
   };
   setTimeout(() => {
