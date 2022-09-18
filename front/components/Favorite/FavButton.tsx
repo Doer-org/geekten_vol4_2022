@@ -11,13 +11,15 @@ export const FavButton: FC<{ user_id: string; article_id: number }> = ({
   const [like, setLike] = useState<boolean>(favoritedNum.includes(article_id));
   useEffect(() => {
     useFetchFavorite(user_id).then((res) => {
-      const ids = res?.map((b) => {
-        if (b.article_id === article_id) {
-          setLike(true);
-        }
-        return b.article_id;
-      });
-      setFavoritedNum(ids);
+      if (typeof res !== 'undefined') {
+        const ids = res.map((b) => {
+          if (b.article_id === article_id) {
+            setLike(true);
+          }
+          return b.article_id;
+        });
+        setFavoritedNum(ids);
+      }
     });
   }, []);
 

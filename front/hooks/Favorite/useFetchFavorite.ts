@@ -1,7 +1,7 @@
 import { FetchFavorite } from '../../services/Favorite/FetchFavorite';
 import { FavoriteInfo } from '../../types/favoriteInfo';
 
-type FetchFavorite = (id: string) => Promise<FavoriteInfo[]>;
+type FetchFavorite = (id: string) => Promise<FavoriteInfo[] | undefined>;
 export const useFetchFavorite: FetchFavorite = async (id) => {
   const favorites = await FetchFavorite(id);
   return favorites;

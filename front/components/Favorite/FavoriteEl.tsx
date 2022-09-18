@@ -19,7 +19,7 @@ export const FavoriteEl: FC<{ favorite: FavoriteInfo }> = ({ favorite }) => {
             <div className="grid grid-cols-1 place-items-center justify-items-center shadow-2xl p-5 -z-10">
               <div>
                 <div className=" p-2 rounded-md w-full -z-10">
-                  {favorite.Article.kind == 'zenn' ? (
+                  {favorite?.Article.kind == 'zenn' ? (
                     <Image
                       src="/Zenn.png"
                       height={100}
