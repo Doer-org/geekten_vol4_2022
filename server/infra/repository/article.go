@@ -207,38 +207,3 @@ func (ar articleRepository) GetHistory(user_id string) ([]*entity.History, []*en
 
 	return historys, articles, nil
 }
-
-func (ar articleRepository) GetFavorite(user_id string) ([]*entity.Favorite, []*entity.Article, error) {
-	var favorites []*entity.Favorite
-	var articles []*entity.Article
-
-	statement := "SELECT h.article_id AS id,a.title,a.likes,a.url,a.author,a.kind FROM historys h INNER JOIN articles a ON h.article_id = a.id where user_id = $1 ORDER BY h.created_at DESC LIMIT 7"
-	rows, err := ar.db.Query(statement, user_id)
-	if err != nil {
-		log.Println(db_error.QueryError)
-		return nil, nil, err
-	}
-
-	defer rows.Close()
-
-	for rows.Next() {
-		favorite := &entity.Favorite{}
-		article := &entity.Article{}
-		if err := rows.Scan(
-			&favorite.ArticleId,
-			&article.Title,
-			&article.Likes,
-			&article.Url,
-			&article.Author,
-			&article.Kind,
-		); err != nil {
-			log.Println(db_error.RowsScanError)
-			return nil, nil, err
-		}
-		favorite.UserId = user_id
-		articles = append(articles, article)
-		favorites = append(favorites, favorite)
-	}
-
-	return favorites, articles, nil
-}
