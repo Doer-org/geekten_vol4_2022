@@ -24,7 +24,7 @@ export const EditForm: FC = () => {
         <div className="p-3">
           <input
             type="text"
-            className="border-2 border-black px-1"
+            className="border border-black px-1"
             value={user.name}
             onChange={(e) => {
               EditUser(user.id, e.target.value);
@@ -35,7 +35,7 @@ export const EditForm: FC = () => {
         <button
           onClick={updateUser}
           disabled={user.name.length <= 0 && user.name.length > 40}
-          className="border-2 border-black px-1 hover:bg-amber-500"
+          className="border border-black px-1 hover:bg-amber-500"
         >
           変更
         </button>
