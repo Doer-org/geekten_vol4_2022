@@ -18,7 +18,7 @@ const Favorite: NextPage = () => {
     <Layout>
       <div className="mx-5 md:mx-14">
         <h2 className="mb-20 text-center text-2xl font-bold">お気に入り</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 place-items-center justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 place-items-center justify-items-center">
           {favorites?.map((fav, id) => {
             return <FavoriteEl key={id} favorite={fav} />;
           })}
