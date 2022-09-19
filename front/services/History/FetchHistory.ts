@@ -1,15 +1,9 @@
 import { Axios } from '../../libs/api';
 import { HistoryInfo } from '../../types/historyInfo';
-type Error = {
-  Status: number;
-  Result: string;
-};
-interface FetchHistory<T> {
-  (id: string): Promise<HistoryInfo[]>;
+interface FetchHistory {
+  (id: string): Promise<HistoryInfo[]> | Error;
 }
-export const FetchHistory: FetchHistory<
-  Promise<HistoryInfo[]> | Error
-> = async (id) => {
+export const FetchHistory: FetchHistory = async (id) => {
   const { data } = await Axios.get(`/api/history/get?user_id=${id}`);
   if (typeof data.Result !== 'undefined') {
     throw new Error('favorite error');

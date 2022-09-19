@@ -9,8 +9,8 @@ export const FetchFavorite: FetchFavorite = async (id) => {
     if (typeof data.Result !== 'undefined') {
       throw new Error('favorite error');
     } else {
-      const tmp: FavoriteInfo[] = data;
-      return tmp;
+      const favorites: FavoriteInfo[] = data;
+      return favorites;
     }
   } catch (error) {
     return undefined;

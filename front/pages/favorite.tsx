@@ -5,20 +5,6 @@ import { useState, useEffect } from 'react';
 import { useFetchFavorite } from '../hooks/Favorite/useFetchFavorite';
 import { FavoriteEl } from '../components/Favorite/FavoriteEl';
 const Favorite: NextPage = () => {
-  const initial = [
-    {
-      user_id: '',
-      article_id: 0,
-      Article: {
-        id: 0,
-        title: '',
-        likes: 0,
-        url: '',
-        author: '',
-        kind: '',
-      },
-    },
-  ];
   const [favorites, setFavorites] = useState<FavoriteInfo[]>([]);
   useEffect(() => {
     const user_id = JSON.parse(localStorage.getItem('user') as string).id;
