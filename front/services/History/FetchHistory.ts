@@ -8,7 +8,7 @@ export const FetchHistory: FetchHistory = async (id) => {
   if (typeof data.Result !== 'undefined') {
     throw new Error('favorite error');
   } else {
-    const tmp: HistoryInfo[] = data;
-    return tmp;
+    const histories: HistoryInfo[] = data;
+    return histories;
   }
 };
