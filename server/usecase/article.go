@@ -10,7 +10,7 @@ type ArticleUsecase interface {
 	GetRanking() ([]*entity.Article, error)
 	CreateHistory(string, int) (*entity.History, error)
 	GetHistory(string) ([]*entity.History, []*entity.Article, error)
-	GetRandomTen() ([]*entity.Article, error)
+	GetRandomRelated() ([]*entity.Article, error)
 }
 
 type articleUsecase struct {
@@ -29,8 +29,8 @@ func (au articleUsecase) GetRandom(types string) (*entity.Article, error) {
 }
 
 func (au articleUsecase) GetRanking() ([]*entity.Article, error) {
-	article, err := au.articleRepository.GetRanking()
-	return article, err
+	articles, err := au.articleRepository.GetRanking()
+	return articles, err
 }
 
 func (ur articleUsecase) CreateHistory(user_id string, article_id int) (*entity.History, error) {
@@ -39,11 +39,11 @@ func (ur articleUsecase) CreateHistory(user_id string, article_id int) (*entity.
 }
 
 func (ur articleUsecase) GetHistory(user_id string) ([]*entity.History, []*entity.Article, error) {
-	history, article, err := ur.articleRepository.GetHistory(user_id)
-	return history, article, err
+	histories, articles, err := ur.articleRepository.GetHistory(user_id)
+	return histories, articles, err
 }
 
-func (au articleUsecase) GetRandomTen() ([]*entity.Article, error) {
-	article, err := au.articleRepository.GetRandomTen()
-	return article, err
+func (au articleUsecase) GetRandomRelated() ([]*entity.Article, error) {
+	articles, err := au.articleRepository.GetRandomRelated()
+	return articles, err
 }

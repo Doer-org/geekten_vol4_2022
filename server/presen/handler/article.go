@@ -17,7 +17,7 @@ type ArticleHandler interface {
 	GetRanking(w http.ResponseWriter, r *http.Request)
 	CreateHistory(http.ResponseWriter, *http.Request)
 	GetHistory(http.ResponseWriter, *http.Request)
-	GetRandomTen(w http.ResponseWriter, r *http.Request)
+	GetRandomRelated(w http.ResponseWriter, r *http.Request)
 }
 
 type articleHandler struct {
@@ -58,8 +58,8 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func (ah articleHandler) GetRandomTen(w http.ResponseWriter, r *http.Request) {
-	articles, err := ah.articleUsecase.GetRandomTen()
+func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request) {
+	articles, err := ah.articleUsecase.GetRandomRelated()
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getrandomten", err)
@@ -141,9 +141,9 @@ func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
 
 	newUserId := r.FormValue("user_id")
 
-	historys, article, err := uh.articleUsecase.GetHistory(newUserId)
+	histories, article, err := uh.articleUsecase.GetHistory(newUserId)
 
-	if historys == nil {
+	if histories == nil {
 		utils.CreateErrorResponse(w, r, "id not found", err)
 		return
 	}
@@ -153,7 +153,7 @@ func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resHistory := response.NewHistoryListResponse(article, historys)
+	resHistory := response.NewHistoryListResponse(article, histories)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 

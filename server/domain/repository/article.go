@@ -9,5 +9,5 @@ type ArticleRepository interface {
 	GetRanking() ([]*entity.Article, error)
 	CreateHistory(string, int) (*entity.History, error)
 	GetHistory(string) ([]*entity.History, []*entity.Article, error)
-	GetRandomTen() ([]*entity.Article, error)
+	GetRandomRelated() ([]*entity.Article, error)
 }
