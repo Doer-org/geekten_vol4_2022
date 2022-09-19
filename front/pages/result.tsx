@@ -22,7 +22,9 @@ const Result: NextPage = () => {
 
   useEffect(() => {
     useFetchArticles().then((res) => {
-      setArticles(res.data);
+      if (typeof res !== 'undefined') {
+        setArticles(res);
+      }
     });
   }, []);
   return (

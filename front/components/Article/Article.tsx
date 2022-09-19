@@ -16,7 +16,9 @@ export const Article: FC = () => {
   const { user } = useUserStore();
   useEffect(() => {
     useFetchArticle(option).then((res) => {
-      setArticle(res.data);
+      if (typeof res !== 'undefined') {
+        setArticle(res);
+      }
     });
   }, []);
   return (
