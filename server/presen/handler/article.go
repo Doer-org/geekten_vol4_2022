@@ -37,6 +37,10 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	types := r.URL.Query().Get("type")
+	if types == "" {
+		utils.CreateErrorResponse(w, r, "types empty", nil)
+		return
+	}
 
 	article, err := ah.articleUsecase.GetRandom(types)
 
@@ -59,6 +63,12 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
+		return
+	}
+
 	articles, err := ah.articleUsecase.GetRandomRelated()
 
 	if err != nil {
@@ -80,6 +90,12 @@ func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request
 }
 
 func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		log.Println(handler_error.MethodNotAllowd)
+		return
+	}
+
 	articles, err := ah.articleUsecase.GetRanking()
 
 	if err != nil {
@@ -108,6 +124,11 @@ func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newUserId := r.FormValue("user_id")
+	if newUserId == "" {
+		utils.CreateErrorResponse(w, r, "user_id empty", nil)
+		return
+	}
+
 	newArticleId, err := strconv.Atoi(r.FormValue("article_id"))
 
 	if err != nil {
@@ -140,6 +161,10 @@ func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newUserId := r.FormValue("user_id")
+	if newUserId == "" {
+		utils.CreateErrorResponse(w, r, "user_id empty", nil)
+		return
+	}
 
 	histories, article, err := uh.articleUsecase.GetHistory(newUserId)
 
