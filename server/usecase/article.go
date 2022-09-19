@@ -10,7 +10,7 @@ type ArticleUsecase interface {
 	GetRanking() ([]*entity.Article, error)
 	CreateHistory(string, int) (*entity.History, error)
 	GetHistory(string) ([]*entity.History, []*entity.Article, error)
-	GetRandomTen() ([]*entity.Article, error)
+	GetRandomRelated() ([]*entity.Article, error)
 }
 
 type articleUsecase struct {
@@ -43,7 +43,7 @@ func (ur articleUsecase) GetHistory(user_id string) ([]*entity.History, []*entit
 	return histories, articles, err
 }
 
-func (au articleUsecase) GetRandomTen() ([]*entity.Article, error) {
-	articles, err := au.articleRepository.GetRandomTen()
+func (au articleUsecase) GetRandomRelated() ([]*entity.Article, error) {
+	articles, err := au.articleRepository.GetRandomRelated()
 	return articles, err
 }

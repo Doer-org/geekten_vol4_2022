@@ -9,7 +9,7 @@ func NewUserResponse(user *entity.User) UserResponse {
 	}
 }
 
-func NewFavoriteResponse(favorite *entity.Favorite, article *entity.Article) FavArtResponse {
+func NewFavoriteResponse(favorite *entity.Favorite, article *entity.Article) FavoriteArticleResponse {
 	art := ArticleResponse{
 		Id:     article.Id,
 		Title:  article.Title,
@@ -18,7 +18,7 @@ func NewFavoriteResponse(favorite *entity.Favorite, article *entity.Article) Fav
 		Author: article.Author,
 		Kind:   article.Kind,
 	}
-	favart := FavArtResponse{
+	favart := FavoriteArticleResponse{
 		Article:   art,
 		UserId:    favorite.UserId,
 		ArticleId: favorite.ArticleId,
@@ -26,8 +26,8 @@ func NewFavoriteResponse(favorite *entity.Favorite, article *entity.Article) Fav
 	return favart
 }
 
-func NewFavoriteListResponse(articles []*entity.Article, favorites []*entity.Favorite) []FavArtResponse {
-	var resFavorites []FavArtResponse
+func NewFavoriteListResponse(articles []*entity.Article, favorites []*entity.Favorite) []FavoriteArticleResponse {
+	var resFavorites []FavoriteArticleResponse
 
 	for i, favorite := range favorites {
 		art := ArticleResponse{
@@ -38,7 +38,7 @@ func NewFavoriteListResponse(articles []*entity.Article, favorites []*entity.Fav
 			Author: articles[i].Author,
 			Kind:   articles[i].Kind,
 		}
-		res := FavArtResponse{
+		res := FavoriteArticleResponse{
 			UserId:    favorite.UserId,
 			ArticleId: favorite.ArticleId,
 			Article:   art,
@@ -54,12 +54,7 @@ type UserResponse struct {
 	Id   string `json:"id"`
 }
 
-type FavoriteResponse struct {
-	UserId    string `json:"user_id"`
-	ArticleId int    `json:"article_id"`
-}
-
-type FavArtResponse struct {
+type FavoriteArticleResponse struct {
 	Article   ArticleResponse
 	UserId    string `json:"user_id"`
 	ArticleId int    `json:"article_id"`

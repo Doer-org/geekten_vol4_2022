@@ -14,8 +14,8 @@ func InitRouter(articleHandler ArticleHandler, userHandler UserHandler) {
 	articleGetRandom := http.HandlerFunc(articleHandler.GetRandom)
 	http.Handle("/api/article/random", middleware.Layres(articleGetRandom))
 
-	articleRandomTen := http.HandlerFunc(articleHandler.GetRandomTen)
-	http.Handle("/api/article/randomten", middleware.Layres(articleRandomTen))
+	articleRandomRelated := http.HandlerFunc(articleHandler.GetRandomRelated)
+	http.Handle("/api/article/randomten", middleware.Layres(articleRandomRelated))
 
 	articleRanking := http.HandlerFunc(articleHandler.GetRanking)
 	http.Handle("/api/article/ranking", middleware.Layres(articleRanking))

@@ -44,10 +44,10 @@ type ArticleResponse struct {
 	Kind   string `json:"kind"`
 }
 
-func NewHistoryListResponse(articles []*entity.Article, historys []*entity.History) []HistoryAriticleResponse {
-	var resHistorys []HistoryAriticleResponse
+func NewHistoryListResponse(articles []*entity.Article, histories []*entity.History) []HistoryAriticleResponse {
+	var resHistories []HistoryAriticleResponse
 
-	for i, history := range historys {
+	for i, history := range histories {
 		art := ArticleResponse{
 			Id:     articles[i].Id,
 			Title:  articles[i].Title,
@@ -62,10 +62,10 @@ func NewHistoryListResponse(articles []*entity.Article, historys []*entity.Histo
 			CreatedAt: history.CreatedAt,
 			Article:   art,
 		}
-		resHistorys = append(resHistorys, res)
+		resHistories = append(resHistories, res)
 	}
 
-	return resHistorys
+	return resHistories
 }
 
 func NewHistoryResponse(history *entity.History) HistoryResponse {
