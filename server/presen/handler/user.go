@@ -206,7 +206,7 @@ func (uh userHandler) GetFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to gethistory", err)
+		utils.CreateErrorResponse(w, r, "faild to getfavorite", err)
 		return
 	}
 
