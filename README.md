@@ -62,7 +62,7 @@ https://dita-doer.vercel.app/
   <tr>
     <th>開発人数</th>
     <td>
-      4人<br>
+      5人<br>
       <b><a href="https://github.com/mahiro72"><img src="https://github.com/mahiro72.png" width="50px;" /></b>
       <b><a href="https://github.com/nisi0929"><img src="https://github.com/nisi0929.png" width="50px;" /></b>
       <b><a href="https://github.com/kai-0307"><img src="https://github.com/kai-0307.png" width="50px;" /></b>
