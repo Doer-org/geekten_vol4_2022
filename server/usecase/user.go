@@ -62,6 +62,6 @@ func (ur userUsecase) ArticleLikesMinus(article_id int) (*entity.Article, error)
 }
 
 func (ur userUsecase) GetFavorite(user_id string) ([]*entity.Favorite, []*entity.Article, error) {
-	favorite, article, err := ur.userRepository.GetFavorite(user_id)
-	return favorite, article, err
+	favorites, articles, err := ur.userRepository.GetFavorite(user_id)
+	return favorites, articles, err
 }

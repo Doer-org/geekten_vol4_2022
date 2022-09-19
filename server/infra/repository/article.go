@@ -152,7 +152,7 @@ func (ar articleRepository) GetRanking() ([]*entity.Article, error) {
 }
 
 func (ar articleRepository) CreateHistory(user_id string, article_id int) (*entity.History, error) {
-	statement := "INSERT INTO historys (user_id, article_id) VALUES($1,$2) returning user_id, article_id, created_at"
+	statement := "INSERT INTO histories (user_id, article_id) VALUES($1,$2) returning user_id, article_id, created_at"
 
 	stmt, err := ar.db.Prepare(statement)
 	if err != nil {
@@ -173,10 +173,10 @@ func (ar articleRepository) CreateHistory(user_id string, article_id int) (*enti
 }
 
 func (ar articleRepository) GetHistory(user_id string) ([]*entity.History, []*entity.Article, error) {
-	var historys []*entity.History
+	var histories []*entity.History
 	var articles []*entity.Article
 
-	statement := "SELECT h.article_id AS id,a.title,a.likes,a.url,a.author,a.kind,h.created_at FROM historys h INNER JOIN articles a ON h.article_id = a.id where user_id = $1 ORDER BY h.created_at DESC LIMIT 7"
+	statement := "SELECT h.article_id AS id,a.title,a.likes,a.url,a.author,a.kind,h.created_at FROM histories h INNER JOIN articles a ON h.article_id = a.id where user_id = $1 ORDER BY h.created_at DESC LIMIT 7"
 	rows, err := ar.db.Query(statement, user_id)
 	if err != nil {
 		log.Println(db_error.QueryError)
@@ -202,8 +202,8 @@ func (ar articleRepository) GetHistory(user_id string) ([]*entity.History, []*en
 		}
 		history.UserId = user_id
 		articles = append(articles, article)
-		historys = append(historys, history)
+		histories = append(histories, history)
 	}
 
-	return historys, articles, nil
+	return histories, articles, nil
 }

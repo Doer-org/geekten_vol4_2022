@@ -16,7 +16,7 @@ CREATE TABLE "users" (
   "name"              VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE "historys" (
+CREATE TABLE "histories" (
   "user_id"             VARCHAR(255) NOT NULL,
   "article_id"          INT NOT NULL,
   "created_at"          TIMESTAMP default CURRENT_TIMESTAMP,
