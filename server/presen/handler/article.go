@@ -62,7 +62,7 @@ func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request
 	articles, err := ah.articleUsecase.GetRandomRelated()
 
 	if err != nil {
-		utils.CreateErrorResponse(w, r, "faild to getrandomten", err)
+		utils.CreateErrorResponse(w, r, "faild to getrandomRelated", err)
 		log.Println(err)
 		return
 	}
