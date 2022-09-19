@@ -39,7 +39,16 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newName := r.FormValue("name")
+	if newName == "" {
+		utils.CreateErrorResponse(w, r, "name empty", nil)
+		return
+	}
+
 	newId := r.FormValue("id")
+	if newId == "" {
+		utils.CreateErrorResponse(w, r, "id empty", nil)
+		return
+	}
 
 	user, err := uh.userUsecase.CreateUser(newId, newName)
 
@@ -65,7 +74,16 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	newName := r.FormValue("name")
+	if newName == "" {
+		utils.CreateErrorResponse(w, r, "name empty", nil)
+		return
+	}
+
 	newId := r.FormValue("id")
+	if newId == "" {
+		utils.CreateErrorResponse(w, r, "id empty", nil)
+		return
+	}
 
 	user, err := uh.userUsecase.UpdateUser(newId, newName)
 
@@ -127,6 +145,11 @@ func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newUserId := r.FormValue("user_id")
+	if newUserId == "" {
+		utils.CreateErrorResponse(w, r, "user_id empty", nil)
+		return
+	}
+
 	newArticleId, err := strconv.Atoi(r.FormValue("article_id"))
 
 	if err != nil {
@@ -142,6 +165,11 @@ func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	article, err := uh.userUsecase.ArticleLikesPlus(newArticleId)
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to articleLikesPlus", err)
+		return
+	}
 
 	resFavorite := response.NewFavoriteResponse(favorite, article)
 
@@ -162,6 +190,11 @@ func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newUserId := r.FormValue("user_id")
+	if newUserId == "" {
+		utils.CreateErrorResponse(w, r, "user_id empty", nil)
+		return
+	}
+
 	newArticleId, err := strconv.Atoi(r.FormValue("article_id"))
 
 	if err != nil {
@@ -177,6 +210,11 @@ func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	article, err := uh.userUsecase.ArticleLikesMinus(newArticleId)
+
+	if err != nil {
+		utils.CreateErrorResponse(w, r, "faild to articleLikesMinus", err)
+		return
+	}
 
 	resArticle := response.NewArticleResponse(article)
 
@@ -197,6 +235,11 @@ func (uh userHandler) GetFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	newUserId := r.FormValue("user_id")
+
+	if newUserId == "" {
+		utils.CreateErrorResponse(w, r, "user_id empty", nil)
+		return
+	}
 
 	favorites, article, err := uh.userUsecase.GetFavorite(newUserId)
 

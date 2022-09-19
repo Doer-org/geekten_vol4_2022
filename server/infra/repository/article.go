@@ -68,7 +68,7 @@ func (ar articleRepository) GetRandom(types string) (*entity.Article, error) {
 	return resarticle, nil
 }
 
-func (ar articleRepository) GetRandomTen() ([]*entity.Article, error) {
+func (ar articleRepository) GetRandomRelated() ([]*entity.Article, error) {
 	var articles []*entity.Article
 
 	getRandomQuery := "SELECT * FROM articles"
