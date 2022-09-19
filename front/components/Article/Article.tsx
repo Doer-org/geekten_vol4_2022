@@ -15,11 +15,9 @@ export const Article: FC = () => {
   const { option } = useArticleOptionStore();
   const { user } = useUserStore();
   useEffect(() => {
-    useFetchArticle(option)
-      .then((res) => {
-        setArticle(res.data);
-      })
-      .catch((err) => {});
+    useFetchArticle(option).then((res) => {
+      setArticle(res.data);
+    });
   }, []);
   return (
     <div className="mx-5">

@@ -7,11 +7,9 @@ export const Histories: FC = () => {
   const setHistory = useHistoryStore((state) => state.setHistory);
   useEffect(() => {
     const user_id = JSON.parse(localStorage.getItem('user') as string).id;
-    useFetchHistory(user_id)
-      .then(async (res) => {
-        setHistory([...res]);
-      })
-      .catch(() => {});
+    useFetchHistory(user_id).then(async (res) => {
+      setHistory([...res]);
+    });
   }, []);
 
   return (

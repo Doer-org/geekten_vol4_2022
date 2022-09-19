@@ -27,7 +27,6 @@ const Favorite: NextPage = () => {
         setFavorites(res);
       }
     });
-    // .catch((err) => {});
   }, []);
   return (
     <Layout>
@@ -35,7 +34,6 @@ const Favorite: NextPage = () => {
         <h2 className="mb-20 text-center text-2xl font-bold">お気に入り</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 place-items-center justify-items-center">
-          {/* {console.log(favorites)} */}
           {favorites.map((fav, id) => {
             return <FavoriteEl key={id} favorite={fav} />;
           })}

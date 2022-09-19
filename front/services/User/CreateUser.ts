@@ -5,7 +5,5 @@ export const CreateUser: CreateUser = (user) => {
   const formData = new FormData();
   formData.append('id', user.id);
   formData.append('name', user.name);
-  Axios.post('/api/user/create', formData)
-    .then((res) => {})
-    .catch((err) => {});
+  Axios.post('/api/user/create', formData);
 };
