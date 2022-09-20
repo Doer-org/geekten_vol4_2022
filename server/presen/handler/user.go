@@ -63,7 +63,8 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resUser); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
 }
 
@@ -98,7 +99,8 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resUser); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
 }
 
@@ -132,7 +134,8 @@ func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resUser); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
 
 }
@@ -178,7 +181,8 @@ func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resFavorite); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
 }
 
@@ -223,7 +227,8 @@ func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resArticle); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
 }
 
@@ -259,7 +264,7 @@ func (uh userHandler) GetFavorite(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resFavorite); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
 		return
 	}
 

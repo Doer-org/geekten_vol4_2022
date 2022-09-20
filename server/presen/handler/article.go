@@ -46,7 +46,6 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getrandom", err)
-		log.Println(err)
 		return
 	}
 
@@ -57,9 +56,9 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resArticle); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
-	return
 }
 
 func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request) {
@@ -73,7 +72,6 @@ func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getrandomRelated", err)
-		log.Println(err)
 		return
 	}
 
@@ -84,9 +82,9 @@ func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resArticles); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
-	return
 }
 
 func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
@@ -100,7 +98,6 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getranking", err)
-		log.Println(err)
 		return
 	}
 
@@ -111,9 +108,9 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resArticles); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
-	return
 }
 
 func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
@@ -149,7 +146,8 @@ func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resHistory); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
+		return
 	}
 }
 
@@ -184,8 +182,7 @@ func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
 
 	je := json.NewEncoder(w)
 	if err := je.Encode(resHistory); err != nil {
-		log.Println(err)
+		utils.CreateErrorResponse(w, r, "json encode error", err)
 		return
 	}
-
 }
