@@ -6,16 +6,16 @@ import (
 	"net/http"
 )
 
-type Error struct {
+type ErrorResponse struct {
 	Status int
 	Result string
 }
 
 func CreateErrorResponse(w http.ResponseWriter, r *http.Request, errormessage string, err error) {
 	log.Println(err)
-	ping := Error{http.StatusOK, errormessage}
+	errResponse := ErrorResponse{http.StatusOK, errormessage}
 
-	res, err := json.Marshal(ping)
+	res, err := json.Marshal(errResponse)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
