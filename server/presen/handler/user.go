@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -16,9 +15,9 @@ type UserHandler interface {
 	CreateUser(http.ResponseWriter, *http.Request)
 	UpdateUser(http.ResponseWriter, *http.Request)
 	GetUser(http.ResponseWriter, *http.Request)
-	CreateFavorite(w http.ResponseWriter, r *http.Request)
-	DeleteFavorite(w http.ResponseWriter, r *http.Request)
-	GetFavorite(w http.ResponseWriter, r *http.Request)
+	CreateFavorite(http.ResponseWriter, *http.Request)
+	DeleteFavorite(http.ResponseWriter, *http.Request)
+	GetFavorite(http.ResponseWriter, *http.Request)
 }
 
 type userHandler struct {
@@ -34,7 +33,7 @@ func NewUserhandler(uu usecase.UserUsecase) UserHandler {
 func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
@@ -71,7 +70,7 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "PUT" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 	newName := r.FormValue("name")
@@ -107,7 +106,7 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
@@ -143,7 +142,7 @@ func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
@@ -189,7 +188,7 @@ func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
 func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "DELETE" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
@@ -235,7 +234,7 @@ func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 func (uh userHandler) GetFavorite(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 

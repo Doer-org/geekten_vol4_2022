@@ -2,16 +2,16 @@ package handler
 
 import (
 	"io"
-	"log"
 	"net/http"
 
-	"github.com/Doer-org/geekten_vol4_2022/error/handler"
+	handler_error "github.com/Doer-org/geekten_vol4_2022/error/handler"
+	"github.com/Doer-org/geekten_vol4_2022/utils"
 )
 
 func health(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
+	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
