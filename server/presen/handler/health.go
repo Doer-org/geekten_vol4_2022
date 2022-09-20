@@ -9,7 +9,7 @@ import (
 )
 
 func health(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
