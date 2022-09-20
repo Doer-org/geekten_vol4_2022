@@ -46,7 +46,6 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getrandom", err)
-		log.Println(err)
 		return
 	}
 
@@ -73,7 +72,6 @@ func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getrandomRelated", err)
-		log.Println(err)
 		return
 	}
 
@@ -100,7 +98,6 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		utils.CreateErrorResponse(w, r, "faild to getranking", err)
-		log.Println(err)
 		return
 	}
 
