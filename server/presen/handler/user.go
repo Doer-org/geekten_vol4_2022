@@ -31,7 +31,7 @@ func NewUserhandler(uu usecase.UserUsecase) UserHandler {
 }
 
 func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -68,7 +68,7 @@ func (uh userHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "PUT" {
+	if r.Method != http.MethodPut {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -104,7 +104,7 @@ func (uh userHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -140,7 +140,7 @@ func (uh userHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -186,7 +186,7 @@ func (uh userHandler) CreateFavorite(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "DELETE" {
+	if r.Method != http.MethodDelete {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -232,7 +232,7 @@ func (uh userHandler) DeleteFavorite(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh userHandler) GetFavorite(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return

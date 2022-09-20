@@ -30,7 +30,7 @@ func NewArticlehandler(au usecase.ArticleUsecase) ArticleHandler {
 }
 
 func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -61,7 +61,7 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -87,7 +87,7 @@ func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request
 }
 
 func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -113,7 +113,7 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
@@ -151,7 +151,7 @@ func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
