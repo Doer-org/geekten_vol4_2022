@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -14,10 +13,10 @@ import (
 
 type ArticleHandler interface {
 	GetRandom(http.ResponseWriter, *http.Request)
-	GetRanking(w http.ResponseWriter, r *http.Request)
+	GetRanking(http.ResponseWriter, *http.Request)
 	CreateHistory(http.ResponseWriter, *http.Request)
 	GetHistory(http.ResponseWriter, *http.Request)
-	GetRandomRelated(w http.ResponseWriter, r *http.Request)
+	GetRandomRelated(http.ResponseWriter, *http.Request)
 }
 
 type articleHandler struct {
@@ -33,12 +32,12 @@ func NewArticlehandler(au usecase.ArticleUsecase) ArticleHandler {
 func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 	types := r.URL.Query().Get("type")
 	if types == "" {
-		utils.CreateErrorResponse(w, r, "types empty", nil)
+		utils.CreateErrorResponse(w, r, "type empty", nil)
 		return
 	}
 
@@ -64,7 +63,7 @@ func (ah articleHandler) GetRandom(w http.ResponseWriter, r *http.Request) {
 func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
@@ -90,7 +89,7 @@ func (ah articleHandler) GetRandomRelated(w http.ResponseWriter, r *http.Request
 func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
@@ -114,9 +113,9 @@ func (ah articleHandler) GetRanking(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
@@ -152,9 +151,9 @@ func (uh articleHandler) CreateHistory(w http.ResponseWriter, r *http.Request) {
 }
 
 func (uh articleHandler) GetHistory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		log.Println(handler_error.MethodNotAllowd)
+		utils.CreateErrorResponse(w, r, "method not allowed", handler_error.MethodNotAllowd)
 		return
 	}
 
