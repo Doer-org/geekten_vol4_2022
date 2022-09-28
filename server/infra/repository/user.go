@@ -25,7 +25,7 @@ func (ur userRepository) CreateUser(id string, name string) (*entity.User, error
 	stmt, err := ur.db.Prepare(statement)
 	if err != nil {
 		log.Println(db_error.StatementError)
-		return nil, err
+		return nil, db_error.StatementError
 	}
 	defer stmt.Close()
 
@@ -34,7 +34,7 @@ func (ur userRepository) CreateUser(id string, name string) (*entity.User, error
 
 	if err != nil {
 		log.Println(db_error.QueryError)
-		return nil, err
+		return nil, db_error.QueryError
 	}
 
 	return user, nil
