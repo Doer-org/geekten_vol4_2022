@@ -8,7 +8,9 @@ export const Histories: FC = () => {
   useEffect(() => {
     const user_id = JSON.parse(localStorage.getItem('user') as string).id;
     useFetchHistory(user_id).then(async (res) => {
-      setHistory([...res]);
+      if (typeof res !== 'undefined') {
+        setHistory([...res]);
+      }
     });
   }, []);
 
@@ -19,7 +21,7 @@ export const Histories: FC = () => {
         <div className="">
           {history !== null ? (
             <div className="grid grid-cols-1 md:grid-cols-3 justify-center items-center gap-5">
-              {history?.map((his, id) => {
+              {history.map((his, id) => {
                 return <History history={his} key={id} />;
               })}
             </div>
