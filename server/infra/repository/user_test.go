@@ -2,6 +2,7 @@ package repository
 
 import (
 	"errors"
+	"log"
 	"testing"
 
 	db_error "github.com/Doer-org/geekten_vol4_2022/error/db"
@@ -10,6 +11,11 @@ import (
 
 func Test_UserCreate(t *testing.T) {
 	db_test := db.NewDriver()
+	err := db_test.Ping()
+
+	if err != nil {
+		log.Println("DB connect error")
+	}
 
 	tests := []struct {
 		name    string
@@ -41,7 +47,7 @@ func Test_UserCreate(t *testing.T) {
 }
 
 func Test_UserUpadate(t *testing.T) {
-	db_test := db.NewDriver()
+	//db_test := db.NewDriver()
 
 }
 
