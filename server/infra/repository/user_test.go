@@ -55,7 +55,7 @@ func Test_UserUpadate(t *testing.T) {
 	}
 
 	r := &userRepository{db: db_test}
-	_, err = r.CreateUser("testid", "testname")
+	_, err = r.CreateUser("testid_update", "testname")
 
 	if err != nil {
 		log.Println("create user error")
@@ -68,12 +68,12 @@ func Test_UserUpadate(t *testing.T) {
 	}{
 		{
 			name:    "存在するIDはupdateできる",
-			id:      "testid",
+			id:      "testid_update",
 			wantErr: nil,
 		},
 		{
 			name:    "存在しないIDはupdateできない",
-			id:      "testDekinaiId",
+			id:      "test_update_DekinaiId",
 			wantErr: db_error.QueryError,
 		},
 	}
@@ -97,20 +97,23 @@ func Test_UserGet(t *testing.T) {
 		log.Println("DB connect error")
 	}
 
+	r := &userRepository{db: db_test}
+	_, err = r.CreateUser("test_get_id", "test_get_name")
+
 	tests := []struct {
 		name    string
 		id      string
-		wantErr error
+		wantName string
 	}{
 		{
 			name:    "存在するidはgetできる",
-			id:      "testid",
-			wantErr: nil,
+			id:      "test_get_id",
+			wantName: "test_get_name",
 		},
 		{
-			name:    "存在しないidはgetできる",
-			id:      "testDekinaiId",
-			wantErr: db_error.QueryError,
+			name:    "存在しないidはgetできない",
+			id:      "test_get_DekinaiId",
+			wantName: "",
 		},
 	}
 
@@ -118,8 +121,9 @@ func Test_UserGet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			r := &userRepository{db: db_test}
 
-			if _, err := r.GetUser(tt.id); !errors.Is(err, tt.wantErr) {
-				t.Errorf("Get() error = %v, wantErr %v", err, tt.wantErr)
+			if user, err := r.GetUser(tt.id); 
+			if user.name != tt.wantName {
+				t.Errorf("Get() name = %v, wantName %v", err, tt.wantName)
 			}
 		})
 	}

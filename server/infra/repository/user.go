@@ -55,7 +55,7 @@ func (ur userRepository) UpdateUser(id string, name string) (*entity.User, error
 
 	if err != nil {
 		log.Println(db_error.QueryError)
-		return nil, err
+		return nil, db_error.QueryError
 	}
 	return user, nil
 }
@@ -66,7 +66,7 @@ func (ur userRepository) GetUser(id string) (*entity.User, error) {
 
 	if err != nil {
 		log.Println(db_error.StatementError)
-		return nil, err
+		return nil, db_error.StatementError
 	}
 	user := &entity.User{}
 	defer stmt.Close()
@@ -75,7 +75,7 @@ func (ur userRepository) GetUser(id string) (*entity.User, error) {
 		err := stmt.Scan(&user.Id, &user.Name)
 		if err != nil {
 			log.Println(db_error.RowsScanError)
-			return nil, err
+			return nil, db_error.RowsScanError
 		}
 	}
 

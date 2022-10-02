@@ -24,7 +24,9 @@ func GetDbUri() string {
 			dbName,
 		)
 	} else {
-		log.Println("env prd: ",dbUrl)
+		log.Println("env prd: ", dbUrl)
 		return dbUrl
 	}
 }
+
+// ENV=dev POSTGRES_USER=hoge POSTGRES_PASSWORD=hoge POSTGRES_DB=hoge DB_HOST=localhost go test ./...
