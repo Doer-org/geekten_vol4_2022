@@ -101,18 +101,18 @@ func Test_UserGet(t *testing.T) {
 	_, err = r.CreateUser("test_get_id", "test_get_name")
 
 	tests := []struct {
-		name    string
-		id      string
+		name     string
+		id       string
 		wantName string
 	}{
 		{
-			name:    "存在するidはgetできる",
-			id:      "test_get_id",
+			name:     "存在するidはgetできる",
+			id:       "test_get_id",
 			wantName: "test_get_name",
 		},
 		{
-			name:    "存在しないidはgetできない",
-			id:      "test_get_DekinaiId",
+			name:     "存在しないidはgetできない",
+			id:       "test_get_DekinaiId",
 			wantName: "",
 		},
 	}
@@ -121,8 +121,8 @@ func Test_UserGet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			r := &userRepository{db: db_test}
 
-			if user, err := r.GetUser(tt.id); 
-			if user.name != tt.wantName {
+			user, err := r.GetUser(tt.id)
+			if user.Name != tt.wantName {
 				t.Errorf("Get() name = %v, wantName %v", err, tt.wantName)
 			}
 		})
