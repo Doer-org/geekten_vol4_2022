@@ -24,7 +24,7 @@ func GetDbUri() string {
 			dbName,
 		)
 	} else {
-		log.Println("env prd: ",dbUrl)
+		log.Println("env prd: ", dbUrl)
 		return dbUrl
 	}
 }
