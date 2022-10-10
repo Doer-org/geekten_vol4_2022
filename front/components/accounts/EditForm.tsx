@@ -5,16 +5,14 @@ export const EditForm: FC = () => {
   const { user } = useUserStore();
   const EditUser = useUserStore((state) => state.editUser);
   const updateUser = () => {
-    UpdateUser(user)
-      .then((res) => {
-        EditUser(res.data.id, res.data.name);
-        localStorage.removeItem('user');
-        localStorage.setItem(
-          'user',
-          JSON.stringify({ id: res.data.id, name: res.data.name })
-        );
-      })
-      .catch((err) => {});
+    UpdateUser(user).then((res) => {
+      EditUser(res.data.id, res.data.name);
+      localStorage.removeItem('user');
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ id: res.data.id, name: res.data.name })
+      );
+    });
   };
   return (
     <div className="text-center">

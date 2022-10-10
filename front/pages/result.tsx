@@ -21,11 +21,11 @@ const Result: NextPage = () => {
   }, 3 * 1000);
 
   useEffect(() => {
-    useFetchArticles()
-      .then((res) => {
-        setArticles(res.data);
-      })
-      .catch((err) => {});
+    useFetchArticles().then((res) => {
+      if (typeof res !== 'undefined') {
+        setArticles(res);
+      }
+    });
   }, []);
   return (
     <Layout>

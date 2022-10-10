@@ -15,11 +15,11 @@ export const Article: FC = () => {
   const { option } = useArticleOptionStore();
   const { user } = useUserStore();
   useEffect(() => {
-    useFetchArticle(option)
-      .then((res) => {
-        setArticle(res.data);
-      })
-      .catch((err) => {});
+    useFetchArticle(option).then((res) => {
+      if (typeof res !== 'undefined') {
+        setArticle(res);
+      }
+    });
   }, []);
   return (
     <div className="mx-5">

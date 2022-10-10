@@ -9,15 +9,13 @@ const Form: FC = () => {
   const setNotice = useNoticeStore((state) => state.setNotice);
 
   const Login = () => {
-    useLogin()
-      .then((res) => {
-        setUser(res);
-        setNotice('Logged in!');
-        setTimeout(() => {
-          setNotice('');
-        }, 2 * 1000);
-      })
-      .catch((err) => {});
+    useLogin().then((res) => {
+      setUser(res);
+      setNotice('Logged in!');
+      setTimeout(() => {
+        setNotice('');
+      }, 2 * 1000);
+    });
   };
   return (
     <div className="shadow-2xl rounded-md p-5">
